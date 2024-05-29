@@ -1,0 +1,14 @@
+2024-05-29T23:08:04.020Z ERROR: uncaughtException: app.user is not a function
+TypeError: app.user is not a function
+    at file:///home/mdstorms/sylessentialz-ecommerce/backend/app.js:23:5
+    at ModuleJob.run (node:internal/modules/esm/module_job:222:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:323:24)
+    at async loadESM (node:internal/process/esm_loader:28:7)
+    at async handleMainPromise (node:internal/modules/run_main:120:12) 
+2024-05-29T23:08:30.864Z ERROR: uncaughtException: app.user is not a function
+TypeError: app.user is not a function
+    at file:///home/mdstorms/sylessentialz-ecommerce/backend/app.js:23:5
+    at ModuleJob.run (node:internal/modules/esm/module_job:222:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:323:24)
+    at async loadESM (node:internal/process/esm_loader:28:7)
+    at async handleMainPromise (node:internal/modules/run_main:120:12) 

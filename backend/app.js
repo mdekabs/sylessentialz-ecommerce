@@ -6,7 +6,9 @@ import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 import { authRoute, userRoute, productRoute, cartRoute, orderRoute } from "./routes/index.js";
-import { swaggerOptions } from "./swaggerConfig.js"; // Import the Swagger configuration
+import { appLogger } from "./middlewares/_logger.js";
+import { checkCache, cacheResponse } from "./middlewares/_caching.js"
+import { swaggerOptions } from "./swaggerConfig.js";
 
 dotenv.config();
 
@@ -18,6 +20,7 @@ app.use(cors());
 // Middleware configuration
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(appLogger);
 
 // Swagger setup
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
@@ -26,8 +29,8 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 // Route definitions
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users", userRoute);
-app.use("/api/v1/products", productRoute);
-app.use("/api/v1/carts", cartRoute);
+app.use("/api/v1/products", checkCache, cacheResponse(300), productRoute);
+app.use("/api/v1/carts", checkCache, cacheResponse(300), cartRoute);
 app.use("/api/v1/orders", orderRoute);
 
 // Database connection

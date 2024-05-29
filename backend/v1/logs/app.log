@@ -1,0 +1,14 @@
+2024-05-29T23:21:28.175Z INFO: GET /api-docs/ 304 6ms 304
+2024-05-29T23:21:28.239Z INFO: GET /api-docs/swagger-ui.css 304 2ms 304
+2024-05-29T23:21:28.243Z INFO: GET /api-docs/swagger-ui-bundle.js 304 0ms 304
+2024-05-29T23:21:28.246Z INFO: GET /api-docs/swagger-ui-standalone-preset.js 304 0ms 304
+2024-05-29T23:21:28.252Z INFO: GET /api-docs/swagger-ui-init.js 304 1ms 304
+2024-05-29T23:21:28.749Z INFO: GET /api-docs/favicon-32x32.png 304 1ms 304
+2024-05-29T23:21:53.309Z INFO: POST /api/v1/auth/login 200 370ms 200
+2024-05-29T23:23:59.115Z WARN: POST /api/v1/api/v1/products 404 1ms 404
+2024-05-29T23:24:56.405Z WARN: POST /api/v1/api/v1/products 404 1ms 404
+2024-05-29T23:24:57.429Z WARN: POST /api/v1/api/v1/products 404 1ms 404
+2024-05-29T23:24:58.053Z WARN: POST /api/v1/api/v1/products 404 0ms 404
+2024-05-29T23:24:58.502Z WARN: POST /api/v1/api/v1/products 404 0ms 404
+2024-05-29T23:24:58.728Z WARN: POST /api/v1/api/v1/products 404 0ms 404
+2024-05-29T23:25:05.707Z WARN: POST /api/v1/api/v1/products 404 0ms 404
