@@ -2,6 +2,9 @@ import User from "../models/_user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import crypto from "crypto";
+import sendMail from "../utils/_sendMail.js";
+import generatePasswordResetEmail from "../utils/_emailMessage.js";
 
 dotenv.config();
 
@@ -56,6 +59,76 @@ const AuthController = {
                 accessToken
             });
         }
+    },
+
+    async logout_user(req, res) {
+        res.status(200).json({
+            type: "success",
+            message: "Successfully logged out"
+        });
+    },
+
+    async forgot_password(req, res) {
+        const user = await User.findOne({ email: req.body.email });
+        if (!user) {
+            return res.status(404).json({
+                type: "error",
+                message: "User not found"
+            });
+        }
+
+        const token = crypto.randomBytes(32).toString('hex');
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = Date.now() + 3600000;
+        await user.save();
+
+        const message = generatePasswordResetEmail(req.headers.host, token);
+
+        try {
+            await sendMail({
+                email: user.email,
+                subject: 'Password Reset',
+                message
+            });
+
+            res.status(200).json({
+                type: "success",
+                message: "Password reset email sent successfully"
+            });
+        } catch (err) {
+            user.resetPasswordToken = null;
+            user.resetPasswordExpires = null;
+            await user.save();
+
+            res.status(500).json({
+                type: "error",
+                message: "Failed to send email, please try again"
+            });
+        }
+    },
+
+    async reset_password(req, res) {
+        const user = await User.findOne({
+            resetPasswordToken: req.params.token,
+            resetPasswordExpires: { $gt: Date.now() }
+        });
+
+        if (!user) {
+            return res.status(400).json({
+                type: "error",
+                message: "Password reset token is invalid or has expired"
+            });
+        }
+
+        user.password = bcrypt.hashSync(req.body.password, 10);
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpires = undefined;
+        await user.save();
+
+        res.status(200).json({
+            type: "success",
+            message: "Password has been reset successfully"
+        });
     }
 };
 
