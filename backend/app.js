@@ -7,7 +7,8 @@ import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 import { authRoute, userRoute, productRoute, cartRoute, orderRoute } from "./routes/index.js";
 import { appLogger } from "./middlewares/_logger.js";
-import { checkCache, cacheResponse } from "./middlewares/_caching.js"
+import { checkCache, cacheResponse } from "./middlewares/_caching.js";
+import Pagination from "./middlewares/_pagination.js";
 import { swaggerOptions } from "./swaggerConfig.js";
 
 dotenv.config();
@@ -28,8 +29,8 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Route definitions
 app.use("/api/v1/auth", authRoute);
-app.use("/api/v1/users", userRoute);
-app.use("/api/v1/products", checkCache, cacheResponse(300), productRoute);
+app.use("/api/v1/users", Pagination, userRoute);
+app.use("/api/v1/products", checkCache, cacheResponse(300), Pagination, productRoute);
 app.use("/api/v1/carts", checkCache, cacheResponse(300), cartRoute);
 app.use("/api/v1/orders", orderRoute);
 

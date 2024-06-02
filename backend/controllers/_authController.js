@@ -121,8 +121,8 @@ const AuthController = {
         }
 
         user.password = bcrypt.hashSync(req.body.password, 10);
-        user.resetPasswordToken = undefined;
-        user.resetPasswordExpires = undefined;
+        user.resetPasswordToken = null;
+        user.resetPasswordExpires = null;
         await user.save();
 
         res.status(200).json({
