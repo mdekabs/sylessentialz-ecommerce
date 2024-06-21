@@ -27,3 +27,10 @@
 2024-05-31T03:54:02.406Z ERROR: POST /api/v1/auth/forgot-password 500 2638ms 500
 2024-05-31T04:25:02.070Z INFO: POST /api/v1/auth/login 200 962ms 200
 2024-05-31T04:27:54.919Z INFO: POST /api/v1/auth/login 200 1026ms 200
+2024-06-20T19:28:22.300Z INFO: GET /api-docs/ 304 10ms 304
+2024-06-20T19:28:22.354Z INFO: GET /api-docs/swagger-ui.css 304 7ms 304
+2024-06-20T19:28:22.361Z INFO: GET /api-docs/swagger-ui-bundle.js 304 1ms 304
+2024-06-20T19:28:22.366Z INFO: GET /api-docs/swagger-ui-standalone-preset.js 304 2ms 304
+2024-06-20T19:28:22.372Z INFO: GET /api-docs/swagger-ui-init.js 200 1ms 200
+2024-06-20T19:28:23.143Z INFO: GET /api-docs/favicon-32x32.png 304 1ms 304
+2024-06-20T19:29:07.822Z ERROR: POST /api/v1/auth/forgot-password 500 2708ms 500
