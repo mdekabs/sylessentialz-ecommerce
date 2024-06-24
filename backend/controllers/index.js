@@ -4,12 +4,13 @@ import ProductController from './_productController.js';
 import CartController from './_cartController.js';
 import OrderController from './_orderController.js';
 import PaymentController from './_paymentController.js';
-
+import SearchController from "./_searchController.js";
 export {
     AuthController,
     UserController,
     ProductController,
     CartController,
     OrderController,
-    PaymentController
+    PaymentController,
+    SearchController
 };

@@ -1,12 +1,18 @@
+import "dotenv/config";
 import Queue from 'bull';
-import dotenv from 'dotenv';
 
-dotenv.config();
+
+//dotenv.config();
+
+
+const RH = process.env.REDIS_HOST;
+const RP = process.env.REDIS_PORT;
+console.log(RH);
 
 const emailQueue = new Queue('emailQueue', {
     redis: {
-        host: process.env.REDIS_HOST,
-        port: process.env.REDIS_PORT
+        host: process.env.RH,
+        port: process.env.RP
     }
 });
 

@@ -25,3 +25,4 @@ TypeError: app.user is not a function
 2024-05-31T03:24:29.358Z ERROR: POST /api/v1/auth/forgot-password 500 3196ms 500
 2024-05-31T03:54:02.406Z ERROR: POST /api/v1/auth/forgot-password 500 2638ms 500
 2024-06-20T19:29:07.822Z ERROR: POST /api/v1/auth/forgot-password 500 2708ms 500
+2024-06-21T16:39:22.641Z ERROR: POST /api/v1/auth/register 500 522ms 500

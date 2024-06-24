@@ -12,7 +12,6 @@ import Pagination from "./middlewares/_pagination.js";
 import { swaggerOptions } from "./swaggerConfig.js";
 
 dotenv.config();
-
 const app = express();
 
 // Use CORS middleware

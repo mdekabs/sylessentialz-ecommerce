@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import crypto from "crypto";
-import sendMail from "../utils/_sendMail.js";
+import { emailQueue } from "../utils/_queue.js";
 import generatePasswordResetEmail from "../utils/_emailMessage.js";
 
 dotenv.config();
@@ -79,16 +79,17 @@ const AuthController = {
 
         const token = crypto.randomBytes(32).toString('hex');
         user.resetPasswordToken = token;
-        user.resetPasswordExpires = Date.now() + 3600000;
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
         await user.save();
 
         const message = generatePasswordResetEmail(req.headers.host, token);
 
         try {
-            await sendMail({
-                email: user.email,
-                subject: 'Password Reset',
-                message
+            // Adding email job to the queue
+            await emailQueue.add({
+                to: user.email,
+                subject: message.subject,
+                text: message.message
             });
 
             res.status(200).json({
