@@ -229,6 +229,63 @@ export const swaggerOptions = {
             },
           },
         },
+        Search: {
+          type: "object",
+          properties: {
+            query: {
+              type: "string",
+              description: "Search query",
+            },
+            filters: {
+              type: "object",
+              properties: {
+                category: {
+                  type: "string",
+                  description: "Category filter",
+                },
+                priceRange: {
+                  type: "object",
+                  properties: {
+                    min: {
+                      type: "number",
+                      description: "Minimum price",
+                    },
+                    max: {
+                      type: "number",
+                      description: "Maximum price",
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+        Notification: {
+          type: "object",
+          properties: {
+            _id: {
+              type: "string",
+              description: "Notification ID",
+            },
+            userId: {
+              type: "string",
+              description: "User ID",
+            },
+            message: {
+              type: "string",
+              description: "Notification message",
+            },
+            read: {
+              type: "boolean",
+              description: "Read status of the notification",
+            },
+            createdAt: {
+              type: "string",
+              description: "Notification creation date",
+              format: "date-time",
+            },
+          },
+        },
       },
     },
     security: [

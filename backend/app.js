@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
-import { authRoute, userRoute, productRoute, cartRoute, orderRoute } from "./routes/index.js";
+import { authRoute, userRoute, productRoute, cartRoute, orderRoute, shippingRoute, reviewRoute } from "./routes/index.js";
 import { appLogger } from "./middlewares/_logger.js";
 import { checkCache, cacheResponse } from "./middlewares/_caching.js";
 import Pagination from "./middlewares/_pagination.js";
@@ -32,6 +32,8 @@ app.use("/api/v1/users", Pagination, userRoute);
 app.use("/api/v1/products", checkCache, cacheResponse(300), Pagination, productRoute);
 app.use("/api/v1/carts", checkCache, cacheResponse(300), cartRoute);
 app.use("/api/v1/orders", orderRoute);
+app.use("/api/v1/shipping", checkCache, cacheResponse(300), shippingRoute);
+app.use("/api/v1/review", Pagination, reviewRoute);
 
 // Database connection
 async function connectToDatabase() {
