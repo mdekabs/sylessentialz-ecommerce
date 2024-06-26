@@ -100,3 +100,16 @@
 2024-06-26T11:30:46.891Z WARN: GET /api/v1/search?q=Electronics 404 2ms 404
 2024-06-26T11:38:37.862Z WARN: GET /api/v1/search?q=Electronics 404 3ms 404
 2024-06-26T11:39:42.141Z INFO: GET /api/v1/products/search?q=Electronics 200 3ms 200
+2024-06-26T12:03:15.445Z INFO: GET /api/v1/products/search?q=Electronics 200 3ms 200
+2024-06-26T12:24:12.984Z INFO: GET /api/v1/products/search?q=Electronics 200 3ms 200
+2024-06-26T13:14:18.220Z INFO: GET /api/v1/products/search?q=Electronics 200 4ms 200
+2024-06-26T13:14:31.403Z INFO: GET /api/v1/products/ 200 1190ms 200
+2024-06-26T13:15:05.015Z INFO: GET /api/v1/products/search?q=Electronics 200 1ms 200
+2024-06-26T13:15:29.943Z INFO: GET /api-docs/ 304 4ms 304
+2024-06-26T13:15:29.984Z INFO: GET /api-docs/swagger-ui.css 304 11ms 304
+2024-06-26T13:15:29.988Z INFO: GET /api-docs/swagger-ui-bundle.js 304 1ms 304
+2024-06-26T13:15:29.991Z INFO: GET /api-docs/swagger-ui-standalone-preset.js 304 1ms 304
+2024-06-26T13:15:29.994Z INFO: GET /api-docs/swagger-ui-init.js 200 0ms 200
+2024-06-26T13:15:30.358Z INFO: GET /api-docs/favicon-32x32.png 304 2ms 304
+2024-06-26T13:18:17.265Z INFO: POST /api/v1/auth/login 200 299ms 200
+2024-06-26T13:19:10.563Z INFO: GET /api/v1/products 200 2ms 200

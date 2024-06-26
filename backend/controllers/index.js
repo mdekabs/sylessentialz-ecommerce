@@ -4,7 +4,6 @@ import ProductController from './_productController.js';
 import CartController from './_cartController.js';
 import OrderController from './_orderController.js';
 import PaymentController from './_paymentController.js';
-import SearchController from "./_searchController.js";
 import ReviewController from "./_reviewController.js";
 import ShippingController from "./_shippingController.js";
 
@@ -16,7 +15,6 @@ export {
     CartController,
     OrderController,
     PaymentController,
-    SearchController,
     ReviewController,
     ShippingController
 };

@@ -1,5 +1,5 @@
 import express from 'express';
-import { ProductController } from '../controllers/ProductController.js';
+import { ProductController } from '../controllers/index.js';
 import { isAdminVerifier } from '../middlewares/_verifyToken.js';
 
 const router = express.Router();
@@ -25,6 +25,28 @@ const router = express.Router();
  *         description: Internal server error
  */
 router.get('/', ProductController.get_products);
+
+/**
+ * @swagger
+ * /api/v1/products/search:
+ *   get:
+ *     summary: Search for products
+ *     description: Search for products by query
+ *     tags: [Products]
+ *     parameters:
+ *       - in: query
+ *         name: q
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The search query
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved search results
+ *       500:
+ *         description: Internal server error
+ */
+router.get('/search', ProductController.search_products);
 
 /**
  * @swagger
