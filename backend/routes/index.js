@@ -5,6 +5,7 @@ import cartRoute from './_cart.js';
 import orderRoute from './_order.js';
 import reviewRoute from "./_review.js"; 
 import shippingRoute from "./_shipping.js";
+import searchRoute from "./_search.js";
 
 
 export {
@@ -14,5 +15,6 @@ export {
     cartRoute,
     orderRoute,
     reviewRoute,
-    shippingRoute
+    shippingRoute,
+    searchRoute
 };

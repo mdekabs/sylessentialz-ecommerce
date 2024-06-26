@@ -1,5 +1,5 @@
 import express from 'express';
-import { ProductController, SearchController } from '../controllers/index.js';
+import { ProductController } from '../controllers/ProductController.js';
 import { isAdminVerifier } from '../middlewares/_verifyToken.js';
 
 const router = express.Router();
@@ -93,7 +93,7 @@ router.get('/:id', ProductController.get_product);
  *       500:
  *         description: Internal server error
  *     security:
- *       - bearerAuth: []
+ *       - accessToken: []
  */
 router.post('/', isAdminVerifier, ProductController.create_product);
 
@@ -144,7 +144,7 @@ router.post('/', isAdminVerifier, ProductController.create_product);
  *       500:
  *         description: Internal server error
  *     security:
- *       - bearerAuth: []
+ *       - accessToken: []
  */
 router.put('/:id', isAdminVerifier, ProductController.update_product);
 
@@ -172,32 +172,8 @@ router.put('/:id', isAdminVerifier, ProductController.update_product);
  *       500:
  *         description: Internal server error
  *     security:
- *       - bearerAuth: []
+ *       - accessToken: []
  */
 router.delete('/:id', isAdminVerifier, ProductController.delete_product);
-
-/**
- * @swagger
- * /api/v1/products/search:
- *   get:
- *     summary: Search for products
- *     description: Search for products based on a query string
- *     tags: [Products]
- *     parameters:
- *       - in: query
- *         name: q
- *         schema:
- *           type: string
- *         required: true
- *         description: The search query string
- *     responses:
- *       200:
- *         description: Successfully retrieved the search results
- *       400:
- *         description: Bad request
- *       500:
- *         description: Internal server error
- */
-router.get('/search', SearchController.search);
 
 export default router;
