@@ -13,7 +13,7 @@ export const swaggerOptions = {
     ],
     components: {
       securitySchemes: {
-        BearerAuth: {
+        accessToken: {
           type: "http",
           scheme: "bearer",
           bearerFormat: "JWT",
@@ -260,37 +260,11 @@ export const swaggerOptions = {
             },
           },
         },
-        Notification: {
-          type: "object",
-          properties: {
-            _id: {
-              type: "string",
-              description: "Notification ID",
-            },
-            userId: {
-              type: "string",
-              description: "User ID",
-            },
-            message: {
-              type: "string",
-              description: "Notification message",
-            },
-            read: {
-              type: "boolean",
-              description: "Read status of the notification",
-            },
-            createdAt: {
-              type: "string",
-              description: "Notification creation date",
-              format: "date-time",
-            },
-          },
-        },
       },
     },
     security: [
       {
-        BearerAuth: [],
+        accessToken: [],
       },
     ],
   },
