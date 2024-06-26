@@ -173,6 +173,62 @@ export const swaggerOptions = {
             },
           },
         },
+        Review: {
+          type: "object",
+          properties: {
+            _id: {
+              type: "string",
+              description: "Review ID",
+            },
+            userId: {
+              type: "string",
+              description: "User ID",
+            },
+            productId: {
+              type: "string",
+              description: "Product ID",
+            },
+            rating: {
+              type: "number",
+              description: "Rating given by the user",
+            },
+            comment: {
+              type: "string",
+              description: "Review comment",
+            },
+          },
+        },
+        Shipping: {
+          type: "object",
+          properties: {
+            _id: {
+              type: "string",
+              description: "Shipping ID",
+            },
+            orderId: {
+              type: "string",
+              description: "Order ID",
+            },
+            trackingNumber: {
+              type: "string",
+              description: "Tracking number",
+            },
+            carrier: {
+              type: "string",
+              description: "Shipping carrier",
+            },
+            status: {
+              type: "string",
+              description: "Shipping status",
+              enum: ["pending", "shipped", "delivered", "cancelled"],
+            },
+            estimatedDeliveryDate: {
+              type: "string",
+              description: "Estimated delivery date",
+              format: "date-time",
+            },
+          },
+        },
       },
     },
     security: [
