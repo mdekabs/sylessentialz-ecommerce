@@ -3,7 +3,6 @@ import Product from "../models/_product.js";
 import { indexProduct, updateProduct, deleteProduct, searchProducts } from '../services/_elasticsearch.js';
 
 const ProductController = {
-
     /* get all products */
     async get_products(req, res) {
         const qNew = req.query.new;

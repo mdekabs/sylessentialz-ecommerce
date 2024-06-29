@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+import mongoosastic from 'mongoose-elasticsearch-xp';
 
 const ProductSchema = new mongoose.Schema({
     title: {
@@ -27,7 +28,12 @@ const ProductSchema = new mongoose.Schema({
         type: Number,
         required: true
     }
-},
-    { timestamps: true });
+}, { timestamps: true });
 
-export default mongoose.model('Product', ProductSchema);
+ProductSchema.plugin(mongoosastic, {
+    hosts: process.env.ELASTICSEARCH_URI || "localhost:9200"
+});
+
+const Product = mongoose.model('Product', ProductSchema);
+
+export default Product;

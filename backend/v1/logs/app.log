@@ -113,3 +113,16 @@
 2024-06-26T13:15:30.358Z INFO: GET /api-docs/favicon-32x32.png 304 2ms 304
 2024-06-26T13:18:17.265Z INFO: POST /api/v1/auth/login 200 299ms 200
 2024-06-26T13:19:10.563Z INFO: GET /api/v1/products 200 2ms 200
+2024-06-27T12:18:53.658Z INFO: GET /api/v1/products/search?q=Electronics 200 9ms 200
+2024-06-27T12:19:50.121Z WARN: GET /api/v1/swagger/ 404 5ms 404
+2024-06-27T12:20:00.815Z INFO: GET /api-docs/ 304 8ms 304
+2024-06-27T12:20:00.864Z INFO: GET /api-docs/swagger-ui.css 304 4ms 304
+2024-06-27T12:20:00.870Z INFO: GET /api-docs/swagger-ui-bundle.js 304 3ms 304
+2024-06-27T12:20:00.875Z INFO: GET /api-docs/swagger-ui-standalone-preset.js 304 1ms 304
+2024-06-27T12:20:00.883Z INFO: GET /api-docs/swagger-ui-init.js 304 1ms 304
+2024-06-27T12:20:12.151Z INFO: POST /api/v1/auth/login 200 449ms 200
+2024-06-27T12:20:53.310Z INFO: GET /api/v1/products/search?q=Electronics 200 2ms 200
+2024-06-29T12:16:50.063Z INFO: GET /api/v1/products/search?q=Electronics 200 7ms 200
+2024-06-29T12:16:51.871Z INFO: GET /api/v1/products/search?q=Electronics 200 1ms 200
+2024-06-29T12:17:05.707Z INFO: GET /api/v1/products/ 200 1ms 200
+2024-06-29T12:17:23.178Z INFO: GET /api/v1/products/search?q=Electronics 200 0ms 200

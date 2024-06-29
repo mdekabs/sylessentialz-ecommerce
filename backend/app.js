@@ -10,6 +10,7 @@ import { appLogger } from "./middlewares/_logger.js";
 import { checkCache, cacheResponse } from "./middlewares/_caching.js";
 import Pagination from "./middlewares/_pagination.js";
 import { swaggerOptions } from "./swaggerConfig.js";
+import { synchronizeProducts } from "./services/_elasticsearch.js";
 
 dotenv.config();
 const app = express();
@@ -35,12 +36,14 @@ app.use("/api/v1/orders", orderRoute);
 app.use("/api/v1/shipping", checkCache, cacheResponse(300), shippingRoute);
 app.use("/api/v1/review", Pagination, reviewRoute);
 
-
 // Database connection
 async function connectToDatabase() {
   try {
     await mongoose.connect(process.env.DB_URI);
     console.log("Successfully connected to the database");
+
+    // Synchronize products with Elasticsearch
+    await synchronizeProducts();
   } catch (err) {
     console.error("Could not connect to the database:", err);
     process.exit(1);
