@@ -1,7 +1,6 @@
-import { emailQueue } from './utils/_queue.js';
-import emailProcessor from './utils/_emailProcessor.js';
+import { emailQueue, _emailProcessor } from './utils/index.js';
 import dotenv from "dotenv";
 
-emailQueue.process(emailProcessor);
+emailQueue.process(_emailProcessor);
 
 console.log('Email worker is running and processing jobs...');
