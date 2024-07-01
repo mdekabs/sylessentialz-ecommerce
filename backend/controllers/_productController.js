@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import Product from "../models/_product.js";
 import { indexProduct, updateProduct, deleteProduct, searchProducts } from '../services/_elasticsearch.js';
+import { responseHandler } from '../utils/index.js';
 
 const ProductController = {
     /* get all products */
@@ -22,16 +23,9 @@ const ProductController = {
             } else {
                 products = await Product.find();
             }
-            res.status(200).json({
-                type: "success",
-                products
-            });
+            responseHandler(res, HttpStatus.OK, 'success', '', { products });
         } catch (err) {
-            res.status(500).json({
-                type: "error",
-                message: "Something went wrong please try again",
-                err
-            });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong please try again', { err });
         }
     },
 
@@ -41,16 +35,9 @@ const ProductController = {
 
         try {
             const products = await searchProducts(query);
-            res.status(200).json({
-                type: "success",
-                products
-            });
+            responseHandler(res, HttpStatus.OK, 'success', '', { products });
         } catch (err) {
-            res.status(500).json({
-                type: "error",
-                message: "Something went wrong please try again",
-                err
-            });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong please try again', { err });
         }
     },
 
@@ -60,31 +47,18 @@ const ProductController = {
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
             console.error(`Invalid ObjectId format: ${id}`);
-            return res.status(400).json({
-                type: "error",
-                message: "Invalid product ID format"
-            });
+            return responseHandler(res, HttpStatus.BAD_REQUEST, 'error', 'Invalid product ID format');
         }
 
         try {
             const product = await Product.findById(id);
             if (!product) {
-                res.status(404).json({
-                    type: "error",
-                    message: "Product doesn't exist"
-                });
+                return responseHandler(res, HttpStatus.NOT_FOUND, 'error', "Product doesn't exist");
             } else {
-                res.status(200).json({
-                    type: "success",
-                    product
-                });
+                responseHandler(res, HttpStatus.OK, 'success', '', { product });
             }
         } catch (err) {
-            res.status(500).json({
-                type: "error",
-                message: "Something went wrong please try again",
-                err
-            });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong please try again', { err });
         }
     },
 
@@ -97,17 +71,9 @@ const ProductController = {
             // Index the product in Elasticsearch
             await indexProduct(savedProduct);
 
-            res.status(201).json({
-                type: "success",
-                message: "Product created successfully",
-                savedProduct
-            });
+            responseHandler(res, HttpStatus.CREATED, 'success', 'Product created successfully', { savedProduct });
         } catch (err) {
-            res.status(500).json({
-                type: "error",
-                message: "Something went wrong please try again",
-                err
-            });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong please try again', { err });
         }
     },
 
@@ -117,18 +83,12 @@ const ProductController = {
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
             console.error(`Invalid ObjectId format: ${id}`);
-            return res.status(400).json({
-                type: "error",
-                message: "Invalid product ID format"
-            });
+            return responseHandler(res, HttpStatus.BAD_REQUEST, 'error', 'Invalid product ID format');
         }
 
         const existing = await Product.findById(id);
         if (!existing) {
-            res.status(404).json({
-                type: "error",
-                message: "Product doesn't exist"
-            });
+            return responseHandler(res, HttpStatus.NOT_FOUND, 'error', "Product doesn't exist");
         } else {
             try {
                 const updatedProduct = await Product.findByIdAndUpdate(id, {
@@ -138,17 +98,9 @@ const ProductController = {
                 // Update the product in Elasticsearch
                 await updateProduct(updatedProduct);
 
-                res.status(200).json({
-                    type: "success",
-                    message: "Product updated successfully",
-                    updatedProduct
-                });
+                responseHandler(res, HttpStatus.OK, 'success', 'Product updated successfully', { updatedProduct });
             } catch (err) {
-                res.status(500).json({
-                    type: "error",
-                    message: "Something went wrong please try again",
-                    err
-                });
+                responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong please try again', { err });
             }
         }
     },
@@ -159,18 +111,12 @@ const ProductController = {
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
             console.error(`Invalid ObjectId format: ${id}`);
-            return res.status(400).json({
-                type: "error",
-                message: "Invalid product ID format"
-            });
+            return responseHandler(res, HttpStatus.BAD_REQUEST, 'error', 'Invalid product ID format');
         }
 
         const existing = await Product.findById(id);
         if (!existing) {
-            res.status(404).json({
-                type: "error",
-                message: "Product doesn't exist"
-            });
+            return responseHandler(res, HttpStatus.NOT_FOUND, 'error', "Product doesn't exist");
         } else {
             try {
                 await Product.findByIdAndDelete(id);
@@ -178,16 +124,9 @@ const ProductController = {
                 // Remove the product from Elasticsearch
                 await deleteProduct(id);
 
-                res.status(200).json({
-                    type: "success",
-                    message: "Product has been deleted successfully"
-                });
+                responseHandler(res, HttpStatus.OK, 'success', 'Product has been deleted successfully');
             } catch (err) {
-                res.status(500).json({
-                    type: "error",
-                    message: "Something went wrong please try again",
-                    err
-                });
+                responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong please try again', { err });
             }
         }
     }

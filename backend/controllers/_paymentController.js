@@ -1,4 +1,6 @@
 import stripe from "stripe";
+import responseHandler from '../utils/index.js';
+
 const stripeInstance = stripe(process.env.STRIPE_KEY);
 
 const PaymentController = {
@@ -12,10 +14,10 @@ const PaymentController = {
                 currency: "usd"
             });
 
-            res.status(200).json(charge);
+            responseHandler(res, HttpStatus.OK, "success", "Payment processed successfully", { charge });
         } catch (error) {
             console.error("Error processing payment:", error);
-            res.status(500).json({ error: "Payment processing failed" });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Payment processing failed", { error });
         }
     }
 };

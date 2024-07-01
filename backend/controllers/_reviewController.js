@@ -1,5 +1,6 @@
 import Review from '../models/_review.js';
 import Product from '../models/_product.js';
+import { responseHandler } from '../utils/index.js';
 
 const ReviewController = {
   // Create a new review
@@ -10,10 +11,7 @@ const ReviewController = {
     try {
       const product = await Product.findById(productId);
       if (!product) {
-        return res.status(404).json({
-          type: 'error',
-          message: 'Product not found',
-        });
+        return responseHandler(res, HttpStatus.NOT_FOUND, 'error', 'Product not found');
       }
 
       const newReview = new Review({
@@ -24,17 +22,9 @@ const ReviewController = {
       });
 
       const savedReview = await newReview.save();
-      res.status(201).json({
-        type: 'success',
-        message: 'Review created successfully',
-        review: savedReview,
-      });
+      responseHandler(res, HttpStatus.CREATED, 'success', 'Review created successfully', { review: savedReview });
     } catch (err) {
-      res.status(500).json({
-        type: 'error',
-        message: 'Something went wrong, please try again',
-        err,
-      });
+      responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong, please try again', { err });
     }
   },
 
@@ -44,16 +34,9 @@ const ReviewController = {
 
     try {
       const reviews = await Review.find({ productId });
-      res.status(200).json({
-        type: 'success',
-        reviews,
-      });
+      responseHandler(res, HttpStatus.OK, 'success', '', { reviews });
     } catch (err) {
-      res.status(500).json({
-        type: 'error',
-        message: 'Something went wrong, please try again',
-        err,
-      });
+      responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong, please try again', { err });
     }
   },
 
@@ -66,33 +49,19 @@ const ReviewController = {
     try {
       const review = await Review.findById(reviewId);
       if (!review) {
-        return res.status(404).json({
-          type: 'error',
-          message: 'Review not found',
-        });
+        return responseHandler(res, HttpStatus.NOT_FOUND, 'error', 'Review not found');
       }
 
       if (review.userId.toString() !== userId) {
-        return res.status(403).json({
-          type: 'error',
-          message: 'Unauthorized to update this review',
-        });
+        return responseHandler(res, HttpStatus.FORBIDDEN, 'error', 'Unauthorized to update this review');
       }
 
       review.rating = rating;
       review.comment = comment;
       const updatedReview = await review.save();
-      res.status(200).json({
-        type: 'success',
-        message: 'Review updated successfully',
-        review: updatedReview,
-      });
+      responseHandler(res, HttpStatus.OK, 'success', 'Review updated successfully', { review: updatedReview });
     } catch (err) {
-      res.status(500).json({
-        type: 'error',
-        message: 'Something went wrong, please try again',
-        err,
-      });
+      responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong, please try again', { err });
     }
   },
 
@@ -104,30 +73,17 @@ const ReviewController = {
     try {
       const review = await Review.findById(reviewId);
       if (!review) {
-        return res.status(404).json({
-          type: 'error',
-          message: 'Review not found',
-        });
+        return responseHandler(res, HttpStatus.NOT_FOUND, 'error', 'Review not found');
       }
 
       if (review.userId.toString() !== userId) {
-        return res.status(403).json({
-          type: 'error',
-          message: 'Unauthorized to delete this review',
-        });
+        return responseHandler(res, HttpStatus.FORBIDDEN, 'error', 'Unauthorized to delete this review');
       }
 
       await review.remove();
-      res.status(200).json({
-        type: 'success',
-        message: 'Review deleted successfully',
-      });
+      responseHandler(res, HttpStatus.OK, 'success', 'Review deleted successfully');
     } catch (err) {
-      res.status(500).json({
-        type: 'error',
-        message: 'Something went wrong, please try again',
-        err,
-      });
+      responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong, please try again', { err });
     }
   },
 };

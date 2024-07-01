@@ -1,20 +1,14 @@
 import Order from "../models/_order.js";
+import { responseHandler } from '../utils/index.js';
 
 const OrderController = {
     /* get all orders (only admin) */
     get_orders: async (req, res) => {
         try {
             const orders = await Order.find();
-            res.status(200).json({
-                type: "success",
-                orders
-            });
+            responseHandler(res, HttpStatus.OK, 'success', '', { orders });
         } catch (err) {
-            res.status(500).json({
-                type: "error",
-                message: "Something went wrong, please try again",
-                err
-            });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong, please try again', { err });
         }
     },
 
@@ -46,16 +40,9 @@ const OrderController = {
                     }
                 },
             ]);
-            res.status(200).json({
-                type: "success",
-                income
-            });
+            responseHandler(res, HttpStatus.OK, 'success', '', { income });
         } catch (err) {
-            res.status(500).json({
-                type: "error",
-                message: "Something went wrong, please try again",
-                err
-            });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong, please try again', { err });
         }
     },
 
@@ -64,22 +51,12 @@ const OrderController = {
         try {
             const orders = await Order.findOne({ userId: req.params.userId });
             if (!orders) {
-                res.status(404).json({
-                    type: "error",
-                    message: "User doesn't exist"
-                });
+                return responseHandler(res, HttpStatus.NOT_FOUND, 'error', "User doesn't exist");
             } else {
-                res.status(200).json({
-                    type: "success",
-                    orders
-                });
+                responseHandler(res, HttpStatus.OK, 'success', '', { orders });
             }
         } catch (err) {
-            res.status(500).json({
-                type: "error",
-                message: "Something went wrong, please try again",
-                err
-            });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong, please try again', { err });
         }
     },
 
@@ -89,17 +66,9 @@ const OrderController = {
             const userId = req.user.id; // Extract user ID from authenticated user
             const newOrder = new Order({ ...req.body, userId });
             const savedOrder = await newOrder.save();
-            res.status(201).json({
-                type: "success",
-                message: "Order created successfully",
-                savedOrder
-            });
+            responseHandler(res, HttpStatus.CREATED, 'success', 'Order created successfully', { savedOrder });
         } catch (err) {
-            res.status(500).json({
-                type: "error",
-                message: "Something went wrong, please try again",
-                err
-            });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong, please try again', { err });
         }
     },
 
@@ -109,17 +78,9 @@ const OrderController = {
             const updatedOrder = await Order.findByIdAndUpdate(req.params.id, {
                 $set: req.body
             }, { new: true });
-            res.status(200).json({
-                type: "success",
-                message: "Order updated successfully",
-                updatedOrder
-            });
+            responseHandler(res, HttpStatus.OK, 'success', 'Order updated successfully', { updatedOrder });
         } catch (err) {
-            res.status(500).json({
-                type: "error",
-                message: "Something went wrong, please try again",
-                err
-            });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong, please try again', { err });
         }
     },
 
@@ -127,16 +88,9 @@ const OrderController = {
     delete_order: async (req, res) => {
         try {
             await Order.findByIdAndDelete(req.params.id);
-            res.status(200).json({
-                type: "success",
-                message: "Order has been deleted successfully"
-            });
+            responseHandler(res, HttpStatus.OK, 'success', 'Order has been deleted successfully');
         } catch (err) {
-            res.status(500).json({
-                type: "error",
-                message: "Something went wrong, please try again",
-                err
-            });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong, please try again', { err });
         }
     }
 };
