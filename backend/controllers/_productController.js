@@ -1,3 +1,4 @@
+import HttpStatus from 'http-status-codes';
 import mongoose from 'mongoose';
 import Product from "../models/_product.js";
 import { indexProduct, updateProduct, deleteProduct, searchProducts } from '../services/_elasticsearch.js';

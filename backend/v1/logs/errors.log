@@ -32,3 +32,15 @@ TypeError: app.user is not a function
 2024-06-26T10:57:29.921Z ERROR: GET /api/v1/products/search?q=Electronics 500 2ms 500
 2024-06-26T10:59:11.693Z ERROR: GET /api/v1/products/search?q=Gadgets 500 6ms 500
 2024-07-01T11:49:37.084Z ERROR: POST /api/v1/auth/login 500 1301ms 500
+2024-07-01T17:37:34.222Z ERROR: uncaughtException: HttpStatus is not defined
+ReferenceError: HttpStatus is not defined
+    at login_user (file:///home/mdstorms/sylessentialz-ecommerce/backend/controllers/_authController.js:42:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) 
+2024-07-01T17:40:24.543Z ERROR: uncaughtException: HttpStatus is not defined
+ReferenceError: HttpStatus is not defined
+    at login_user (file:///home/mdstorms/sylessentialz-ecommerce/backend/controllers/_authController.js:42:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) 
+2024-07-01T17:42:57.764Z ERROR: uncaughtException: HttpStatus is not defined
+ReferenceError: HttpStatus is not defined
+    at login_user (file:///home/mdstorms/sylessentialz-ecommerce/backend/controllers/_authController.js:42:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) 
