@@ -1,5 +1,5 @@
 import Cart from "../models/_cart.js";
-import responseHandler from '../utils/index.js';
+import { responseHandler } from '../utils/index.js';
 
 const CartController = {
     // Get all carts (admin only)

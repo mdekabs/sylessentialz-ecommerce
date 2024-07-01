@@ -1,5 +1,5 @@
 import stripe from "stripe";
-import responseHandler from '../utils/index.js';
+import { responseHandler } from '../utils/index.js';
 
 const stripeInstance = stripe(process.env.STRIPE_KEY);
 
