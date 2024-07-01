@@ -36,9 +36,9 @@ class RedisClient {
    *
    * @returns {boolean} - The status of the Redis server connection.
    */
-  isAlive() {
+  isAlive = () => {
     return this.alive;
-  }
+  };
 
   /**
    * Retrieves the value associated with a key from Redis.
@@ -46,13 +46,13 @@ class RedisClient {
    * @param {string} key - The key to retrieve.
    * @returns {Promise<string | null>} - The value associated with the key or null if not found.
    */
-  async get(key) {
+  get = async (key) => {
     try {
       return await this.client.get(key);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   /**
    * Sets the value associated with a key in Redis.
@@ -62,13 +62,13 @@ class RedisClient {
    * @param {number} duration - The expiration time for the key in seconds.
    * @returns {Promise<void>} - A Promise that resolves when the operation is complete.
    */
-  async set(key, value, duration) {
+  set = async (key, value, duration) => {
     try {
       await this.client.set(key, value, "EX", duration);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   /**
    * Deletes a key and its associated value from Redis.
@@ -76,13 +76,13 @@ class RedisClient {
    * @param {string} key - The key to delete.
    * @returns {Promise<void>} - A Promise that resolves when the operation is complete.
    */
-  async del(key) {
+  del = async (key) => {
     try {
       await this.client.del(key);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 }
 
 const redisClient = new RedisClient();
