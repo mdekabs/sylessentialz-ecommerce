@@ -4,7 +4,7 @@ import { indexProduct, updateProduct, deleteProduct, searchProducts } from '../s
 
 const ProductController = {
     /* get all products */
-    async get_products(req, res) {
+    get_products: async (req, res) => {
         const qNew = req.query.new;
         const qCategory = req.query.category;
 
@@ -36,7 +36,7 @@ const ProductController = {
     },
 
     /* search products */
-    async search_products(req, res) {
+    search_products: async (req, res) => {
         const query = req.query.q;
 
         try {
@@ -55,7 +55,7 @@ const ProductController = {
     },
 
     /* get single product */
-    async get_product(req, res) {
+    get_product: async (req, res) => {
         const { id } = req.params;
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -89,7 +89,7 @@ const ProductController = {
     },
 
     /* create new product */
-    async create_product(req, res) {
+    create_product: async (req, res) => {
         const newProduct = new Product(req.body);
         try {
             const savedProduct = await newProduct.save();
@@ -112,7 +112,7 @@ const ProductController = {
     },
 
     /* update product */
-    async update_product(req, res) {
+    update_product: async (req, res) => {
         const { id } = req.params;
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -154,7 +154,7 @@ const ProductController = {
     },
 
     /* delete product */
-    async delete_product(req, res) {
+    delete_product: async (req, res) => {
         const { id } = req.params;
 
         if (!mongoose.Types.ObjectId.isValid(id)) {

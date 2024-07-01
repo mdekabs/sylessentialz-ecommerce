@@ -31,3 +31,4 @@ TypeError: app.user is not a function
 2024-06-26T10:55:07.454Z ERROR: GET /api/v1/products/search?q=%22Electronics%22 500 3ms 500
 2024-06-26T10:57:29.921Z ERROR: GET /api/v1/products/search?q=Electronics 500 2ms 500
 2024-06-26T10:59:11.693Z ERROR: GET /api/v1/products/search?q=Gadgets 500 6ms 500
+2024-07-01T11:49:37.084Z ERROR: POST /api/v1/auth/login 500 1301ms 500

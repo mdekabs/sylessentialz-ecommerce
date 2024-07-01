@@ -1,4 +1,4 @@
-const passwordResetEmail = (host, token) => {
+const generatePasswordResetEmail = (host, token) => {
     return {
         subject: 'Password Reset',
         message: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n
@@ -7,4 +7,4 @@ const passwordResetEmail = (host, token) => {
         If you did not request this, please ignore this email and your password will remain unchanged.\n`
     };
 };
-export default passwordResetEmail;
+export default generatePasswordResetEmail;

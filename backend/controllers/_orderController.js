@@ -2,7 +2,7 @@ import Order from "../models/_order.js";
 
 const OrderController = {
     /* get all orders (only admin) */
-    async get_orders(req, res) {
+    get_orders: async (req, res) => {
         try {
             const orders = await Order.find();
             res.status(200).json({
@@ -18,8 +18,8 @@ const OrderController = {
         }
     },
 
-    /* get monthly income (only admin)*/
-    async get_income(req, res) {
+    /* get monthly income (only admin) */
+    get_income: async (req, res) => {
         const date = new Date();
         const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
         const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
@@ -60,7 +60,7 @@ const OrderController = {
     },
 
     /* get user's orders */
-    async get_order(req, res) {
+    get_order: async (req, res) => {
         try {
             const orders = await Order.findOne({ userId: req.params.userId });
             if (!orders) {
@@ -84,7 +84,7 @@ const OrderController = {
     },
 
     /* add order */
-    async create_order(req, res) {
+    create_order: async (req, res) => {
         try {
             const userId = req.user.id; // Extract user ID from authenticated user
             const newOrder = new Order({ ...req.body, userId });
@@ -104,7 +104,7 @@ const OrderController = {
     },
 
     /* update order */
-    async update_order(req, res) {
+    update_order: async (req, res) => {
         try {
             const updatedOrder = await Order.findByIdAndUpdate(req.params.id, {
                 $set: req.body
@@ -124,7 +124,7 @@ const OrderController = {
     },
 
     /* delete order */
-    async delete_order(req, res) {
+    delete_order: async (req, res) => {
         try {
             await Order.findByIdAndDelete(req.params.id);
             res.status(200).json({
@@ -140,4 +140,5 @@ const OrderController = {
         }
     }
 };
+
 export default OrderController;
