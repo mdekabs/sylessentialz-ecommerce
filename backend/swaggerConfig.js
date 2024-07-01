@@ -171,6 +171,25 @@ export const swaggerOptions = {
               description: "Order status",
               default: "pending",
             },
+            storeCredit: {
+              type: "object",
+              properties: {
+                amount: {
+                  type: "number",
+                  description: "Store credit amount",
+                },
+                issuedAt: {
+                  type: "string",
+                  description: "Store credit issued date",
+                  format: "date-time",
+                },
+                expirationDate: {
+                  type: "string",
+                  description: "Store credit expiration date",
+                  format: "date-time",
+                },
+              },
+            },
           },
         },
         Review: {
