@@ -174,3 +174,7 @@
 2024-07-01T17:45:28.750Z INFO: GET /api-docs/swagger-ui-init.js 304 1ms 304
 2024-07-01T17:45:29.295Z INFO: GET /api-docs/favicon-32x32.png 304 2ms 304
 2024-07-01T17:45:41.116Z INFO: POST /api/v1/auth/login 200 688ms 200
+2024-07-01T17:52:47.777Z WARN: GET /api/v1/api/v1/products/search?q=Electronics 404 6ms 404
+2024-07-01T17:53:17.261Z WARN: GET /api/v1/api/v1/products/search?q=q%3DElectronics 404 7ms 404
+2024-07-01T17:53:40.110Z INFO: GET /api/v1/products/search?q=Electronics 200 8ms 200
+2024-07-01T17:53:47.050Z INFO: GET /api/v1/products/ 200 4ms 200
