@@ -12,7 +12,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/v1/shipping/create:
+ * /shipping/create:
  *   post:
  *     summary: Create a shipment
  *     description: Create a new shipment (admin only)
@@ -47,7 +47,7 @@ router.post('/create', isAdminVerifier, ShippingController.createShipment);
 
 /**
  * @swagger
- * /api/v1/shipping/{id}:
+ * /shipping/{id}:
  *   get:
  *     summary: Get shipment details
  *     description: Retrieve details of a specific shipment
