@@ -13,7 +13,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/v1/payment:
+ * /payment:
  *   post:
  *     summary: Process a payment
  *     description: Process a payment using Stripe

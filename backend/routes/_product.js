@@ -13,7 +13,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/v1/products:
+ * /products:
  *   get:
  *     summary: Get all products
  *     description: Retrieve a list of all products
@@ -28,7 +28,7 @@ router.get('/', ProductController.get_products);
 
 /**
  * @swagger
- * /api/v1/products/search:
+ * /products/search:
  *   get:
  *     summary: Search for products
  *     description: Search for products by query
@@ -50,7 +50,7 @@ router.get('/search', ProductController.search_products);
 
 /**
  * @swagger
- * /api/v1/products/{id}:
+ * /products/{id}:
  *   get:
  *     summary: Get a single product
  *     description: Retrieve a single product by its ID
@@ -74,7 +74,7 @@ router.get('/:id', ProductController.get_product);
 
 /**
  * @swagger
- * /api/v1/products:
+ * /products:
  *   post:
  *     summary: Create a new product
  *     description: Create a new product. Admin access required.
@@ -121,7 +121,7 @@ router.post('/', isAdminVerifier, ProductController.create_product);
 
 /**
  * @swagger
- * /api/v1/products/{id}:
+ * /products/{id}:
  *   put:
  *     summary: Update a product
  *     description: Update an existing product by its ID. Admin access required.
@@ -172,7 +172,7 @@ router.put('/:id', isAdminVerifier, ProductController.update_product);
 
 /**
  * @swagger
- * /api/v1/products/{id}:
+ * /products/{id}:
  *   delete:
  *     summary: Delete a product
  *     description: Delete a product by its ID. Admin access required.

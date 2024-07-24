@@ -13,7 +13,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/v1/orders:
+ *  /orders:
  *   get:
  *     summary: Get all orders
  *     description: Retrieve all orders (admin only)
@@ -32,7 +32,7 @@ router.get('/', isAdminVerifier, OrderController.get_orders);
 
 /**
  * @swagger
- * /api/v1/orders/income:
+ * /orders/income:
  *   get:
  *     summary: Get monthly income
  *     description: Retrieve monthly income (admin only)
@@ -51,7 +51,7 @@ router.get('/income', isAdminVerifier, OrderController.get_income);
 
 /**
  * @swagger
- * /api/v1/orders/{userId}:
+ * /orders/{userId}:
  *   get:
  *     summary: Get user's orders
  *     description: Retrieve the orders of a specific user
@@ -81,7 +81,7 @@ router.get('/:userId', accessLevelVerifier, OrderController.get_order);
 
 /**
  * @swagger
- * /api/v1/orders:
+ * /orders:
  *   post:
  *     summary: Create an order
  *     description: Create a new order

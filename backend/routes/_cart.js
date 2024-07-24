@@ -13,7 +13,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/v1/carts:
+ * /carts:
  *   get:
  *     summary: Get all carts
  *     description: Retrieve all carts (admin only)
@@ -32,7 +32,7 @@ router.get('/', isAdminVerifier, CartController.get_carts);
 
 /**
  * @swagger
- * /api/v1/carts/my-cart:
+ * /carts/my-cart:
  *   get:
  *     summary: Get current user's cart
  *     description: Retrieve the cart of the currently authenticated user
@@ -53,7 +53,7 @@ router.get('/my-cart', authenticationVerifier, CartController.get_cart);
 
 /**
  * @swagger
- * /api/v1/carts:
+ * /carts:
  *   post:
  *     summary: Add product to cart
  *     description: Add a new product to the cart. The userId is obtained from the authenticated user's token.
@@ -89,7 +89,7 @@ router.post('/', authenticationVerifier, CartController.create_cart);
 
 /**
  * @swagger
- * /api/v1/carts/{id}:
+ * /carts/{id}:
  *   put:
  *     summary: Update cart
  *     description: Update the cart with the specified ID
@@ -135,7 +135,7 @@ router.put('/:id', accessLevelVerifier, CartController.update_cart);
 
 /**
  * @swagger
- * /api/v1/carts/{id}:
+ * /carts/{id}:
  *   delete:
  *     summary: Delete cart
  *     description: Delete the cart with the specified ID

@@ -13,7 +13,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/v1/users:
+ * /users:
  *   get:
  *     summary: Get all users
  *     description: Retrieve all users (admin only)
@@ -32,7 +32,7 @@ router.get('/', isAdminVerifier, UserController.get_users);
 
 /**
  * @swagger
- * /api/v1/users/{id}:
+ * /users/{id}:
  *   get:
  *     summary: Get user by ID
  *     description: Retrieve a user by ID (admin only)
@@ -60,7 +60,7 @@ router.get('/:id', isAdminVerifier, UserController.get_user);
 
 /**
  * @swagger
- * /api/v1/users/stats:
+ * /users/stats:
  *   get:
  *     summary: Get user statistics
  *     description: Retrieve statistics about users (admin only)
@@ -79,7 +79,7 @@ router.get('/stats', isAdminVerifier, UserController.get_stats);
 
 /**
  * @swagger
- * /api/v1/users/{id}:
+ * /users/{id}:
  *   put:
  *     summary: Update user
  *     description: Update user details (admin or self)
@@ -109,7 +109,7 @@ router.put('/:id', accessLevelVerifier, UserController.update_user);
 
 /**
  * @swagger
- * /api/v1/users/{id}:
+ * /users/{id}:
  *   delete:
  *     summary: Delete user
  *     description: Delete a user by ID (admin only)

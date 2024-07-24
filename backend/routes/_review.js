@@ -13,7 +13,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/v1/reviews:
+ * /reviews:
  *   post:
  *     summary: Create a new review
  *     description: Create a new review for a product. User authentication required.
@@ -51,7 +51,7 @@ router.post('/', authenticationVerifier, ReviewController.create_review);
 
 /**
  * @swagger
- * /api/v1/reviews/{productId}:
+ * /reviews/{productId}:
  *   get:
  *     summary: Get all reviews for a product
  *     description: Retrieve all reviews for a specific product
@@ -75,7 +75,7 @@ router.get('/:productId', ReviewController.get_reviews);
 
 /**
  * @swagger
- * /api/v1/reviews/{reviewId}:
+ * /reviews/{reviewId}:
  *   put:
  *     summary: Update a review
  *     description: Update an existing review by its ID. User authentication required.
@@ -118,7 +118,7 @@ router.put('/:reviewId', authenticationVerifier, ReviewController.update_review)
 
 /**
  * @swagger
- * /api/v1/reviews/{reviewId}:
+ * /reviews/{reviewId}:
  *   delete:
  *     summary: Delete a review
  *     description: Delete a review by its ID. User authentication required.
