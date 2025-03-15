@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import crypto from "crypto";
 import { responseHandler, emailQueue, generatePasswordResetEmail } from "../utils/index.js";
-import { updateBlacklist } from "./middlewares/index.js";
+import { updateBlacklist } from "../middlewares/index.js";
 
 dotenv.config();
 

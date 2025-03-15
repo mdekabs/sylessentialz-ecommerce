@@ -1,0 +1,8 @@
+2025-03-15T15:02:33.221Z ERROR: uncaughtException: Route.delete() requires a callback function but got a [object Undefined]
+Error: Route.delete() requires a callback function but got a [object Undefined]
+    at Route.<computed> [as delete] (/home/mdstorms/sylessentialz-ecommerce/backend/v1/node_modules/express/lib/router/route.js:216:15)
+    at proto.<computed> [as delete] (/home/mdstorms/sylessentialz-ecommerce/backend/v1/node_modules/express/lib/router/index.js:521:19)
+    at file:///home/mdstorms/sylessentialz-ecommerce/backend/v1/routes/_cart.js:164:14
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5) 

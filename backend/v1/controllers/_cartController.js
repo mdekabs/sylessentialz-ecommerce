@@ -6,10 +6,14 @@ const CartController = {
     // Get all carts (admin only)
     get_carts: async (req, res) => {
         try {
+            if (!req.user.isAdmin) {
+                return responseHandler(res, HttpStatus.FORBIDDEN, "error", "Admin access required");
+            }
+            
             const carts = await Cart.find();
-            responseHandler(res, HttpStatus.OK, "success", "", { carts });
+            responseHandler(res, HttpStatus.OK, "success", "Carts retrieved successfully", { carts });
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Something went wrong, please try again", { err });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Failed to retrieve carts", { error: err.message });
         }
     },
 
@@ -17,56 +21,168 @@ const CartController = {
     get_cart: async (req, res) => {
         try {
             const cart = await Cart.findOne({ userId: req.user.id });
+            
             if (!cart) {
                 return responseHandler(res, HttpStatus.NOT_FOUND, "error", "Cart not found");
-            } else {
-                responseHandler(res, HttpStatus.OK, "success", "", { cart });
             }
+            
+            responseHandler(res, HttpStatus.OK, "success", "Cart retrieved successfully", { cart });
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Something went wrong, please try again", { err });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Failed to retrieve cart", { error: err.message });
         }
     },
 
     // Create a new cart
     create_cart: async (req, res) => {
-        const newCart = new Cart({
-            userId: req.user.id, // Get userId from the authenticated user
-            products: req.body.products,
-        });
-
         try {
+            if (!req.body.products || !Array.isArray(req.body.products)) {
+                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Valid products array is required");
+            }
+
+            const existingCart = await Cart.findOne({ userId: req.user.id });
+            if (existingCart) {
+                return responseHandler(res, HttpStatus.CONFLICT, "error", "Cart already exists for this user");
+            }
+
+            const validProducts = req.body.products.every(product => 
+                product.productId && 
+                typeof product.productId === 'string' &&
+                (!product.quantity || (typeof product.quantity === 'number' && product.quantity > 0))
+            );
+            if (!validProducts) {
+                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Invalid product format in cart");
+            }
+
+            const newCart = new Cart({
+                userId: req.user.id,
+                products: req.body.products,
+            });
+
             const savedCart = await newCart.save();
-            responseHandler(res, HttpStatus.CREATED, "success", "Cart created successfully", { savedCart });
+            responseHandler(res, HttpStatus.CREATED, "success", "Cart created successfully", { cart: savedCart });
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Something went wrong, please try again", { err });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Failed to create cart", { error: err.message });
         }
     },
 
     // Update a cart
     update_cart: async (req, res) => {
         try {
+            const cart = await Cart.findById(req.params.id);
+            
+            if (!cart || cart.userId !== req.user.id) {
+                return responseHandler(res, HttpStatus.FORBIDDEN, "error", "Not authorized to update this cart");
+            }
+
+            if (req.body.products) {
+                if (!Array.isArray(req.body.products)) {
+                    return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Products must be an array");
+                }
+                
+                const validProducts = req.body.products.every(product => 
+                    product.productId && 
+                    typeof product.productId === 'string' &&
+                    (!product.quantity || (typeof product.quantity === 'number' && product.quantity >= 0))
+                );
+                if (!validProducts) {
+                    return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Invalid product format");
+                }
+            }
+
             const updatedCart = await Cart.findByIdAndUpdate(
                 req.params.id,
-                {
-                    $set: req.body,
-                },
-                { new: true }
+                { $set: req.body },
+                { new: true, runValidators: true }
             );
-            responseHandler(res, HttpStatus.OK, "success", "Cart updated successfully", { updatedCart });
+
+            if (!updatedCart) {
+                return responseHandler(res, HttpStatus.NOT_FOUND, "error", "Cart not found");
+            }
+
+            responseHandler(res, HttpStatus.OK, "success", "Cart updated successfully", { cart: updatedCart });
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Something went wrong, please try again", { err });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Failed to update cart", { error: err.message });
         }
     },
 
-    // Delete a cart
-    delete_cart: async (req, res) => {
+    // Add item to cart
+    add_to_cart: async (req, res) => {
         try {
-            await Cart.findByIdAndDelete(req.params.id);
-            responseHandler(res, HttpStatus.OK, "success", "Cart deleted successfully");
+            const { productId, quantity = 1 } = req.body;
+            
+            if (!productId || typeof productId !== 'string') {
+                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Valid productId (string) is required");
+            }
+            if (typeof quantity !== 'number' || quantity <= 0) {
+                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Valid quantity (positive number) is required");
+            }
+
+            let cart = await Cart.findOne({ userId: req.user.id });
+            if (!cart) {
+                cart = new Cart({ 
+                    userId: req.user.id, 
+                    products: [] 
+                });
+            }
+
+            const productIndex = cart.products.findIndex(p => p.productId === productId);
+            if (productIndex > -1) {
+                cart.products[productIndex].quantity += quantity;
+            } else {
+                cart.products.push({ productId, quantity });
+            }
+
+            const updatedCart = await cart.save();
+            responseHandler(res, HttpStatus.OK, "success", "Item added to cart", { cart: updatedCart });
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Something went wrong, please try again", { err });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Failed to add item to cart", { error: err.message });
         }
     },
+
+    // Remove item from cart
+    remove_from_cart: async (req, res) => {
+        try {
+            const { productId } = req.body;
+            
+            if (!productId || typeof productId !== 'string') {
+                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Valid productId (string) is required");
+            }
+
+            const cart = await Cart.findOne({ userId: req.user.id });
+            if (!cart) {
+                return responseHandler(res, HttpStatus.NOT_FOUND, "error", "Cart not found");
+            }
+
+            const productIndex = cart.products.findIndex(p => p.productId === productId);
+            if (productIndex === -1) {
+                return responseHandler(res, HttpStatus.NOT_FOUND, "error", "Product not found in cart");
+            }
+
+            cart.products.splice(productIndex, 1);
+            const updatedCart = await cart.save();
+            responseHandler(res, HttpStatus.OK, "success", "Item removed from cart", { cart: updatedCart });
+        } catch (err) {
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Failed to remove item from cart", { error: err.message });
+        }
+    },
+
+    // Clear all items from cart
+    clear_cart: async (req, res) => {
+        try {
+            const cart = await Cart.findOne({ userId: req.user.id });
+            
+            if (!cart) {
+                return responseHandler(res, HttpStatus.NOT_FOUND, "error", "Cart not found");
+            }
+
+            cart.products = [];
+            const updatedCart = await cart.save();
+            
+            responseHandler(res, HttpStatus.OK, "success", "Cart cleared successfully", { cart: updatedCart });
+        } catch (err) {
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Failed to clear cart", { error: err.message });
+        }
+    }
 };
 
 export default CartController;

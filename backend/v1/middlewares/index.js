@@ -18,5 +18,5 @@ export {
   logger,
   appLogger,
   errorLogger,
-  _pagination
+  pagination
 };
