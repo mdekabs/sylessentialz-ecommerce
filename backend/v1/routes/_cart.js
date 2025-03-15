@@ -21,8 +21,8 @@ const router = express.Router();
  *     responses:
  *       200:
  *         description: Carts retrieved successfully
- *       401:
- *         description: Unauthorized - Admin access required
+ *       403:
+ *         description: Forbidden - Admin access required
  *       500:
  *         description: Internal server error
  *     security:
@@ -41,7 +41,7 @@ router.get('/', isAdminVerifier, CartController.get_carts);
  *       200:
  *         description: Cart retrieved successfully
  *       401:
- *         description: Unauthorized - User access required
+ *         description: Unauthorized - Authentication required
  *       404:
  *         description: Cart not found
  *       500:
@@ -55,8 +55,8 @@ router.get('/my-cart', authenticationVerifier, CartController.get_cart);
  * @swagger
  * /carts:
  *   post:
- *     summary: Add product to cart
- *     description: Add a new product to the cart. The userId is obtained from the authenticated user's token.
+ *     summary: Create new cart
+ *     description: Create a new cart for the authenticated user
  *     tags: [Carts]
  *     requestBody:
  *       required: true
@@ -77,9 +77,13 @@ router.get('/my-cart', authenticationVerifier, CartController.get_cart);
  *                       default: 1
  *     responses:
  *       201:
- *         description: Product added successfully
+ *         description: Cart created successfully
+ *       400:
+ *         description: Bad request - Invalid products array
  *       401:
- *         description: Unauthorized - User access required
+ *         description: Unauthorized - Authentication required
+ *       409:
+ *         description: Conflict - Cart already exists
  *       500:
  *         description: Internal server error
  *     security:
@@ -92,7 +96,7 @@ router.post('/', authenticationVerifier, CartController.create_cart);
  * /carts/{id}:
  *   put:
  *     summary: Update cart
- *     description: Update the cart with the specified ID
+ *     description: Update the authenticated user's cart
  *     tags: [Carts]
  *     parameters:
  *       - in: path
@@ -102,7 +106,7 @@ router.post('/', authenticationVerifier, CartController.create_cart);
  *           type: string
  *         description: The cart ID
  *     requestBody:
- *       required: true
+ *       required: false
  *       content:
  *         application/json:
  *           schema:
@@ -120,10 +124,12 @@ router.post('/', authenticationVerifier, CartController.create_cart);
  *     responses:
  *       200:
  *         description: Cart updated successfully
+ *       400:
+ *         description: Bad request - Invalid product format
  *       401:
- *         description: Unauthorized - User or admin access required
+ *         description: Unauthorized - Authentication required
  *       403:
- *         description: Forbidden - You are not allowed to perform this task
+ *         description: Forbidden - Not authorized to update this cart
  *       404:
  *         description: Cart not found
  *       500:
@@ -131,29 +137,85 @@ router.post('/', authenticationVerifier, CartController.create_cart);
  *     security:
  *       - bearerAuth: []
  */
-router.put('/:id', accessLevelVerifier, CartController.update_cart);
+router.put('/:id', authenticationVerifier, CartController.update_cart);
 
 /**
  * @swagger
- * /carts/{id}:
- *   delete:
- *     summary: Delete cart
- *     description: Delete the cart with the specified ID
+ * /carts/add:
+ *   post:
+ *     summary: Add item to cart
+ *     description: Add a product to the authenticated user's cart
  *     tags: [Carts]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: The cart ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               productId:
+ *                 type: string
+ *               quantity:
+ *                 type: number
+ *                 default: 1
  *     responses:
  *       200:
- *         description: Cart deleted successfully
+ *         description: Item added to cart successfully
+ *       400:
+ *         description: Bad request - Invalid productId or quantity
  *       401:
- *         description: Unauthorized - User or admin access required
- *       403:
- *         description: Forbidden - You are not allowed to perform this task
+ *         description: Unauthorized - Authentication required
+ *       500:
+ *         description: Internal server error
+ *     security:
+ *       - bearerAuth: []
+ */
+router.post('/add', authenticationVerifier, CartController.add_to_cart);
+
+/**
+ * @swagger
+ * /carts/remove:
+ *   post:
+ *     summary: Remove item from cart
+ *     description: Remove a product from the authenticated user's cart
+ *     tags: [Carts]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               productId:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Item removed from cart successfully
+ *       400:
+ *         description: Bad request - Invalid productId
+ *       401:
+ *         description: Unauthorized - Authentication required
+ *       404:
+ *         description: Product or cart not found
+ *       500:
+ *         description: Internal server error
+ *     security:
+ *       - bearerAuth: []
+ */
+router.post('/remove', authenticationVerifier, CartController.remove_from_cart);
+
+/**
+ * @swagger
+ * /carts/clear:
+ *   post:
+ *     summary: Clear cart
+ *     description: Remove all items from the authenticated user's cart
+ *     tags: [Carts]
+ *     responses:
+ *       200:
+ *         description: Cart cleared successfully
+ *       401:
+ *         description: Unauthorized - Authentication required
  *       404:
  *         description: Cart not found
  *       500:
@@ -161,6 +223,6 @@ router.put('/:id', accessLevelVerifier, CartController.update_cart);
  *     security:
  *       - bearerAuth: []
  */
-router.delete('/:id', accessLevelVerifier, CartController.delete_cart);
+router.post('/clear', authenticationVerifier, CartController.clear_cart);
 
 export default router;

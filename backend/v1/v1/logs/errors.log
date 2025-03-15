@@ -6,3 +6,12 @@ Error: Route.delete() requires a callback function but got a [object Undefined]
     at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5) 
+2025-03-15T15:42:13.355Z ERROR: ❌ Internal Server Error: undefined 
+2025-03-15T15:42:13.372Z ERROR: POST /api/v1/auth 500 7ms 500
+2025-03-15T15:44:42.748Z ERROR: ❌ Database or Elasticsearch connection failed: Cannot read properties of undefined (reading 'statusCode') 
+2025-03-15T15:47:04.368Z ERROR: ⚠️ Elasticsearch connection failed (non-critical): Cannot read properties of undefined (reading 'statusCode') 
+2025-03-15T15:51:42.651Z ERROR: ⚠️ Elasticsearch connection failed (non-critical): Cannot read properties of undefined (reading 'statusCode') 
+2025-03-15T15:52:21.613Z ERROR: ⚠️ Elasticsearch connection failed (non-critical): Cannot read properties of undefined (reading 'statusCode') 
+2025-03-15T15:53:41.767Z ERROR: ⚠️ Failed to update Elasticsearch settings: 
+2025-03-15T16:07:14.975Z ERROR: POST /api/v1/auth/register 500 275ms 500
+2025-03-15T20:09:44.825Z ERROR: POST /api/v1/auth/login 500 120ms 500

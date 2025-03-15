@@ -1,4 +1,4 @@
-import HttpStatus from 'http-status-codes';
+import HttpStatus from "http-status-codes";
 import User from "../models/_user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -9,37 +9,50 @@ import { updateBlacklist } from "../middlewares/index.js";
 
 dotenv.config();
 
-// Constants for better readability
 const SALT_ROUNDS = 10;
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRATION = "1d";
 const PASSWORD_RESET_EXPIRATION = 3600000; // 1 hour
 const TOKEN_BYTES = 32;
-const ERROR_MESSAGES = {
-    MISSING_FIELDS: "Username, email, and password are required.",
-    EMAIL_EXISTS: "Email is already in use.",
-    USER_NOT_FOUND: "No user found with this email.",
-    INVALID_CREDENTIALS: "Invalid username or password.",
-    INVALID_PASSWORD: "Incorrect password.",
-    INVALID_RESET_TOKEN: "Invalid or expired password reset token.",
-    PASSWORD_REQUIRED: "New password is required.",
-    FAILED_USER_CREATION: "User creation failed: ",
-    FAILED_LOGIN: "Login failed: ",
-    FAILED_PASSWORD_RESET_REQUEST: "Password reset request failed: ",
-    FAILED_PASSWORD_RESET: "Password reset failed: ",
-};
 
 const AuthController = {
+    create_admin_user: async () => {
+        try {
+            const adminEmail = process.env.ADMIN_EMAIL;
+            const adminUsername = process.env.ADMIN_USERNAME;
+            const adminPassword = process.env.ADMIN_PASSWORD;
+
+            const existingAdmin = await User.findOne({ email: adminEmail });
+            if (existingAdmin) {
+                console.log("ℹ️ Admin user already exists.");
+                return;
+            }
+
+            const hashedPassword = await bcrypt.hash(adminPassword, SALT_ROUNDS);
+            const newAdmin = new User({
+                username: adminUsername.toLowerCase(),
+                email: adminEmail,
+                password: hashedPassword,
+                isAdmin: true,
+            });
+
+            await newAdmin.save();
+            console.log("✅ Admin user created successfully!");
+        } catch (err) {
+            console.error("❌ Failed to create admin user:", err.message);
+        }
+    },
+
     create_user: async (req, res) => {
         try {
             const { username, email, password } = req.body;
             if (!username || !email || !password) {
-                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", ERROR_MESSAGES.MISSING_FIELDS);
+                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Username, email, and password are required.");
             }
 
             const existingUser = await User.findOne({ email });
             if (existingUser) {
-                return responseHandler(res, HttpStatus.CONFLICT, "error", ERROR_MESSAGES.EMAIL_EXISTS);
+                return responseHandler(res, HttpStatus.CONFLICT, "error", "Email is already in use.");
             }
 
             const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
@@ -48,7 +61,7 @@ const AuthController = {
 
             responseHandler(res, HttpStatus.CREATED, "success", "User has been created successfully", { user });
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", ERROR_MESSAGES.FAILED_USER_CREATION + err.message);
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "User creation failed: " + err.message);
         }
     },
 
@@ -61,85 +74,68 @@ const AuthController = {
 
             const user = await User.findOne({ username });
             if (!user) {
-                return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", ERROR_MESSAGES.INVALID_CREDENTIALS);
+                return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", "Invalid username or password.");
             }
 
             const isPasswordValid = bcrypt.compareSync(password, user.password);
             if (!isPasswordValid) {
-                return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", ERROR_MESSAGES.INVALID_PASSWORD);
+                return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", "Incorrect password.");
             }
 
             const accessToken = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, JWT_SECRET, { expiresIn: JWT_EXPIRATION });
             const { password: _, ...data } = user._doc;
             responseHandler(res, HttpStatus.OK, "success", "Successfully logged in", { ...data, accessToken });
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", ERROR_MESSAGES.FAILED_LOGIN + err.message);
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Login failed: " + err.message);
         }
     },
 
     logout_user: async (req, res) => {
-        const token = req.headers.authorization?.split(' ')[1];
-        if (!token) {
-            return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", "No token provided");
-        }
-
         try {
+            const token = req.header("Authorization").replace("Bearer ", "");
             await updateBlacklist(token);
-            responseHandler(res, HttpStatus.OK, "success", "Successfully logged out");
+            responseHandler(res, HttpStatus.OK, "success", "Successfully logged out.");
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Something went wrong, please try again", { error: err.message });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Logout failed: " + err.message);
         }
     },
 
     forgot_password: async (req, res) => {
         try {
             const { email } = req.body;
-            if (!email) {
-                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Email is required.");
-            }
-
             const user = await User.findOne({ email });
             if (!user) {
-                return responseHandler(res, HttpStatus.NOT_FOUND, "error", ERROR_MESSAGES.USER_NOT_FOUND);
+                return responseHandler(res, HttpStatus.NOT_FOUND, "error", "User not found.");
             }
 
-            const token = crypto.randomBytes(TOKEN_BYTES).toString('hex');
-            user.resetPasswordToken = token;
+            const resetToken = crypto.randomBytes(TOKEN_BYTES).toString("hex");
+            user.resetPasswordToken = resetToken;
             user.resetPasswordExpires = Date.now() + PASSWORD_RESET_EXPIRATION;
             await user.save();
 
-            const message = generatePasswordResetEmail(req.headers.host, token);
-            await emailQueue.add({ to: user.email, subject: message.subject, text: message.message });
-
-            responseHandler(res, HttpStatus.OK, "success", "Password reset email sent successfully.");
+            await emailQueue.add("sendEmail", generatePasswordResetEmail(user.email, resetToken));
+            responseHandler(res, HttpStatus.OK, "success", "Password reset email sent.");
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", ERROR_MESSAGES.FAILED_PASSWORD_RESET_REQUEST + err.message);
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Forgot password failed: " + err.message);
         }
     },
 
     reset_password: async (req, res) => {
         try {
-            if (!req.body.password) {
-                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", ERROR_MESSAGES.PASSWORD_REQUIRED);
-            }
-
-            const user = await User.findOne({
-                resetPasswordToken: req.params.token,
-                resetPasswordExpires: { $gt: Date.now() }
-            });
-
+            const { token, newPassword } = req.body;
+            const user = await User.findOne({ resetPasswordToken: token, resetPasswordExpires: { $gt: Date.now() } });
             if (!user) {
-                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", ERROR_MESSAGES.INVALID_RESET_TOKEN);
+                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Invalid or expired token.");
             }
 
-            user.password = await bcrypt.hash(req.body.password, SALT_ROUNDS);
-            user.resetPasswordToken = null;
-            user.resetPasswordExpires = null;
+            user.password = await bcrypt.hash(newPassword, SALT_ROUNDS);
+            user.resetPasswordToken = undefined;
+            user.resetPasswordExpires = undefined;
             await user.save();
 
-            responseHandler(res, HttpStatus.OK, "success", "Password has been reset successfully.");
+            responseHandler(res, HttpStatus.OK, "success", "Password reset successful.");
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", ERROR_MESSAGES.FAILED_PASSWORD_RESET + err.message);
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Password reset failed: " + err.message);
         }
     }
 };
