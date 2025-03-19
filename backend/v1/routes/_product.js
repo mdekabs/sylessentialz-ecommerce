@@ -1,6 +1,6 @@
 import express from 'express';
 import { ProductController } from '../controllers/index.js';
-import { isAdminVerifier } from '../middlewares/_verifyToken.js';
+import { isAdminVerifier } from '../middlewares/index.js';
 
 const router = express.Router();
 

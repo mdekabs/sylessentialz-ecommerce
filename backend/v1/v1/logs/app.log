@@ -83,3 +83,88 @@
 2025-03-15T20:54:18.915Z INFO: POST /api/v1/auth/login 200 136ms 200
 2025-03-15T20:54:43.290Z INFO: POST /api/v1/products/ 200 1ms 200
 2025-03-15T20:55:17.051Z INFO: POST /api/v1/products/ 200 1ms 200
+2025-03-15T20:58:24.257Z INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 
+2025-03-15T20:58:24.274Z INFO: 🚀 Server is running on port 3000 in development mode 
+2025-03-15T20:58:24.304Z INFO: ✅ Elasticsearch client initialized successfully 
+2025-03-15T20:58:24.310Z INFO: ✅ Successfully connected to MongoDB 
+2025-03-15T20:58:24.360Z INFO: ✅ Elasticsearch connected: Status is green 
+2025-03-15T20:58:28.900Z INFO: POST /api/v1/products/ 200 3ms 200
+2025-03-15T20:58:30.610Z INFO: POST /api/v1/products/ 200 5ms 200
+2025-03-15T21:08:29.464Z INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 
+2025-03-15T21:08:29.483Z INFO: 🚀 Server is running on port 3000 in development mode 
+2025-03-15T21:08:29.510Z INFO: ✅ Elasticsearch client initialized successfully 
+2025-03-15T21:08:29.518Z INFO: ✅ Successfully connected to MongoDB 
+2025-03-15T21:08:29.568Z INFO: ✅ Elasticsearch connected: Status is green 
+2025-03-15T21:08:35.081Z INFO: POST /api/v1/products/ 200 7ms 200
+2025-03-15T21:08:36.362Z INFO: POST /api/v1/products/ 200 1ms 200
+2025-03-15T21:08:37.517Z INFO: POST /api/v1/products/ 200 1ms 200
+2025-03-15T21:12:44.967Z INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 
+2025-03-15T21:12:44.988Z INFO: 🚀 Server is running on port 3000 in development mode 
+2025-03-15T21:12:45.015Z INFO: ✅ Elasticsearch client initialized successfully 
+2025-03-15T21:12:45.021Z INFO: ✅ Successfully connected to MongoDB 
+2025-03-15T21:12:45.066Z INFO: ✅ Elasticsearch connected: Status is green 
+2025-03-15T21:12:59.363Z INFO: POST /api/v1/auth/login 200 136ms 200
+2025-03-15T21:13:31.511Z INFO: POST /api/v1/products/ 200 4ms 200
+2025-03-15T21:14:35.135Z INFO: POST /api/v1/products 200 1ms 200
+2025-03-15T21:14:50.845Z INFO: POST /api/v1/products/ 200 1ms 200
+2025-03-15T21:20:23.297Z INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 
+2025-03-15T21:20:23.321Z INFO: 🚀 Server is running on port 3000 in development mode 
+2025-03-15T21:20:23.368Z INFO: ✅ Elasticsearch client initialized successfully 
+2025-03-15T21:20:23.380Z INFO: ✅ Successfully connected to MongoDB 
+2025-03-15T21:20:23.451Z INFO: ✅ Elasticsearch connected: Status is green 
+2025-03-15T21:20:27.882Z WARN: POST /api/v1/products/ 401 3ms 401
+2025-03-15T21:20:30.438Z WARN: POST /api/v1/products/ 401 2ms 401
+2025-03-15T21:51:47.026Z INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 
+2025-03-15T21:51:47.045Z INFO: 🚀 Server is running on port 3000 in development mode 
+2025-03-15T21:51:47.085Z INFO: ✅ Elasticsearch client initialized successfully 
+2025-03-15T21:51:47.090Z INFO: ✅ Successfully connected to MongoDB 
+2025-03-15T21:51:47.140Z INFO: ✅ Elasticsearch connected: Status is green 
+2025-03-15T21:51:55.900Z WARN: POST /api/v1/products/ 401 2ms 401
+2025-03-15T21:52:10.648Z INFO: POST /api/v1/auth/login 200 135ms 200
+2025-03-15T21:52:37.923Z WARN: POST /api/v1/products/ 401 1ms 401
+2025-03-15T21:52:44.692Z WARN: POST /api/v1/products/ 401 0ms 401
+2025-03-15T22:00:44.547Z INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 
+2025-03-15T22:00:44.574Z INFO: 🚀 Server is running on port 3000 in development mode 
+2025-03-15T22:00:44.610Z INFO: ✅ Elasticsearch client initialized successfully 
+2025-03-15T22:00:44.624Z INFO: ✅ Successfully connected to MongoDB 
+2025-03-15T22:00:44.703Z INFO: ✅ Elasticsearch connected: Status is green 
+2025-03-15T22:00:51.854Z ERROR: POST /api/v1/products/ 500 49ms 500
+2025-03-15T22:01:44.321Z INFO: POST /api/v1/auth/login 200 115ms 200
+2025-03-15T22:02:08.194Z ERROR: POST /api/v1/products/ 500 8ms 500
+2025-03-15T22:03:59.091Z ERROR: ❌ Internal Server Error: Cannot read properties of undefined (reading 'statusCode') 
+2025-03-15T22:05:36.063Z ERROR: ❌ Internal Server Error: Cannot read properties of undefined (reading 'statusCode') 
+2025-03-15T22:27:02.132Z INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 
+2025-03-15T22:27:02.157Z INFO: 🚀 Server is running on port 3000 in development mode 
+2025-03-15T22:27:02.202Z INFO: ✅ Successfully connected to MongoDB 
+2025-03-15T22:27:02.232Z INFO: ✅ Elasticsearch client initialized successfully 
+2025-03-15T22:27:02.309Z INFO: ✅ Elasticsearch connected: Status is green 
+2025-03-15T22:27:08.668Z ERROR: ❌ Internal Server Error: Cannot read properties of undefined (reading 'statusCode') 
+2025-03-15T22:29:24.033Z INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 
+2025-03-15T22:29:24.053Z INFO: 🚀 Server is running on port 3000 in development mode 
+2025-03-15T22:29:24.082Z INFO: ✅ Elasticsearch client initialized successfully 
+2025-03-15T22:29:24.088Z INFO: ✅ Successfully connected to MongoDB 
+2025-03-15T22:29:24.171Z INFO: ✅ Elasticsearch connected: Status is green 
+2025-03-15T22:29:38.140Z ERROR: ❌ Internal Server Error: Cannot read properties of undefined (reading 'statusCode') 
+2025-03-15T22:29:40.478Z ERROR: ❌ Internal Server Error: Cannot read properties of undefined (reading 'statusCode') 
+2025-03-15T22:32:57.454Z INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 
+2025-03-15T22:32:57.474Z INFO: 🚀 Server is running on port 3000 in development mode 
+2025-03-15T22:32:57.508Z INFO: ✅ Elasticsearch client initialized successfully 
+2025-03-15T22:32:57.516Z INFO: ✅ Successfully connected to MongoDB 
+2025-03-15T22:32:57.568Z INFO: ✅ Elasticsearch connected: Status is green 
+2025-03-15T22:33:10.521Z ERROR: ❌ Internal Server Error: Cannot read properties of undefined (reading 'statusCode') 
+2025-03-15T22:33:54.122Z INFO: POST /api/v1/auth/login 200 119ms 200
+2025-03-15T22:34:24.154Z ERROR: ❌ Internal Server Error: Cannot read properties of undefined (reading 'statusCode') 
+2025-03-15T22:34:48.034Z INFO: POST /api/v1/products/ 201 66ms 201
+2025-03-16T04:15:37.981Z WARN: POST /api/v1/products/search 404 34ms 404
+2025-03-16T04:18:04.733Z INFO: POST /api/v1/products/ 201 408ms 201
+2025-03-16T04:18:55.746Z WARN: POST /api/v1/products/search 404 1ms 404
+2025-03-16T04:19:28.489Z WARN: POST /api/v1/products/search 404 0ms 404
+2025-03-16T04:21:39.330Z ERROR: GET /api/v1/products/search 500 15ms 500
+2025-03-16T04:22:18.072Z ERROR: GET /api/v1/products/search 500 1ms 500
+2025-03-16T04:23:00.930Z INFO: GET /api/v1/products/ 200 140ms 200
+2025-03-16T04:25:11.257Z INFO: GET /api/v1/products/67d650fcb87c5636981f8f72 200 22ms 200
+2025-03-16T04:35:44.988Z ERROR: POST /api/v1/products/ 500 27ms 500
+2025-03-16T04:36:24.744Z WARN: POST /api/v1/carts/ 400 22ms 400
+2025-03-16T04:37:47.674Z INFO: POST /api/v1/carts/ 200 7ms 200
+2025-03-16T04:38:15.890Z INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 
+2025-03-16T04:38:15.916Z INFO: 🚀 Server is running on port 3000 in development mode 
