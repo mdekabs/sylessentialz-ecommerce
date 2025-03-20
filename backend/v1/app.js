@@ -67,7 +67,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users", pagination, userRoute);
 app.use("/api/v1/products", pagination, productRoute);
-app.use("/api/v1/carts", checkCache, cacheResponse(60), cartRoute);
+app.use("/api/v1/carts", cartRoute);
 app.use("/api/v1/orders", orderRoute);
 app.use("/api/v1/shipping", checkCache, cacheResponse(300), shippingRoute);
 app.use("/api/v1/review", pagination, reviewRoute);
