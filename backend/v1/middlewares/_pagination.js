@@ -1,3 +1,7 @@
+import logger from "../middlewares/index.js";
+import responseHandler from "../utils/index.js";
+import HttpStatus from "http-status-codes";
+
 /**
  * Constants for pagination parameters and default values.
  */
@@ -6,26 +10,27 @@ const PAGINATION_CONSTANTS = {
   LIMIT_PARAM: "limit",
   DEFAULT_PAGE: 1,
   DEFAULT_LIMIT: 12,
-  MAX_LIMIT: 100, // To prevent excessive data fetching
+  MAX_LIMIT: 100, // Prevent excessive data fetching
 };
 
 /**
- * Generates pagination links based on current page, limit, and total items.
+ * Generates HATEOAS-style pagination links.
  * @param {number} page - Current page number.
  * @param {number} limit - Items per page.
  * @param {number} totalItems - Total items in the collection.
  * @param {string} baseUrl - Base URL for the request.
- * @returns {Object} Object containing pagination links.
+ * @returns {Array} Array containing pagination links with "rel" attributes.
  */
 function generatePaginationLinks(page, limit, totalItems, baseUrl) {
   const totalPages = Math.ceil(totalItems / limit);
-  return {
-    first: `${baseUrl}?${PAGINATION_CONSTANTS.PAGE_PARAM}=1&${PAGINATION_CONSTANTS.LIMIT_PARAM}=${limit}`,
-    prev: page > 1 ? `${baseUrl}?${PAGINATION_CONSTANTS.PAGE_PARAM}=${page - 1}&${PAGINATION_CONSTANTS.LIMIT_PARAM}=${limit}` : null,
-    self: `${baseUrl}?${PAGINATION_CONSTANTS.PAGE_PARAM}=${page}&${PAGINATION_CONSTANTS.LIMIT_PARAM}=${limit}`,
-    next: page < totalPages ? `${baseUrl}?${PAGINATION_CONSTANTS.PAGE_PARAM}=${page + 1}&${PAGINATION_CONSTANTS.LIMIT_PARAM}=${limit}` : null,
-    last: `${baseUrl}?${PAGINATION_CONSTANTS.PAGE_PARAM}=${totalPages}&${PAGINATION_CONSTANTS.LIMIT_PARAM}=${limit}`,
-  };
+
+  return [
+    { rel: "first", href: `${baseUrl}?${PAGINATION_CONSTANTS.PAGE_PARAM}=1&${PAGINATION_CONSTANTS.LIMIT_PARAM}=${limit}` },
+    { rel: "prev", href: page > 1 ? `${baseUrl}?${PAGINATION_CONSTANTS.PAGE_PARAM}=${page - 1}&${PAGINATION_CONSTANTS.LIMIT_PARAM}=${limit}` : null },
+    { rel: "self", href: `${baseUrl}?${PAGINATION_CONSTANTS.PAGE_PARAM}=${page}&${PAGINATION_CONSTANTS.LIMIT_PARAM}=${limit}` },
+    { rel: "next", href: page < totalPages ? `${baseUrl}?${PAGINATION_CONSTANTS.PAGE_PARAM}=${page + 1}&${PAGINATION_CONSTANTS.LIMIT_PARAM}=${limit}` : null },
+    { rel: "last", href: `${baseUrl}?${PAGINATION_CONSTANTS.PAGE_PARAM}=${totalPages}&${PAGINATION_CONSTANTS.LIMIT_PARAM}=${limit}` },
+  ].filter(link => link.href !== null); // Remove null links
 }
 
 /**
@@ -57,15 +62,15 @@ export const pagination = (req, res, next) => {
       req.query[PAGINATION_CONSTANTS.LIMIT_PARAM]
     );
 
-    const baseUrl = `${req.protocol}://${req.get('host')}${req.baseUrl || ''}`;
+    const baseUrl = `${req.protocol}://${req.get("host")}${req.baseUrl || ""}`;
 
-    res.locals.pagination = { page, limit, links: {}, hasMorePages: false };
+    res.locals.pagination = { page, limit, links: [], hasMorePages: false };
 
     // Middleware will require `totalItems` to be set in the response locals in the route handler
     res.locals.setPagination = (totalItems) => {
-      if (typeof totalItems !== 'number' || totalItems < 0) {
-        logger.error('Invalid totalItems value in pagination middleware');
-        return;
+      if (typeof totalItems !== "number" || totalItems < 0) {
+        logger.error("Invalid totalItems value in pagination middleware");
+        return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Invalid totalItems value");
       }
 
       res.locals.pagination.links = generatePaginationLinks(page, limit, totalItems, baseUrl);
@@ -75,6 +80,6 @@ export const pagination = (req, res, next) => {
     next();
   } catch (error) {
     logger.error(`Pagination Middleware Error: ${error.message}`);
-    res.status(500).json({ error: 'Internal server error' });
+    return responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Internal server error");
   }
 };

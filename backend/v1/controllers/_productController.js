@@ -4,34 +4,66 @@ import Product from "../models/_product.js";
 import { responseHandler } from '../utils/index.js';
 
 const ProductController = {
-    /* get all products */
+    /* get all products with pagination */
     get_products: async (req, res) => {
         const qNew = req.query.new;
         const qCategory = req.query.category;
+        const { page, limit } = res.locals.pagination;
+        const skip = (page - 1) * limit;
 
         try {
-            let products;
+            let query = {};
+            let sort = {};
+            let limitOverride = limit;
 
+            // Handle special query parameters
             if (qNew) {
-                products = await Product.find()
-                    .sort({ createdAt: -1 })
-                    .limit(5);
+                sort = { createdAt: -1 };
+                limitOverride = 5; // Override pagination limit for "new" products
             } else if (qCategory) {
-                products = await Product.find({
-                    categories: {
-                        $in: [qCategory]
-                    }
-                });
-            } else {
-                products = await Product.find();
+                query = {
+                    categories: { $in: [qCategory] }
+                };
             }
-            responseHandler(res, HttpStatus.OK, 'success', '', { products });
+
+            // Optional sorting parameters (if not already set by qNew)
+            if (!qNew) {
+                const sortField = req.query.sort || 'createdAt';
+                const order = req.query.order === 'desc' ? -1 : 1;
+                sort = { [sortField]: order };
+            }
+
+            // Parallel execution for count and data
+            const [totalItems, products] = await Promise.all([
+                Product.countDocuments(query),
+                Product.find(query)
+                    .sort(sort)
+                    .skip(qNew ? 0 : skip) // Skip not applied for qNew since limit is fixed
+                    .limit(qNew ? limitOverride : limit)
+            ]);
+
+            // Set pagination metadata (adjusted for qNew case)
+            res.locals.setPagination(totalItems);
+
+            const responseData = {
+                products,
+                pagination: {
+                    page,
+                    limit: qNew ? limitOverride : limit,
+                    totalItems,
+                    totalPages: Math.ceil(totalItems / (qNew ? limitOverride : limit)),
+                    hasMorePages: res.locals.pagination.hasMorePages,
+                    links: res.locals.pagination.links
+                }
+            };
+
+            responseHandler(res, HttpStatus.OK, 'success', '', responseData);
         } catch (err) {
             responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong please try again', { err });
         }
     },
 
-    /* search products */
+    /* search products (pagination not applied here) */
     search_products: async (req, res) => {
         const query = req.query.q;
 
@@ -47,7 +79,7 @@ const ProductController = {
         }
     },
 
-    /* get single product */
+    /* get single product (no pagination needed) */
     get_product: async (req, res) => {
         const { id } = req.params;
 
@@ -60,15 +92,14 @@ const ProductController = {
             const product = await Product.findById(id);
             if (!product) {
                 return responseHandler(res, HttpStatus.NOT_FOUND, 'error', "Product doesn't exist");
-            } else {
-                responseHandler(res, HttpStatus.OK, 'success', '', { product });
             }
+            responseHandler(res, HttpStatus.OK, 'success', '', { product });
         } catch (err) {
             responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong please try again', { err });
         }
     },
 
-    /* create new product */
+    /* create new product (no pagination needed) */
     create_product: async (req, res) => {
         const newProduct = new Product(req.body);
         try {
@@ -79,7 +110,7 @@ const ProductController = {
         }
     },
 
-    /* update product */
+    /* update product (no pagination needed) */
     update_product: async (req, res) => {
         const { id } = req.params;
 
@@ -91,19 +122,18 @@ const ProductController = {
         const existing = await Product.findById(id);
         if (!existing) {
             return responseHandler(res, HttpStatus.NOT_FOUND, 'error', "Product doesn't exist");
-        } else {
-            try {
-                const updatedProduct = await Product.findByIdAndUpdate(id, {
-                    $set: req.body
-                }, { new: true });
-                responseHandler(res, HttpStatus.OK, 'success', 'Product updated successfully', { updatedProduct });
-            } catch (err) {
-                responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong please try again', { err });
-            }
+        }
+        try {
+            const updatedProduct = await Product.findByIdAndUpdate(id, {
+                $set: req.body
+            }, { new: true });
+            responseHandler(res, HttpStatus.OK, 'success', 'Product updated successfully', { updatedProduct });
+        } catch (err) {
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong please try again', { err });
         }
     },
 
-    /* delete product */
+    /* delete product (no pagination needed) */
     delete_product: async (req, res) => {
         const { id } = req.params;
 
@@ -115,13 +145,12 @@ const ProductController = {
         const existing = await Product.findById(id);
         if (!existing) {
             return responseHandler(res, HttpStatus.NOT_FOUND, 'error', "Product doesn't exist");
-        } else {
-            try {
-                await Product.findByIdAndDelete(id);
-                responseHandler(res, HttpStatus.OK, 'success', 'Product has been deleted successfully');
-            } catch (err) {
-                responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong please try again', { err });
-            }
+        }
+        try {
+            await Product.findByIdAndDelete(id);
+            responseHandler(res, HttpStatus.OK, 'success', 'Product has been deleted successfully');
+        } catch (err) {
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong please try again', { err });
         }
     }
 };

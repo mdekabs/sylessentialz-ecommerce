@@ -1,6 +1,6 @@
 import express from 'express';
 import { ProductController } from '../controllers/index.js';
-import { isAdminVerifier } from '../middlewares/index.js';
+import { isAdminVerifier, pagination, clearCache, cacheMiddleware } from '../middlewares/index.js';
 
 const router = express.Router();
 
@@ -24,7 +24,7 @@ const router = express.Router();
  *       500:
  *         description: Internal server error
  */
-router.get('/', ProductController.get_products);
+router.get('/', pagination, cacheMiddleware, ProductController.get_products);
 
 /**
  * @swagger
@@ -46,7 +46,7 @@ router.get('/', ProductController.get_products);
  *       500:
  *         description: Internal server error
  */
-router.get('/search', ProductController.search_products);
+router.get('/search', cacheMiddleware, ProductController.search_products);
 
 /**
  * @swagger
@@ -70,7 +70,7 @@ router.get('/search', ProductController.search_products);
  *       500:
  *         description: Internal server error
  */
-router.get('/:id', ProductController.get_product);
+router.get('/:id', cacheMiddleware, ProductController.get_product);
 
 /**
  * @swagger
@@ -117,7 +117,7 @@ router.get('/:id', ProductController.get_product);
  *     security:
  *       - accessToken: []
  */
-router.post('/', isAdminVerifier, ProductController.create_product);
+router.post('/', isAdminVerifier, clearCache, ProductController.create_product);
 
 /**
  * @swagger
@@ -168,7 +168,7 @@ router.post('/', isAdminVerifier, ProductController.create_product);
  *     security:
  *       - accessToken: []
  */
-router.put('/:id', isAdminVerifier, ProductController.update_product);
+router.put('/:id', isAdminVerifier, clearCache, ProductController.update_product);
 
 /**
  * @swagger
@@ -196,6 +196,6 @@ router.put('/:id', isAdminVerifier, ProductController.update_product);
  *     security:
  *       - accessToken: []
  */
-router.delete('/:id', isAdminVerifier, ProductController.delete_product);
+router.delete('/:id', isAdminVerifier, clearCache, ProductController.delete_product);
 
 export default router;

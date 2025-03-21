@@ -3,21 +3,51 @@ import Cart from "../models/_cart.js";
 import { responseHandler } from '../utils/index.js';
 
 const CartController = {
-    // Get all carts (admin only)
+    // Get all carts (admin only) with pagination
     get_carts: async (req, res) => {
         try {
             if (!req.user.isAdmin) {
                 return responseHandler(res, HttpStatus.FORBIDDEN, "error", "Admin access required");
             }
-            
-            const carts = await Cart.find();
-            responseHandler(res, HttpStatus.OK, "success", "Carts retrieved successfully", { carts });
+
+            const { page, limit } = res.locals.pagination;
+            const skip = (page - 1) * limit;
+
+            // Optional sorting parameters
+            const sort = req.query.sort || 'createdAt';
+            const order = req.query.order === 'desc' ? -1 : 1;
+
+            // Parallel execution for count and data
+            const [totalItems, carts] = await Promise.all([
+                Cart.countDocuments(),
+                Cart.find()
+                    .sort({ [sort]: order })
+                    .skip(skip)
+                    .limit(limit)
+            ]);
+
+            // Set pagination metadata
+            res.locals.setPagination(totalItems);
+
+            const responseData = {
+                carts,
+                pagination: {
+                    page,
+                    limit,
+                    totalItems,
+                    totalPages: Math.ceil(totalItems / limit),
+                    hasMorePages: res.locals.pagination.hasMorePages,
+                    links: res.locals.pagination.links
+                }
+            };
+
+            responseHandler(res, HttpStatus.OK, "success", "Carts retrieved successfully", responseData);
         } catch (err) {
             responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Failed to retrieve carts", { error: err.message });
         }
     },
 
-    // Get the authenticated user's cart
+    // Get the authenticated user's cart (no pagination needed)
     get_cart: async (req, res) => {
         try {
             const cart = await Cart.findOne({ userId: req.user.id });
@@ -32,7 +62,7 @@ const CartController = {
         }
     },
 
-    // Create a new cart
+    // Create a new cart (no pagination needed)
     create_cart: async (req, res) => {
         try {
             if (!req.body.products || !Array.isArray(req.body.products)) {
@@ -65,12 +95,12 @@ const CartController = {
         }
     },
 
-    // Update a cart
+    // Update a cart (no pagination needed)
     update_cart: async (req, res) => {
         try {
             const cart = await Cart.findById(req.params.id);
             
-            if (!cart || cart.userId !== req.user.id) {
+            if (!cart || cart.userId.toString() !== req.user.id) { // Convert to string for comparison
                 return responseHandler(res, HttpStatus.FORBIDDEN, "error", "Not authorized to update this cart");
             }
 
@@ -105,7 +135,7 @@ const CartController = {
         }
     },
 
-    // Add item to cart
+    // Add item to cart (no pagination needed)
     add_to_cart: async (req, res) => {
         try {
             const { productId, quantity = 1 } = req.body;
@@ -139,7 +169,7 @@ const CartController = {
         }
     },
 
-    // Remove item from cart
+    // Remove item from cart (no pagination needed)
     remove_from_cart: async (req, res) => {
         try {
             const { productId } = req.body;
@@ -166,7 +196,7 @@ const CartController = {
         }
     },
 
-    // Clear all items from cart
+    // Clear all items from cart (no pagination needed)
     clear_cart: async (req, res) => {
         try {
             const cart = await Cart.findOne({ userId: req.user.id });

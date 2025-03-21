@@ -1,18 +1,23 @@
 import mongoose from "mongoose";
 
-const CartSchema = new mongoose.Schema({
+const CartSchema = new mongoose.Schema(
+    {
         userId: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
             required: true,
         },
         products: [
             {
                 productId: {
-                    type: String
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "Product",
+                    required: true,
                 },
                 quantity: {
                     type: Number,
-                    default : 1
+                    default: 1,
+                    min: 1,
                 }
             }
         ]
@@ -20,4 +25,6 @@ const CartSchema = new mongoose.Schema({
     { timestamps: true }
 );
 
-export default mongoose.model('Cart', CartSchema);
+CartSchema.index({ userId: 1 });
+
+export default mongoose.model("Cart", CartSchema);

@@ -14,7 +14,6 @@ const orderController = {
       const userId = req.user.id;
       const { address } = req.body;
 
-      // Fetch user's cart
       const cart = await Cart.findOne({ userId });
       if (!cart || cart.products.length === 0) {
         return responseHandler(res, HttpStatus.BAD_REQUEST, 'error', 'Your cart is empty.');
@@ -63,27 +62,62 @@ const orderController = {
     }
   },
 
-  // Get all orders (Admin only)
+  // Get all orders (Admin only) with pagination
   get_all_orders: async (req, res) => {
     try {
-      const orders = await Order.find().sort({ createdAt: -1 });
-      responseHandler(res, HttpStatus.OK, 'success', 'Orders retrieved successfully', { orders });
+      const { page, limit } = res.locals.pagination;
+      const skip = (page - 1) * limit;
+
+      const totalItems = await Order.countDocuments();
+      const orders = await Order.find()
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit);
+
+      res.locals.setPagination(totalItems);
+
+      responseHandler(res, HttpStatus.OK, 'success', 'Orders retrieved successfully', {
+        orders,
+        pagination: {
+          page,
+          limit,
+          totalItems,
+          totalPages: Math.ceil(totalItems / limit),
+          hasMorePages: res.locals.pagination.hasMorePages,
+          links: res.locals.pagination.links
+        }
+      });
     } catch (error) {
       responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', error.message);
     }
   },
 
-  // Get user's orders
+  // Get user's orders with pagination
   get_user_orders: async (req, res) => {
     try {
       const userId = req.user.id;
-      const orders = await Order.find({ userId }).sort({ createdAt: -1 });
+      const { page, limit } = res.locals.pagination;
+      const skip = (page - 1) * limit;
 
-      if (!orders.length) {
-        return responseHandler(res, HttpStatus.NOT_FOUND, 'error', 'No orders found for this user.');
-      }
+      const totalItems = await Order.countDocuments({ userId });
+      const orders = await Order.find({ userId })
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit);
 
-      responseHandler(res, HttpStatus.OK, 'success', 'Orders retrieved successfully', { orders });
+      res.locals.setPagination(totalItems);
+
+      responseHandler(res, HttpStatus.OK, 'success', 'Orders retrieved successfully', {
+        orders,
+        pagination: {
+          page,
+          limit,
+          totalItems,
+          totalPages: Math.ceil(totalItems / limit),
+          hasMorePages: res.locals.pagination.hasMorePages,
+          links: res.locals.pagination.links
+        }
+      });
     } catch (error) {
       responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', error.message);
     }

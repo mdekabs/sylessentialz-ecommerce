@@ -1,7 +1,7 @@
 import express from 'express';
-import { accessLevelVerifier, isAdminVerifier } from '../middlewares/_verifyToken.js';
+import { accessLevelVerifier, isAdminVerifier, cacheMiddleware, clearCache, pagination } from '../middlewares/index.js';
 import { UserController } from '../controllers/index.js';
-
+ 
 const router = express.Router();
 
 /**
@@ -18,6 +18,17 @@ const router = express.Router();
  *     summary: Get all users
  *     description: Retrieve all users (admin only)
  *     tags: [Users]
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *         description: Page number for pagination
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *         description: Number of users per page
  *     responses:
  *       200:
  *         description: Users retrieved successfully
@@ -28,7 +39,7 @@ const router = express.Router();
  *     security:
  *       - bearerAuth: []
  */
-router.get('/', isAdminVerifier, UserController.get_users);
+router.get('/', isAdminVerifier, pagination, cacheMiddleware, UserController.get_users);
 
 /**
  * @swagger
@@ -56,7 +67,7 @@ router.get('/', isAdminVerifier, UserController.get_users);
  *     security:
  *       - bearerAuth: []
  */
-router.get('/:id', isAdminVerifier, UserController.get_user);
+router.get('/:id', isAdminVerifier, cacheMiddleware, UserController.get_user);
 
 /**
  * @swagger
@@ -75,7 +86,7 @@ router.get('/:id', isAdminVerifier, UserController.get_user);
  *     security:
  *       - bearerAuth: []
  */
-router.get('/stats', isAdminVerifier, UserController.get_stats);
+router.get('/stats', isAdminVerifier, cacheMiddleware, UserController.get_stats);
 
 /**
  * @swagger
@@ -105,7 +116,7 @@ router.get('/stats', isAdminVerifier, UserController.get_stats);
  *     security:
  *       - bearerAuth: []
  */
-router.put('/:id', accessLevelVerifier, UserController.update_user);
+router.put('/:id', accessLevelVerifier, clearCache, UserController.update_user);
 
 /**
  * @swagger
@@ -133,6 +144,6 @@ router.put('/:id', accessLevelVerifier, UserController.update_user);
  *     security:
  *       - bearerAuth: []
  */
-router.delete('/:id', isAdminVerifier, UserController.delete_user);
+router.delete('/:id', isAdminVerifier, clearCache, UserController.delete_user);
 
 export default router;

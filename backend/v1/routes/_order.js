@@ -1,6 +1,6 @@
 import express from 'express';
 import { OrderController } from '../controllers/index.js';
-import { authenticationVerifier, accessLevelVerifier, isAdminVerifier } from '../middlewares/_verifyToken.js';
+import { authenticationVerifier, accessLevelVerifier, isAdminVerifier, pagination, clearCache, cacheMiddleware } from '../middlewares/index.js';
 
 const router = express.Router();
 
@@ -27,7 +27,7 @@ const router = express.Router();
  *     security:
  *       - bearerAuth: []
  */
-router.get('/', isAdminVerifier, OrderController.get_all_orders);
+router.get('/', isAdminVerifier, pagination, cacheMiddleware, OrderController.get_all_orders);
 
 /**
  * @swagger
@@ -45,7 +45,7 @@ router.get('/', isAdminVerifier, OrderController.get_all_orders);
  *     security:
  *       - bearerAuth: []
  */
-router.get('/user', authenticationVerifier, OrderController.get_user_orders);
+router.get('/user', authenticationVerifier, cacheMiddleware, OrderController.get_user_orders);
 
 /**
  * @swagger
@@ -86,7 +86,7 @@ router.get('/user', authenticationVerifier, OrderController.get_user_orders);
  *     security:
  *       - bearerAuth: []
  */
-router.post('/', authenticationVerifier, OrderController.create_order);
+router.post('/', authenticationVerifier, clearCache, OrderController.create_order);
 
 /**
  * @swagger
@@ -123,7 +123,7 @@ router.post('/', authenticationVerifier, OrderController.create_order);
  *     security:
  *       - bearerAuth: []
  */
-router.patch('/:orderId/status', isAdminVerifier, OrderController.update_order_status);
+router.patch('/:orderId/status', isAdminVerifier, clearCache, OrderController.update_order_status);
 
 /**
  * @swagger
@@ -150,7 +150,7 @@ router.patch('/:orderId/status', isAdminVerifier, OrderController.update_order_s
  *     security:
  *       - bearerAuth: []
  */
-router.delete('/:orderId', isAdminVerifier, OrderController.delete_order);
+router.delete('/:orderId', isAdminVerifier, clearCache, OrderController.delete_order);
 
 /**
  * @swagger
@@ -177,7 +177,7 @@ router.delete('/:orderId', isAdminVerifier, OrderController.delete_order);
  *     security:
  *       - bearerAuth: []
  */
-router.post('/:orderId/cancel', authenticationVerifier, OrderController.cancelOrderAndIssueStoreCredit);
+router.post('/:orderId/cancel', authenticationVerifier, clearCache, OrderController.cancelOrderAndIssueStoreCredit);
 
 /**
  * @swagger
@@ -195,6 +195,6 @@ router.post('/:orderId/cancel', authenticationVerifier, OrderController.cancelOr
  *     security:
  *       - bearerAuth: []
  */
-router.get('/income', isAdminVerifier, OrderController.get_income);
+router.get('/income', isAdminVerifier, clearCache, OrderController.get_income);
 
 export default router;

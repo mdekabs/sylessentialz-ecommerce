@@ -1,35 +1,44 @@
-import redisClient from '../redis.js';
+import redisClient from "../redis.js";
+import { logger } from "../config/logger.js";
 
-/**
- * Middleware to check cache for existing responses.
- */
-export const checkCache = async (req, res, next) => {
+export const cacheMiddleware = async (req, res, next) => {
+  if (req.method !== "GET") {
+    return next();
+  }
+
   const key = req.originalUrl;
+  const TTL = 300;
 
   try {
     const cachedData = await redisClient.get(key);
     if (cachedData) {
-      res.send(JSON.parse(cachedData));
-    } else {
-      next();
+      logger.info(`✅ CACHE HIT: ${key}`);
+      return res.json(JSON.parse(cachedData));
     }
+
+    logger.info(`❌ CACHE MISS: ${key}`);
+
+    const originalJson = res.json.bind(res);
+    res.json = (body) => {
+      if (res.statusCode >= 200 && res.statusCode < 300) {
+        redisClient.set(key, JSON.stringify(body), "EX", TTL);
+        logger.info(`🗄️ CACHE SET: ${key} (TTL: ${TTL}s)`);
+      }
+      originalJson(body);
+    };
+
+    next();
   } catch (error) {
-    console.error("Cache check failed:", error);
+    logger.error(`⚠️ CACHE ERROR: ${error.message}`);
     next();
   }
 };
 
-/**
- * Middleware to cache responses.
- */
-export const cacheResponse = (duration) => (req, res, next) => {
-  const key = req.originalUrl;
-  const sendResponse = res.send.bind(res);
-
-  res.send = (body) => {
-    redisClient.set(key, JSON.stringify(body), duration);
-    sendResponse(body);
-  };
-
-  next();
+export const clearCache = async (key) => {
+  try {
+    await redisClient.del(key);
+    logger.info(`🗑️ CACHE CLEARED: ${key}`);
+  } catch (error) {
+    logger.error(`⚠️ ERROR CLEARING CACHE: ${error.message}`);
+  }
 };

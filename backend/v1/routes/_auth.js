@@ -1,6 +1,6 @@
 import express from 'express';
 import { AuthController } from '../controllers/index.js';
-
+import { clearCache } from "../middlewares/index.js";
 const router = express.Router();
 
 /**
@@ -42,7 +42,7 @@ const router = express.Router();
  *       500:
  *         description: Internal server error
  */
-router.post('/register', AuthController.create_user);
+router.post('/register', clearCache, AuthController.create_user);
 
 /**
  * @swagger
@@ -133,6 +133,6 @@ router.post('/forgot-password', AuthController.forgot_password);
  *       500:
  *         description: Internal server error
  */
-router.post('/reset-password/:token', AuthController.reset_password);
+router.post('/reset-password/:token', clearCache, AuthController.reset_password);
 
 export default router;

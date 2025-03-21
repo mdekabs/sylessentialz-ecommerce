@@ -1,5 +1,5 @@
 import HttpStatus from "http-status-codes";
-import User from "../models/_user.js";
+import User from "../models/index.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -14,6 +14,9 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRATION = "1d";
 const PASSWORD_RESET_EXPIRATION = 3600000; // 1 hour
 const TOKEN_BYTES = 32;
+
+const MAX_LOGIN_ATTEMPTS = 5;
+const LOCK_TIME = 15 * 60 * 1000; // 15 minutes
 
 const AuthController = {
     create_admin_user: async () => {
@@ -77,13 +80,33 @@ const AuthController = {
                 return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", "Invalid username or password.");
             }
 
+            // Check if account is locked
+            if (user.lockUntil && user.lockUntil > Date.now()) {
+                return responseHandler(res, HttpStatus.FORBIDDEN, "error", `Account locked. Try again after ${new Date(user.lockUntil).toLocaleTimeString()}`);
+            }
+
             const isPasswordValid = bcrypt.compareSync(password, user.password);
             if (!isPasswordValid) {
+                user.failedLoginAttempts = (user.failedLoginAttempts || 0) + 1;
+
+                if (user.failedLoginAttempts >= MAX_LOGIN_ATTEMPTS) {
+                    user.lockUntil = Date.now() + LOCK_TIME;
+                    await user.save();
+                    return responseHandler(res, HttpStatus.FORBIDDEN, "error", "Too many failed attempts. Account locked for 15 minutes.");
+                }
+
+                await user.save();
                 return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", "Incorrect password.");
             }
 
+            // Reset failed attempts on success
+            user.failedLoginAttempts = 0;
+            user.lockUntil = undefined;
+            await user.save();
+
             const accessToken = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, JWT_SECRET, { expiresIn: JWT_EXPIRATION });
             const { password: _, ...data } = user._doc;
+            
             responseHandler(res, HttpStatus.OK, "success", "Successfully logged in", { ...data, accessToken });
         } catch (err) {
             responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Login failed: " + err.message);

@@ -1,13 +1,13 @@
 import express from "express";
-import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
-import { Client } from "@elastic/elasticsearch";
 import asyncHandler from "express-async-handler";
-import { AuthController } from "./controllers/index.js";
+
+import { connectToDatabase, esClient } from "./db.js"; // Database connections
+//import { AuthController } from "./controllers/index.js";
 import {
   authRoute,
   userRoute,
@@ -20,33 +20,13 @@ import {
   appLogger,
   errorLogger,
   logger,
-  checkCache,
-  cacheResponse,
   pagination,
 } from "./middlewares/index.js";
 import { swaggerOptions } from "./swaggerConfig.js";
 
 dotenv.config();
 
-if (!process.env.DB_URI) {
-  console.error("❌ DB_URI is not defined in environment variables");
-  process.exit(1);
-}
-
 const app = express();
-const esClient = new Client({
-  node: process.env.ELASTICSEARCH_URI || "http://localhost:9200",
-  maxRetries: 5,
-  requestTimeout: 60000,
-});
-
-// Test Elasticsearch client initialization
-esClient
-  .ping()
-  .then(() => logger.info("✅ Elasticsearch client initialized successfully"))
-  .catch((err) =>
-    logger.error("⚠️ Failed to initialize Elasticsearch client:", err)
-  );
 
 app.use(
   cors({
@@ -68,6 +48,7 @@ app.use("/api/v1/products", pagination, productRoute);
 app.use("/api/v1/carts", cartRoute);
 app.use("/api/v1/orders", orderRoute);
 
+// Health Check Endpoint
 app.get(
   "/api/v1/health",
   asyncHandler(async (req, res) => {
@@ -84,48 +65,6 @@ app.get(
     });
   })
 );
-
-async function configureElasticsearch() {
-  try {
-    await esClient.indices.putSettings({
-      index: {
-        number_of_replicas: 0,
-      },
-    });
-    logger.info("✅ Elasticsearch settings updated: replicas set to 0");
-  } catch (err) {
-    logger.error("⚠️ Failed to update Elasticsearch settings:", err.message);
-  }
-}
-
-async function connectToDatabase() {
-  try {
-    logger.info(`🔄 Connecting to MongoDB at: ${process.env.DB_URI}`);
-    await mongoose.connect(process.env.DB_URI, {
-      serverSelectionTimeoutMS: 5000,
-    });
-    logger.info("✅ Successfully connected to MongoDB");
-    await AuthController.create_admin_user();
-  } catch (mongoErr) {
-    logger.error("❌ MongoDB connection failed:", mongoErr);
-    process.exit(1);
-  }
-
-  try {
-    const esHealth = await esClient.cluster.health({ timeout: "10s" });
-    logger.info(`✅ Elasticsearch connected: Status is ${esHealth.status}`);
-    if (esHealth.status === "yellow" && process.env.NODE_ENV !== "production") {
-      await configureElasticsearch();
-    }
-  } catch (esErr) {
-    logger.error(
-      "⚠️ Elasticsearch connection issue (non-critical):",
-      esErr.message
-    );
-  }
-}
-
-connectToDatabase();
 
 app.use(errorLogger);
 
@@ -148,6 +87,7 @@ app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
 
+// Start Server
 const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () => {
   logger.info(
@@ -165,5 +105,8 @@ process.on("SIGTERM", async () => {
     process.exit(0);
   });
 });
+
+// Connect to database
+connectToDatabase();
 
 export { app, esClient };
