@@ -1,8 +1,5 @@
 import HttpStatus from 'http-status-codes';
-import Order from "../models/_order.js";
-import StoreCredit from "../models/_storeCredit.js";
-import Product from "../models/_product.js";
-import Cart from "../models/_cart.js";
+import { Order, StoreCredit, Product, Cart } from "../models/index.js";
 import { responseHandler } from '../utils/index.js';
 
 const STORE_CREDIT_EXPIRY = new Date(Date.now() + 3 * 30 * 24 * 60 * 60 * 1000);

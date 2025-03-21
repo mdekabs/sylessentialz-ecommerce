@@ -345,3 +345,7 @@
 2025-03-21 02:24:16 AM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
 2025-03-21 02:24:16 AM INFO: ✅ Elasticsearch client initialized successfully (Status: N/A)
 2025-03-21 02:24:16 AM INFO: ✅ Elasticsearch connected: Status is green (Status: N/A)
+2025-03-21 15:31:41 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-21 15:31:41 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-21 15:31:41 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-21 15:31:42 PM INFO: ✅ Elasticsearch connected: Status is green (Status: N/A)

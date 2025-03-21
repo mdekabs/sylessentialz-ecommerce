@@ -1,5 +1,5 @@
 import HttpStatus from "http-status-codes";
-import User from "../models/index.js";
+import { User } from "../models/index.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";

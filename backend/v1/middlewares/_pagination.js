@@ -1,5 +1,5 @@
-import logger from "../middlewares/index.js";
-import responseHandler from "../utils/index.js";
+import { logger } from "../middlewares/index.js";
+import { responseHandler } from "../utils/index.js";
 import HttpStatus from "http-status-codes";
 
 /**

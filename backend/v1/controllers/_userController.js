@@ -1,6 +1,6 @@
 import HttpStatus from 'http-status-codes';
-import bcrypt from 'bcrypt';
-import User from "../models/_user.js";
+import bcrypt from 'bcryptjs';
+import { User } from "../models/index.js";
 import { responseHandler } from '../utils/index.js';
 
 const UserController = {

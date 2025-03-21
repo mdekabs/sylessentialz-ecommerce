@@ -1,7 +1,6 @@
 import HttpStatus from 'http-status-codes';
 import stripe from "stripe";
-import Order from "../models/_order.js";
-import Shipping from "../models/_shipping.js";
+import { Order, Shipping } from "../models/index.js";
 import { v4 as uuidv4 } from 'uuid';
 import { responseHandler } from '../utils/index.js';
 

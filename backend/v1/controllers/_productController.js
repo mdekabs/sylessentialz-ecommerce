@@ -1,6 +1,6 @@
 import HttpStatus from 'http-status-codes';
 import mongoose from 'mongoose';
-import Product from "../models/_product.js";
+import { Product } from "../models/index.js";
 import { responseHandler } from '../utils/index.js';
 
 const ProductController = {
