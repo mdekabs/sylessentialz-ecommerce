@@ -43,8 +43,8 @@ const swaggerDocs = swaggerJsdoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use("/api/v1/auth", authRoute);
-app.use("/api/v1/users", pagination, userRoute);
-app.use("/api/v1/products", pagination, productRoute);
+app.use("/api/v1/users", userRoute);
+app.use("/api/v1/products", productRoute);
 app.use("/api/v1/carts", cartRoute);
 app.use("/api/v1/orders", orderRoute);
 
