@@ -14,8 +14,6 @@ import {
   productRoute,
   cartRoute,
   orderRoute,
-  shippingRoute,
-  reviewRoute,
 } from "./routes/index.js";
 import { responseHandler } from "./utils/index.js";
 import {
@@ -69,8 +67,6 @@ app.use("/api/v1/users", pagination, userRoute);
 app.use("/api/v1/products", pagination, productRoute);
 app.use("/api/v1/carts", cartRoute);
 app.use("/api/v1/orders", orderRoute);
-app.use("/api/v1/shipping", checkCache, cacheResponse(300), shippingRoute);
-app.use("/api/v1/review", pagination, reviewRoute);
 
 app.get(
   "/api/v1/health",
