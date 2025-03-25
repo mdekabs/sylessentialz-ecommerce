@@ -1,4 +1,3 @@
-// app.js
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
@@ -6,14 +5,15 @@ import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 import asyncHandler from "express-async-handler";
-import { connectToDatabase } from "./db.js"; // MongoDB connection
-import { initializeElasticsearch } from "./elasticsearch.js"; // Elasticsearch connection
-import {
-    authRoute,
-    userRoute,
-    productRoute,
-    cartRoute,
-    orderRoute,
+import { connectToDatabase } from "./db.js";
+import { esClient } from "./elasticsearch.js";
+import { syncProducts } from "./models/index.js";
+import { 
+    authRoute, 
+    userRoute, 
+    productRoute, 
+    cartRoute, 
+    orderRoute 
 } from "./routes/index.js";
 import { responseHandler } from "./utils/index.js";
 import { appLogger, errorLogger, logger } from "./middlewares/index.js";
@@ -28,6 +28,7 @@ app.use(cors({
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
 }));
+
 app.use(bodyParser.json({ limit: "10mb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
 app.use(appLogger);
@@ -43,14 +44,19 @@ app.use("/api/v1/orders", orderRoute);
 
 app.get("/api/v1/health", asyncHandler(async (req, res) => {
     const dbStatus = mongoose.connection.readyState === 1 ? "connected" : "disconnected";
-    const esStatus = global.esClient
-        ? await global.esClient.ping().then(() => "connected").catch(() => "disconnected")
-        : "not initialized";
-
-    res.status(200).json({ status: "ok", database: dbStatus, elasticsearch: esStatus });
+    const esStatus = await esClient.ping()
+        .then(() => "connected")
+        .catch(() => "disconnected");
+    
+    res.status(200).json({ 
+        status: "ok", 
+        database: dbStatus, 
+        elasticsearch: esStatus 
+    });
 }));
 
 app.use(errorLogger);
+
 app.use((err, req, res, next) => {
     const error = err || new Error("Unknown error occurred");
     logger.error(`❌ Internal Server Error: ${error.message}`, {
@@ -72,15 +78,35 @@ async function startServer() {
     try {
         // 1️⃣ Connect to MongoDB
         await connectToDatabase();
-
-        // 2️⃣ Initialize Elasticsearch
-        global.esClient = await initializeElasticsearch();
-
-        // 3️⃣ Start the server
+        
+        // 2️⃣ Check Elasticsearch connection
+        await esClient.ping();
+        logger.info("✅ Elasticsearch connected successfully");
+        
+        // 3️⃣ Sync products with retry logic
+        const maxRetries = 3;
+        let retryCount = 0;
+        
+        while (retryCount < maxRetries) {
+            try {
+                await syncProducts();
+                break;
+            } catch (error) {
+                retryCount++;
+                if (retryCount === maxRetries) {
+                    throw error;
+                }
+                logger.warn(`Sync failed, retrying in 5 seconds... (Attempt ${retryCount}/${maxRetries})`);
+                await new Promise(resolve => setTimeout(resolve, 5000));
+            }
+        }
+        
+        // 4️⃣ Start the server
         const server = app.listen(PORT, () => {
             logger.info(`🚀 Server is running on port ${PORT} in ${process.env.NODE_ENV || "development"} mode`);
         });
-
+        
+        // Handle graceful shutdown
         process.on("SIGTERM", async () => {
             logger.info("SIGTERM signal received: closing HTTP server");
             await mongoose.connection.close();
