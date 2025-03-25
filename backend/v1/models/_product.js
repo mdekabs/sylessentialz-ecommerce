@@ -1,54 +1,52 @@
 import mongoose from "mongoose";
-import mongoosastic from "mongoose-elasticsearch-xp";
+import mongoosastic from "mongoosastic";
 
-const ProductSchema = new mongoose.Schema(
-    {
-        title: {
-            type: String,
-            required: true,
-            unique: true,
-            index: true,
-            maxlength: 100,
-        },
-        description: {
-            type: String,
-            required: true,
-            maxlength: 1000,
-        },
-        image: {
-            type: String,
-            required: true,
-            validate: {
-                validator: function (v) {
-                    return /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/i.test(v);
-                },
-                message: (props) => `${props.value} is not a valid image URL!`,
-            },
-        },
-        categories: {
-            type: [String], // Ensures it's an array of strings
-            index: true,
-            validate: {
-                validator: function (v) {
-                    return v.length <= 10; // Limit categories to 10 items max
-                },
-                message: "A product can have at most 10 categories.",
-            },
-        },
-        price: {
-            type: Number,
-            required: true,
-            min: 0, // Ensures price is non-negative
-        },
-    },
-    { timestamps: true }
-);
+const ProductSchema = new mongoose.Schema({
+    title: { type: String, required: true, unique: true, index: true, maxlength: 100 },
+    description: { type: String, required: true, maxlength: 1000 },
+    image: { type: String, required: true },
+    categories: { type: [String], index: true },
+    price: { type: Number, required: true, min: 0 },
+}, { timestamps: true });
 
-// Elasticsearch Integration
-ProductSchema.plugin(mongoosastic, {
-    hosts: process.env.ELASTICSEARCH_URI || "localhost:9200",
-});
+const syncElasticSearch = async () => {
+    if (!global.esClient) {
+        throw new Error("Elasticsearch client is not initialized");
+    }
+
+    try {
+        await global.esClient.ping();
+        console.log("✅ Elasticsearch connection verified in Product model");
+
+        const stream = Product.find().cursor();
+        let count = 0;
+
+        return new Promise((resolve, reject) => {
+            stream.on("data", async doc => {
+                stream.pause();
+                try {
+                    await doc.index();
+                    count++;
+                } catch (err) {
+                    console.error(`❌ Failed to index product ${doc._id}:`, err);
+                }
+                stream.resume();
+            });
+
+            stream.on("end", () => {
+                console.log(`✅ Synced ${count} products to Elasticsearch`);
+                resolve(count);
+            });
+
+            stream.on("error", reject);
+        });
+    } catch (error) {
+        console.error("❌ Sync Failed:", error);
+        throw error;
+    }
+};
+
+ProductSchema.plugin(mongoosastic, { esClient: global.esClient });
 
 const Product = mongoose.model("Product", ProductSchema);
-
-export default Product;
+export { Product, syncElasticSearch };

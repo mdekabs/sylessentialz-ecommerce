@@ -1,6 +1,6 @@
 import express from 'express';
 import { ProductController } from '../controllers/index.js';
-import { isAdminVerifier, pagination, clearCache, cacheMiddleware } from '../middlewares/index.js';
+import { isAdminVerifier, authenticationVerifier, pagination, clearCache, cacheMiddleware } from '../middlewares/index.js';
 
 const router = express.Router();
 

@@ -16,36 +16,30 @@ const ProductController = {
             let sort = {};
             let limitOverride = limit;
 
-            // Handle special query parameters
             if (qNew) {
                 sort = { createdAt: -1 };
-                limitOverride = 5; // Override pagination limit for "new" products
+                limitOverride = 5;
             } else if (qCategory) {
-                query = {
-                    categories: { $in: [qCategory] }
-                };
+                query = { categories: { $in: [qCategory] } };
             }
 
-            // Optional sorting parameters (if not already set by qNew)
             if (!qNew) {
                 const sortField = req.query.sort || 'createdAt';
                 const order = req.query.order === 'desc' ? -1 : 1;
                 sort = { [sortField]: order };
             }
 
-            // Parallel execution for count and data
             const [totalItems, products] = await Promise.all([
                 Product.countDocuments(query),
                 Product.find(query)
                     .sort(sort)
-                    .skip(qNew ? 0 : skip) // Skip not applied for qNew since limit is fixed
+                    .skip(qNew ? 0 : skip)
                     .limit(qNew ? limitOverride : limit)
             ]);
 
-            // Set pagination metadata (adjusted for qNew case)
             res.locals.setPagination(totalItems);
 
-            const responseData = {
+            responseHandler(res, HttpStatus.OK, 'success', '', {
                 products,
                 pagination: {
                     page,
@@ -55,36 +49,52 @@ const ProductController = {
                     hasMorePages: res.locals.pagination.hasMorePages,
                     links: res.locals.pagination.links
                 }
-            };
-
-            responseHandler(res, HttpStatus.OK, 'success', '', responseData);
+            });
         } catch (err) {
             responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong please try again', { err });
         }
     },
 
-    /* search products (pagination not applied here) */
+    /* search products using Elasticsearch */
     search_products: async (req, res) => {
-        const query = req.query.q;
+        const query = req.query.q?.trim();
+
+        if (!query) {
+            return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Search query is required");
+        }
 
         try {
-            const products = await Product.search({
-                query_string: {
-                    query: query
+            if (!global.esClient) {
+                throw new Error("Elasticsearch client is not initialized");
+            }
+
+            Product.search(
+                {
+                    multi_match: {
+                        query: query,
+                        fields: ["title", "description", "categories"],
+                        fuzziness: "AUTO",
+                    },
+                },
+                (err, results) => {
+                    if (err) {
+                        console.error("Elasticsearch error:", err);
+                        return responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Something went wrong, please try again", { err });
+                    }
+                    return responseHandler(res, HttpStatus.OK, "success", "", { products: results.hits.hits });
                 }
-            });
-            responseHandler(res, HttpStatus.OK, 'success', '', { products });
+            );
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong please try again', { err });
+            console.error("Search error:", err);
+            return responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Something went wrong please try again", { err });
         }
     },
 
-    /* get single product (no pagination needed) */
+    /* get single product */
     get_product: async (req, res) => {
         const { id } = req.params;
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            console.error(`Invalid ObjectId format: ${id}`);
             return responseHandler(res, HttpStatus.BAD_REQUEST, 'error', 'Invalid product ID format');
         }
 
@@ -99,7 +109,7 @@ const ProductController = {
         }
     },
 
-    /* create new product (no pagination needed) */
+    /* create new product */
     create_product: async (req, res) => {
         const newProduct = new Product(req.body);
         try {
@@ -110,44 +120,38 @@ const ProductController = {
         }
     },
 
-    /* update product (no pagination needed) */
+    /* update product */
     update_product: async (req, res) => {
         const { id } = req.params;
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            console.error(`Invalid ObjectId format: ${id}`);
             return responseHandler(res, HttpStatus.BAD_REQUEST, 'error', 'Invalid product ID format');
         }
 
-        const existing = await Product.findById(id);
-        if (!existing) {
-            return responseHandler(res, HttpStatus.NOT_FOUND, 'error', "Product doesn't exist");
-        }
         try {
-            const updatedProduct = await Product.findByIdAndUpdate(id, {
-                $set: req.body
-            }, { new: true });
+            const updatedProduct = await Product.findByIdAndUpdate(id, { $set: req.body }, { new: true });
+            if (!updatedProduct) {
+                return responseHandler(res, HttpStatus.NOT_FOUND, 'error', "Product doesn't exist");
+            }
             responseHandler(res, HttpStatus.OK, 'success', 'Product updated successfully', { updatedProduct });
         } catch (err) {
             responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong please try again', { err });
         }
     },
 
-    /* delete product (no pagination needed) */
+    /* delete product */
     delete_product: async (req, res) => {
         const { id } = req.params;
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            console.error(`Invalid ObjectId format: ${id}`);
             return responseHandler(res, HttpStatus.BAD_REQUEST, 'error', 'Invalid product ID format');
         }
 
-        const existing = await Product.findById(id);
-        if (!existing) {
-            return responseHandler(res, HttpStatus.NOT_FOUND, 'error', "Product doesn't exist");
-        }
         try {
-            await Product.findByIdAndDelete(id);
+            const deletedProduct = await Product.findByIdAndDelete(id);
+            if (!deletedProduct) {
+                return responseHandler(res, HttpStatus.NOT_FOUND, 'error', "Product doesn't exist");
+            }
             responseHandler(res, HttpStatus.OK, 'success', 'Product has been deleted successfully');
         } catch (err) {
             responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', 'Something went wrong please try again', { err });
