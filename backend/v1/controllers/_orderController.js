@@ -2,7 +2,13 @@ import HttpStatus from 'http-status-codes';
 import { Order, StoreCredit, Product, Cart } from "../models/index.js";
 import { responseHandler } from '../utils/index.js';
 
-const STORE_CREDIT_EXPIRY = new Date(Date.now() + 3 * 30 * 24 * 60 * 60 * 1000);
+// Constants
+const CONSTANTS = {
+  STORE_CREDIT_EXPIRY: new Date(Date.now() + 3 * 30 * 24 * 60 * 60 * 1000),
+  FIXED_SHIPPING_FEE: 2,
+  VALID_ORDER_STATUSES: ["pending", "processing", "shipped", "delivered", "cancelled"],
+  ORDER_STATUSES_FOR_INCOME: ["pending", "processing", "shipped", "delivered"]
+};
 
 const orderController = {
   // Create a new order
@@ -28,8 +34,7 @@ const orderController = {
         orderedProducts.push({ productId: cartItem.productId, quantity: cartItem.quantity });
       }
 
-      const fixedShippingFee = 2;
-      let payableAmount = orderTotal + fixedShippingFee;
+      let payableAmount = orderTotal + CONSTANTS.FIXED_SHIPPING_FEE;
       let storeCredit = await StoreCredit.findOne({ userId });
 
       if (storeCredit && storeCredit.amount > 0) {
@@ -126,8 +131,7 @@ const orderController = {
       const { orderId } = req.params;
       const { status } = req.body;
 
-      const validStatuses = ["pending", "processing", "shipped", "delivered", "cancelled"];
-      if (!validStatuses.includes(status)) {
+      if (!CONSTANTS.VALID_ORDER_STATUSES.includes(status)) {
         return responseHandler(res, HttpStatus.BAD_REQUEST, 'error', 'Invalid status provided.');
       }
 
@@ -181,11 +185,11 @@ const orderController = {
         storeCredit = new StoreCredit({
           userId: order.userId,
           amount: order.amount,
-          expiryDate: STORE_CREDIT_EXPIRY,
+          expiryDate: CONSTANTS.STORE_CREDIT_EXPIRY,
         });
       } else {
         storeCredit.amount += order.amount;
-        storeCredit.expiryDate = STORE_CREDIT_EXPIRY;
+        storeCredit.expiryDate = CONSTANTS.STORE_CREDIT_EXPIRY;
       }
 
       await storeCredit.save();
@@ -200,7 +204,7 @@ const orderController = {
   get_income: async (req, res) => {
     try {
       const totalIncome = await Order.aggregate([
-        { $match: { status: { $in: ["pending", "processing", "shipped", "delivered"] } } },
+        { $match: { status: { $in: CONSTANTS.ORDER_STATUSES_FOR_INCOME } } },
         { $group: { _id: null, total: { $sum: "$amount" } } },
       ]);
 

@@ -4,6 +4,22 @@ import { Product } from "../models/index.js";
 import { responseHandler } from "../utils/index.js";
 import { esClient } from "../elasticsearch.js"; // Import Elasticsearch client
 
+// Constants
+const DEFAULT_SORT_FIELD = "createdAt";
+const SORT_DESC = -1;
+const SORT_ASC = 1;
+const NEW_PRODUCTS_LIMIT = 5;
+const DEFAULT_INDEX = "products";
+const ERROR_MESSAGE = "Something went wrong, please try again";
+const SUCCESS_MESSAGE = "success";
+const ERROR_MESSAGE_TYPE = "error";
+const INVALID_PRODUCT_ID = "Invalid product ID format";
+const PRODUCT_NOT_FOUND = "Product doesn't exist";
+const PRODUCT_DELETED = "Product has been deleted successfully";
+const PRODUCT_CREATED = "Product created successfully";
+const PRODUCT_UPDATED = "Product updated successfully";
+const SEARCH_QUERY_REQUIRED = "Search query is required";
+
 const ProductController = {
     /* Get all products with pagination */
     get_products: async (req, res) => {
@@ -18,15 +34,15 @@ const ProductController = {
             let limitOverride = limit;
 
             if (qNew) {
-                sort = { createdAt: -1 };
-                limitOverride = 5;
+                sort = { createdAt: SORT_DESC };
+                limitOverride = NEW_PRODUCTS_LIMIT;
             } else if (qCategory) {
                 query = { categories: { $in: [qCategory] } };
             }
 
             if (!qNew) {
-                const sortField = req.query.sort || "createdAt";
-                const order = req.query.order === "desc" ? -1 : 1;
+                const sortField = req.query.sort || DEFAULT_SORT_FIELD;
+                const order = req.query.order === "desc" ? SORT_DESC : SORT_ASC;
                 sort = { [sortField]: order };
             }
 
@@ -37,7 +53,7 @@ const ProductController = {
 
             res.locals.setPagination(totalItems);
 
-            responseHandler(res, HttpStatus.OK, "success", "", {
+            responseHandler(res, HttpStatus.OK, SUCCESS_MESSAGE, "", {
                 products,
                 pagination: {
                     page,
@@ -49,7 +65,7 @@ const ProductController = {
                 },
             });
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Something went wrong, please try again", { err });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGE_TYPE, ERROR_MESSAGE, { err });
         }
     },
 
@@ -58,17 +74,17 @@ const ProductController = {
         const query = req.query.q?.trim();
 
         if (!query) {
-            return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Search query is required");
+            return responseHandler(res, HttpStatus.BAD_REQUEST, ERROR_MESSAGE_TYPE, SEARCH_QUERY_REQUIRED);
         }
 
         try {
             const result = await esClient.search({
-                index: "products",
+                index: DEFAULT_INDEX,
                 body: {
                     query: {
                         multi_match: {
                             query: query,
-                            fields: ["title", "description", "categories"],
+                            fields: ["title", "description"],
                             fuzziness: "AUTO",
                         },
                     },
@@ -81,10 +97,10 @@ const ProductController = {
                 score: hit._score
             })) || [];
 
-            return responseHandler(res, HttpStatus.OK, "success", "", { products });
+            return responseHandler(res, HttpStatus.OK, SUCCESS_MESSAGE, "", { products });
         } catch (err) {
             console.error("Elasticsearch search error:", err);
-            return responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Something went wrong, please try again", { err });
+            return responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGE_TYPE, ERROR_MESSAGE, { err });
         }
     },
 
@@ -93,17 +109,17 @@ const ProductController = {
         const { id } = req.params;
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Invalid product ID format");
+            return responseHandler(res, HttpStatus.BAD_REQUEST, ERROR_MESSAGE_TYPE, INVALID_PRODUCT_ID);
         }
 
         try {
             const product = await Product.findById(id);
             if (!product) {
-                return responseHandler(res, HttpStatus.NOT_FOUND, "error", "Product doesn't exist");
+                return responseHandler(res, HttpStatus.NOT_FOUND, ERROR_MESSAGE_TYPE, PRODUCT_NOT_FOUND);
             }
-            responseHandler(res, HttpStatus.OK, "success", "", { product });
+            responseHandler(res, HttpStatus.OK, SUCCESS_MESSAGE, "", { product });
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Something went wrong, please try again", { err });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGE_TYPE, ERROR_MESSAGE, { err });
         }
     },
 
@@ -115,14 +131,14 @@ const ProductController = {
 
             // Index product in Elasticsearch
             await esClient.index({
-                index: "products",
+                index: DEFAULT_INDEX,
                 id: savedProduct._id.toString(),
                 body: savedProduct.toObject(),
             });
 
-            responseHandler(res, HttpStatus.CREATED, "success", "Product created successfully", { savedProduct });
+            responseHandler(res, HttpStatus.CREATED, SUCCESS_MESSAGE, PRODUCT_CREATED, { savedProduct });
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Something went wrong, please try again", { err });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGE_TYPE, ERROR_MESSAGE, { err });
         }
     },
 
@@ -131,28 +147,28 @@ const ProductController = {
         const { id } = req.params;
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Invalid product ID format");
+            return responseHandler(res, HttpStatus.BAD_REQUEST, ERROR_MESSAGE_TYPE, INVALID_PRODUCT_ID);
         }
 
         try {
             const updatedProduct = await Product.findByIdAndUpdate(id, { $set: req.body }, { new: true });
 
             if (!updatedProduct) {
-                return responseHandler(res, HttpStatus.NOT_FOUND, "error", "Product doesn't exist");
+                return responseHandler(res, HttpStatus.NOT_FOUND, ERROR_MESSAGE_TYPE, PRODUCT_NOT_FOUND);
             }
 
             // Update Elasticsearch index
             await esClient.update({
-                index: "products",
+                index: DEFAULT_INDEX,
                 id: id,
                 body: {
                     doc: req.body,
                 },
             });
 
-            responseHandler(res, HttpStatus.OK, "success", "Product updated successfully", { updatedProduct });
+            responseHandler(res, HttpStatus.OK, SUCCESS_MESSAGE, PRODUCT_UPDATED, { updatedProduct });
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Something went wrong, please try again", { err });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGE_TYPE, ERROR_MESSAGE, { err });
         }
     },
 
@@ -161,24 +177,24 @@ const ProductController = {
         const { id } = req.params;
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Invalid product ID format");
+            return responseHandler(res, HttpStatus.BAD_REQUEST, ERROR_MESSAGE_TYPE, INVALID_PRODUCT_ID);
         }
 
         try {
             const deletedProduct = await Product.findByIdAndDelete(id);
             if (!deletedProduct) {
-                return responseHandler(res, HttpStatus.NOT_FOUND, "error", "Product doesn't exist");
+                return responseHandler(res, HttpStatus.NOT_FOUND, ERROR_MESSAGE_TYPE, PRODUCT_NOT_FOUND);
             }
 
             // Remove from Elasticsearch index
             await esClient.delete({
-                index: "products",
+                index: DEFAULT_INDEX,
                 id: id,
             });
 
-            responseHandler(res, HttpStatus.OK, "success", "Product has been deleted successfully");
+            responseHandler(res, HttpStatus.OK, SUCCESS_MESSAGE, PRODUCT_DELETED);
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Something went wrong, please try again", { err });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGE_TYPE, ERROR_MESSAGE, { err });
         }
     },
 };

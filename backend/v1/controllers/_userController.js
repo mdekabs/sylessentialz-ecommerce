@@ -3,6 +3,19 @@ import bcrypt from 'bcryptjs';
 import { User } from "../models/index.js";
 import { responseHandler } from '../utils/index.js';
 
+const MESSAGES = {
+    SUCCESS: "success",
+    ERROR: "error",
+    USER_NOT_FOUND: "User not found",
+    UPDATE_SUCCESS: "User updated successfully",
+    DELETE_SUCCESS: "User has been deleted successfully",
+    SERVER_ERROR: "Something went wrong, please try again"
+};
+
+const SORT_DEFAULT = 'createdAt';
+const ORDER_DESC = 'desc';
+const PASSWORD_FIELD = '-password';
+
 const UserController = {
     /* ✅ Get all users with pagination, filtering & sorting */
     get_users: async (req, res) => {
@@ -11,15 +24,15 @@ const UserController = {
             const skip = (page - 1) * limit;
 
             // Sorting & filtering parameters
-            const sort = req.query.sort || 'createdAt';
-            const order = req.query.order === 'desc' ? -1 : 1;
+            const sort = req.query.sort || SORT_DEFAULT;
+            const order = req.query.order === ORDER_DESC ? -1 : 1;
             const query = req.query.username ? { username: new RegExp(req.query.username, 'i') } : {};
 
             // Parallel execution for efficiency
             const [totalItems, users] = await Promise.all([
                 User.countDocuments(query),
                 User.find(query)
-                    .select('-password')
+                    .select(PASSWORD_FIELD)
                     .sort({ [sort]: order })
                     .skip(skip)
                     .limit(limit)
@@ -28,7 +41,7 @@ const UserController = {
 
             res.locals.setPagination(totalItems);
 
-            responseHandler(res, HttpStatus.OK, "success", "", {
+            responseHandler(res, HttpStatus.OK, MESSAGES.SUCCESS, "", {
                 users,
                 pagination: {
                     page,
@@ -40,20 +53,20 @@ const UserController = {
                 }
             });
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Something went wrong, please try again", { err });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, MESSAGES.ERROR, MESSAGES.SERVER_ERROR, { err });
         }
     },
 
     /* ✅ Get a single user */
     get_user: async (req, res) => {
         try {
-            const user = await User.findById(req.params.id).select('-password').lean();
+            const user = await User.findById(req.params.id).select(PASSWORD_FIELD).lean();
             if (!user) {
-                return responseHandler(res, HttpStatus.NOT_FOUND, "error", "User not found");
+                return responseHandler(res, HttpStatus.NOT_FOUND, MESSAGES.ERROR, MESSAGES.USER_NOT_FOUND);
             }
-            responseHandler(res, HttpStatus.OK, "success", "", { user });
+            responseHandler(res, HttpStatus.OK, MESSAGES.SUCCESS, "", { user });
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Something went wrong, please try again", { err });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, MESSAGES.ERROR, MESSAGES.SERVER_ERROR, { err });
         }
     },
 
@@ -70,9 +83,9 @@ const UserController = {
                 { $sort: { _id: 1 } }
             ]);
 
-            responseHandler(res, HttpStatus.OK, "success", "", { stats: data });
+            responseHandler(res, HttpStatus.OK, MESSAGES.SUCCESS, "", { stats: data });
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Something went wrong, please try again", { err });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, MESSAGES.ERROR, MESSAGES.SERVER_ERROR, { err });
         }
     },
 
@@ -88,14 +101,14 @@ const UserController = {
                 req.params.id,
                 { $set: updateData },
                 { new: true, runValidators: true }
-            ).select('-password').lean();
+            ).select(PASSWORD_FIELD).lean();
 
             if (!updatedUser) {
-                return responseHandler(res, HttpStatus.NOT_FOUND, "error", "User not found");
+                return responseHandler(res, HttpStatus.NOT_FOUND, MESSAGES.ERROR, MESSAGES.USER_NOT_FOUND);
             }
-            responseHandler(res, HttpStatus.OK, "success", "User updated successfully", { updatedUser });
+            responseHandler(res, HttpStatus.OK, MESSAGES.SUCCESS, MESSAGES.UPDATE_SUCCESS, { updatedUser });
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Something went wrong, please try again", { err });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, MESSAGES.ERROR, MESSAGES.SERVER_ERROR, { err });
         }
     },
 
@@ -104,11 +117,11 @@ const UserController = {
         try {
             const deletedUser = await User.findByIdAndDelete(req.params.id);
             if (!deletedUser) {
-                return responseHandler(res, HttpStatus.NOT_FOUND, "error", "User not found");
+                return responseHandler(res, HttpStatus.NOT_FOUND, MESSAGES.ERROR, MESSAGES.USER_NOT_FOUND);
             }
-            responseHandler(res, HttpStatus.OK, "success", "User has been deleted successfully");
+            responseHandler(res, HttpStatus.OK, MESSAGES.SUCCESS, MESSAGES.DELETE_SUCCESS);
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Something went wrong, please try again", { err });
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, MESSAGES.ERROR, MESSAGES.SERVER_ERROR, { err });
         }
     }
 };

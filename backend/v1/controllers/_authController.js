@@ -18,6 +18,9 @@ const TOKEN_BYTES = 32;
 const MAX_LOGIN_ATTEMPTS = 5;
 const LOCK_TIME = 15 * 60 * 1000; // 15 minutes
 
+const ONE = 1;
+const ZERO = 0;
+
 const AuthController = {
     create_admin_user: async () => {
         try {
@@ -87,7 +90,7 @@ const AuthController = {
 
             const isPasswordValid = bcrypt.compareSync(password, user.password);
             if (!isPasswordValid) {
-                user.failedLoginAttempts = (user.failedLoginAttempts || 0) + 1;
+                user.failedLoginAttempts = (user.failedLoginAttempts || ZERO) + ONE;
 
                 if (user.failedLoginAttempts >= MAX_LOGIN_ATTEMPTS) {
                     user.lockUntil = Date.now() + LOCK_TIME;
@@ -100,7 +103,7 @@ const AuthController = {
             }
 
             // Reset failed attempts on success
-            user.failedLoginAttempts = 0;
+            user.failedLoginAttempts = ZERO;
             user.lockUntil = undefined;
             await user.save();
 
