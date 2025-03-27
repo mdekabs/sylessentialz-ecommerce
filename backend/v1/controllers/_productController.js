@@ -84,8 +84,8 @@ const ProductController = {
                     query: {
                         multi_match: {
                             query: query,
-                            fields: ["title", "description"],
-                            fuzziness: "AUTO",
+                            fields: ["name", "description", "category", "title"],
+                          //  fuzziness: "AUTO",
                         },
                     },
                 },
@@ -128,13 +128,6 @@ const ProductController = {
         const newProduct = new Product(req.body);
         try {
             const savedProduct = await newProduct.save();
-
-            // Index product in Elasticsearch
-            await esClient.index({
-                index: DEFAULT_INDEX,
-                id: savedProduct._id.toString(),
-                body: savedProduct.toObject(),
-            });
 
             responseHandler(res, HttpStatus.CREATED, SUCCESS_MESSAGE, PRODUCT_CREATED, { savedProduct });
         } catch (err) {

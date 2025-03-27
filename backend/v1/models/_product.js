@@ -7,7 +7,7 @@ const ProductSchema = new mongoose.Schema({
     description: { type: String, es_indexed: true },
     price: { type: Number, required: true, es_indexed: true },
     category: { type: String, required: true, es_indexed: true },
-    image: { type: String, required: true, es_indexed: true } // ✅ Include image in indexing
+    image: { type: String, required: true, es_indexed: true }
 });
 
 ProductSchema.plugin(mongoosastic, {
@@ -15,8 +15,9 @@ ProductSchema.plugin(mongoosastic, {
     index: "products",
     bulk: {
         size: 1000,
-        delay: "100ms"
-    }
+        delay: 100, // Fix: Use number (milliseconds), not string
+    },
+    indexAutomatically: false
 });
 
 const Product = mongoose.model("Product", ProductSchema);
@@ -25,7 +26,6 @@ async function syncProducts() {
     try {
         console.log("🔄 Syncing products with Elasticsearch...");
 
-        // Check if index exists before creating a new one
         const indexExists = await esClient.indices.exists({ index: "products" });
 
         if (!indexExists) {
@@ -38,7 +38,7 @@ async function syncProducts() {
                             description: { type: "text" },
                             price: { type: "float" },
                             category: { type: "keyword" },
-                            image: { type: "text" } // ✅ Include image in mapping
+                            image: { type: "text" }
                         }
                     }
                 }
@@ -48,7 +48,6 @@ async function syncProducts() {
             console.log("✅ 'products' index already exists. Skipping creation.");
         }
 
-        // Bulk indexing products
         const batchSize = 100;
         let page = 1;
 
@@ -60,7 +59,6 @@ async function syncProducts() {
 
             if (products.length === 0) break;
 
-            // Prepare bulk body for Elasticsearch
             const bulkBody = products.flatMap(doc => {
                 const { _id, ...docWithoutId } = doc;
                 return [{ index: { _index: "products", _id: _id.toString() } }, docWithoutId];

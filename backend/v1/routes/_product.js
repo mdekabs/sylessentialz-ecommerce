@@ -1,6 +1,6 @@
 import express from 'express';
 import { ProductController } from '../controllers/index.js';
-import { isAdminVerifier, authenticationVerifier, pagination, clearCache, cacheMiddleware } from '../middlewares/index.js';
+import { isAdminVerifier, accessLevelVerifier, authenticationVerifier, pagination, clearCache, cacheMiddleware } from '../middlewares/index.js';
 
 const router = express.Router();
 
@@ -70,7 +70,7 @@ router.get('/search', cacheMiddleware, ProductController.search_products);
  *       500:
  *         description: Internal server error
  */
-router.get('/:id', cacheMiddleware, ProductController.get_product);
+router.get('/:id', accessLevelVerifier, cacheMiddleware, ProductController.get_product);
 
 /**
  * @swagger

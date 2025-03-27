@@ -1,0 +1,54 @@
+2025-03-27 13:23:44 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 13:23:44 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 13:23:44 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 13:23:44 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 13:24:21 PM INFO: DELETE /api/v1/products/67e51b129df7781293b2d990 200 234ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/products/67e51b129df7781293b2d990",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "cb21abe1-3869-4932-8771-3d6c835787ba",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "24"
+    },
+    "method": "DELETE",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/products/67e51b129df7781293b2d990",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 234
+}
+2025-03-27 13:24:28 PM WARN: GET /api/v1/products/67e51b129df7781293b2d990 404 8ms (Status: 404)
+{
+  "req": {
+    "url": "/api/v1/products/67e51b129df7781293b2d990",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "32e5adf6-6604-424a-bcde-bd975369547d",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "24"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/products/67e51b129df7781293b2d990",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 8
+}

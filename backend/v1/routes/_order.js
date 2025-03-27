@@ -1,6 +1,6 @@
 import express from 'express';
 import { OrderController } from '../controllers/index.js';
-import { authenticationVerifier, accessLevelVerifier, isAdminVerifier, pagination, clearCache, cacheMiddleware } from '../middlewares/index.js';
+import { authenticationVerifier, isAdminVerifier, pagination, clearCache, cacheMiddleware } from '../middlewares/index.js';
 
 const router = express.Router();
 
@@ -27,7 +27,7 @@ const router = express.Router();
  *     security:
  *       - bearerAuth: []
  */
-router.get('/', isAdminVerifier, pagination, cacheMiddleware, OrderController.get_all_orders);
+router.get('/', authenticationVerifier, isAdminVerifier, pagination, cacheMiddleware, OrderController.get_all_orders);
 
 /**
  * @swagger
@@ -177,7 +177,7 @@ router.delete('/:orderId', isAdminVerifier, clearCache, OrderController.delete_o
  *     security:
  *       - bearerAuth: []
  */
-router.post('/:orderId/cancel', authenticationVerifier, clearCache, OrderController.cancelOrderAndIssueStoreCredit);
+router.post('/:orderId/cancel', isAdminVerifier, clearCache, OrderController.cancelOrderAndIssueStoreCredit);
 
 /**
  * @swagger

@@ -67,7 +67,7 @@ router.get('/', isAdminVerifier, pagination, cacheMiddleware, UserController.get
  *     security:
  *       - bearerAuth: []
  */
-router.get('/:id', isAdminVerifier, cacheMiddleware, UserController.get_user);
+router.get('/:id', accessLevelVerifier, cacheMiddleware, UserController.get_user);
 
 /**
  * @swagger

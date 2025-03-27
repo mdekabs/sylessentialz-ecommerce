@@ -138,7 +138,7 @@ router.post('/', authenticationVerifier, clearCache, CartController.create_cart)
  *     security:
  *       - bearerAuth: []
  */
-router.put('/:id', authenticationVerifier, clearCache, CartController.update_cart);
+router.put('/:id', accessLevelVerifier, clearCache, CartController.update_cart);
 
 /**
  * @swagger

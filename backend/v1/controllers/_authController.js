@@ -78,7 +78,7 @@ const AuthController = {
                 return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Username and password are required.");
             }
 
-            const user = await User.findOne({ username });
+            const user = await User.findOne({ username: username.toLowerCase() });
             if (!user) {
                 return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", "Invalid username or password.");
             }
@@ -88,7 +88,7 @@ const AuthController = {
                 return responseHandler(res, HttpStatus.FORBIDDEN, "error", `Account locked. Try again after ${new Date(user.lockUntil).toLocaleTimeString()}`);
             }
 
-            const isPasswordValid = bcrypt.compareSync(password, user.password);
+            const isPasswordValid = bcrypt.compare(password, user.password);
             if (!isPasswordValid) {
                 user.failedLoginAttempts = (user.failedLoginAttempts || ZERO) + ONE;
 
@@ -109,7 +109,7 @@ const AuthController = {
 
             const accessToken = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, JWT_SECRET, { expiresIn: JWT_EXPIRATION });
             const { password: _, ...data } = user._doc;
-            
+
             responseHandler(res, HttpStatus.OK, "success", "Successfully logged in", { ...data, accessToken });
         } catch (err) {
             responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Login failed: " + err.message);

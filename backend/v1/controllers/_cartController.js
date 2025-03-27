@@ -14,7 +14,6 @@ const CART_CONSTANTS = {
 };
 
 const ERROR_MESSAGES = {
-    ADMIN_ACCESS_REQUIRED: "Admin access required",
     CART_NOT_FOUND: "Cart not found",
     INVALID_PRODUCTS_ARRAY: "Valid products array is required",
     CART_ALREADY_EXISTS: "Cart already exists for this user",
@@ -37,10 +36,6 @@ const CartController = {
     // Get all carts (admin only) with pagination
     get_carts: async (req, res) => {
         try {
-            if (!req.user.isAdmin) {
-                return responseHandler(res, HttpStatus.FORBIDDEN, "error", ERROR_MESSAGES.ADMIN_ACCESS_REQUIRED);
-            }
-
             const { page, limit } = res.locals.pagination;
             const skip = (page - 1) * limit;
 
@@ -129,8 +124,8 @@ const CartController = {
         try {
             const cart = await Cart.findById(req.params.id);
 
-            if (!cart || cart.userId.toString() !== req.user.id) {
-                return responseHandler(res, HttpStatus.FORBIDDEN, "error", "Not authorized to update this cart");
+            if (!cart) {
+                return responseHandler(res, HttpStatus.NOT_FOUND, "error", ERROR_MESSAGES.CART_NOT_FOUND);
             }
 
             if (req.body.products) {
@@ -154,10 +149,6 @@ const CartController = {
                 { $set: req.body },
                 { new: true, runValidators: true }
             );
-
-            if (!updatedCart) {
-                return responseHandler(res, HttpStatus.NOT_FOUND, "error", ERROR_MESSAGES.CART_NOT_FOUND);
-            }
 
             responseHandler(res, HttpStatus.OK, "success", SUCCESS_MESSAGES.CART_UPDATED, { cart: updatedCart });
         } catch (err) {

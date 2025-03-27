@@ -72,10 +72,10 @@ const UserController = {
 
     /* ✅ Get user statistics */
     get_stats: async (req, res) => {
-        const date = new Date();
-        const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
-
         try {
+            const date = new Date();
+            const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+
             const data = await User.aggregate([
                 { $match: { createdAt: { $gte: lastYear } } },
                 { $project: { month: { $month: "$createdAt" } } },
