@@ -45,7 +45,7 @@ router.get('/', authenticationVerifier, isAdminVerifier, pagination, cacheMiddle
  *     security:
  *       - bearerAuth: []
  */
-router.get('/user', authenticationVerifier, cacheMiddleware, OrderController.get_user_orders);
+router.get('/user', authenticationVerifier, pagination, cacheMiddleware, OrderController.get_user_orders);
 
 /**
  * @swagger
@@ -125,32 +125,9 @@ router.post('/', authenticationVerifier, clearCache, OrderController.create_orde
  */
 router.patch('/:orderId/status', isAdminVerifier, clearCache, OrderController.update_order_status);
 
-/**
- * @swagger
- * /orders/{orderId}:
- *   delete:
- *     summary: Delete an order (Admin only)
- *     tags: [Orders]
- *     parameters:
- *       - in: path
- *         name: orderId
- *         required: true
- *         schema:
- *           type: string
- *         description: The ID of the order to delete
- *     responses:
- *       200:
- *         description: Order deleted successfully
- *       401:
- *         description: Unauthorized - Admin access required
- *       404:
- *         description: Order not found
- *       500:
- *         description: Internal server error
- *     security:
- *       - bearerAuth: []
- */
-router.delete('/:orderId', isAdminVerifier, clearCache, OrderController.delete_order);
+
+
+router.get('/:store_credit', authenticationVerifier, cacheMiddleware, OrderController.get_store_credit);
 
 /**
  * @swagger
@@ -177,7 +154,7 @@ router.delete('/:orderId', isAdminVerifier, clearCache, OrderController.delete_o
  *     security:
  *       - bearerAuth: []
  */
-router.post('/:orderId/cancel', isAdminVerifier, clearCache, OrderController.cancelOrderAndIssueStoreCredit);
+router.post('/:orderId/cancel', authenticationVerifier, isAdminVerifier, clearCache, OrderController.cancelOrderAndIssueStoreCredit);
 
 /**
  * @swagger
@@ -195,6 +172,6 @@ router.post('/:orderId/cancel', isAdminVerifier, clearCache, OrderController.can
  *     security:
  *       - bearerAuth: []
  */
-router.get('/income', isAdminVerifier, clearCache, OrderController.get_income);
+router.get('/income', isAdminVerifier, cacheMiddleware, OrderController.get_income);
 
 export default router;

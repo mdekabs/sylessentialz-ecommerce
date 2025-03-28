@@ -1,4 +1,5 @@
 import HttpStatus from 'http-status-codes';
+import mongoose from 'mongoose';
 import { Cart } from "../models/index.js";
 import { responseHandler } from '../utils/index.js';
 
@@ -20,7 +21,7 @@ const ERROR_MESSAGES = {
     INVALID_PRODUCT_FORMAT: "Invalid product format",
     INVALID_QUANTITY: "Valid quantity (positive number) is required",
     PRODUCT_NOT_FOUND_IN_CART: "Product not found in cart",
-    VALID_PRODUCT_ID_REQUIRED: "Valid productId (string) is required"
+    VALID_PRODUCT_ID_REQUIRED: "Valid productId (ObjectId) is required"
 };
 
 const SUCCESS_MESSAGES = {
@@ -33,7 +34,6 @@ const SUCCESS_MESSAGES = {
 };
 
 const CartController = {
-    // Get all carts (admin only) with pagination
     get_carts: async (req, res) => {
         try {
             const { page, limit } = res.locals.pagination;
@@ -70,7 +70,6 @@ const CartController = {
         }
     },
 
-    // Get the authenticated user's cart (no pagination needed)
     get_cart: async (req, res) => {
         try {
             const cart = await Cart.findOne({ userId: req.user.id });
@@ -85,7 +84,27 @@ const CartController = {
         }
     },
 
-    // Create a new cart (no pagination needed)
+    get_cart_by_id: async (req, res) => {
+        try {
+            const { id } = req.params;
+
+            if (!mongoose.Types.ObjectId.isValid(id)) {
+                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Invalid cart ID");
+            }
+
+            const cart = await Cart.findById(id);
+
+            if (!cart) {
+                return responseHandler(res, HttpStatus.NOT_FOUND, "error", ERROR_MESSAGES.CART_NOT_FOUND);
+            }
+
+            responseHandler(res, HttpStatus.OK, "success", "Cart retrieved successfully", { cart });
+        } catch (err) {
+            console.error('Get cart by ID error:', err);
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Failed to retrieve cart", { error: err.message });
+        }
+    },
+
     create_cart: async (req, res) => {
         try {
             if (!req.body.products || !Array.isArray(req.body.products)) {
@@ -99,7 +118,7 @@ const CartController = {
 
             const validProducts = req.body.products.every(product => 
                 product.productId && 
-                typeof product.productId === 'string' &&
+                mongoose.Types.ObjectId.isValid(product.productId) &&
                 (!product.quantity || (typeof product.quantity === 'number' && product.quantity > CART_CONSTANTS.PRODUCTS_VALIDATION_RULES.QUANTITY_MIN_VALUE))
             );
 
@@ -109,7 +128,10 @@ const CartController = {
 
             const newCart = new Cart({
                 userId: req.user.id,
-                products: req.body.products,
+                products: req.body.products.map(product => ({
+                    productId: new mongoose.Types.ObjectId(product.productId),
+                    quantity: product.quantity || CART_CONSTANTS.DEFAULT_QUANTITY
+                })),
             });
 
             const savedCart = await newCart.save();
@@ -119,7 +141,6 @@ const CartController = {
         }
     },
 
-    // Update a cart (no pagination needed)
     update_cart: async (req, res) => {
         try {
             const cart = await Cart.findById(req.params.id);
@@ -135,13 +156,18 @@ const CartController = {
 
                 const validProducts = req.body.products.every(product => 
                     product.productId && 
-                    typeof product.productId === 'string' &&
+                    mongoose.Types.ObjectId.isValid(product.productId) &&
                     (!product.quantity || (typeof product.quantity === 'number' && product.quantity >= CART_CONSTANTS.PRODUCTS_VALIDATION_RULES.QUANTITY_MIN_VALUE))
                 );
 
                 if (!validProducts) {
                     return responseHandler(res, HttpStatus.BAD_REQUEST, "error", ERROR_MESSAGES.INVALID_PRODUCT_FORMAT);
                 }
+
+                req.body.products = req.body.products.map(product => ({
+                    productId: new mongoose.Types.ObjectId(product.productId),
+                    quantity: product.quantity || CART_CONSTANTS.DEFAULT_QUANTITY
+                }));
             }
 
             const updatedCart = await Cart.findByIdAndUpdate(
@@ -156,12 +182,11 @@ const CartController = {
         }
     },
 
-    // Add item to cart (no pagination needed)
     add_to_cart: async (req, res) => {
         try {
             const { productId, quantity = CART_CONSTANTS.DEFAULT_QUANTITY } = req.body;
 
-            if (!productId || typeof productId !== 'string') {
+            if (!productId || !mongoose.Types.ObjectId.isValid(productId)) {
                 return responseHandler(res, HttpStatus.BAD_REQUEST, "error", ERROR_MESSAGES.VALID_PRODUCT_ID_REQUIRED);
             }
 
@@ -177,26 +202,30 @@ const CartController = {
                 });
             }
 
-            const productIndex = cart.products.findIndex(p => p.productId === productId);
+            const productIndex = cart.products.findIndex(p => p.productId.toString() === productId);
             if (productIndex > -1) {
                 cart.products[productIndex].quantity += quantity;
             } else {
-                cart.products.push({ productId, quantity });
+                cart.products.push({ 
+                    productId: new mongoose.Types.ObjectId(productId), 
+                    quantity 
+                });
             }
 
+            cart.markModified('products');
             const updatedCart = await cart.save();
             responseHandler(res, HttpStatus.OK, "success", SUCCESS_MESSAGES.ITEM_ADDED, { cart: updatedCart });
         } catch (err) {
+            console.error('Add to cart error:', err);
             responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Failed to add item to cart", { error: err.message });
         }
     },
 
-    // Remove item from cart (no pagination needed)
     remove_from_cart: async (req, res) => {
         try {
             const { productId } = req.body;
 
-            if (!productId || typeof productId !== 'string') {
+            if (!productId || !mongoose.Types.ObjectId.isValid(productId)) {
                 return responseHandler(res, HttpStatus.BAD_REQUEST, "error", ERROR_MESSAGES.VALID_PRODUCT_ID_REQUIRED);
             }
 
@@ -205,7 +234,7 @@ const CartController = {
                 return responseHandler(res, HttpStatus.NOT_FOUND, "error", ERROR_MESSAGES.CART_NOT_FOUND);
             }
 
-            const productIndex = cart.products.findIndex(p => p.productId === productId);
+            const productIndex = cart.products.findIndex(p => p.productId.toString() === productId);
             if (productIndex === -1) {
                 return responseHandler(res, HttpStatus.NOT_FOUND, "error", ERROR_MESSAGES.PRODUCT_NOT_FOUND_IN_CART);
             }
@@ -218,7 +247,6 @@ const CartController = {
         }
     },
 
-    // Clear all items from cart (no pagination needed)
     clear_cart: async (req, res) => {
         try {
             const cart = await Cart.findOne({ userId: req.user.id });

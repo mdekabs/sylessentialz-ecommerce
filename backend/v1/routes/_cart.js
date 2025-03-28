@@ -226,4 +226,6 @@ router.post('/remove', authenticationVerifier, clearCache, CartController.remove
  */
 router.post('/clear', authenticationVerifier, clearCache, CartController.clear_cart);
 
+router.get('/:id', authenticationVerifier, cacheMiddleware, CartController.get_cart_by_id);
+
 export default router;

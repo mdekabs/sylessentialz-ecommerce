@@ -52,3 +52,2498 @@
   },
   "responseTime": 8
 }
+2025-03-27 13:39:53 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 13:39:53 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 13:39:53 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 13:39:53 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 13:40:28 PM INFO: GET /api/v1/carts 200 116ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "ecc6edc2-92ab-4407-9d25-b4432297c599",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "24"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 116
+}
+2025-03-27 13:44:41 PM INFO: GET /api/v1/products 200 7ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/products",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "433fbac8-2fc3-46db-84b3-f4529b993f2c",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "105"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/products",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 7
+}
+2025-03-27 13:44:59 PM ERROR: POST /api/v1/products 500 20ms (Status: 500)
+{
+  "req": {
+    "url": "/api/v1/products",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "d61ecb39-72cf-415f-88d5-4360e22c794b",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "105"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/products",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 500
+  },
+  "responseTime": 20
+}
+2025-03-27 13:45:27 PM INFO: POST /api/v1/carts 201 50ms (Status: 201)
+{
+  "req": {
+    "url": "/api/v1/carts",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "01a5323e-ac9e-4260-9a82-310c29a05200",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "105"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 201
+  },
+  "responseTime": 50
+}
+2025-03-27 13:45:43 PM WARN: POST /api/v1/carts 409 19ms (Status: 409)
+{
+  "req": {
+    "url": "/api/v1/carts",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "3f84085f-f8d7-442c-83de-f436e49d262d",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "105"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 409
+  },
+  "responseTime": 19
+}
+2025-03-27 13:46:29 PM INFO: GET /api/v1/carts 200 25ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "9bb03bfb-1306-4ede-b76a-c5e672da32d3",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "105"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 25
+}
+2025-03-27 13:48:01 PM INFO: PUT /api/v1/carts/67e54867a118c42448721d65 200 87ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts/67e54867a118c42448721d65",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "80346acb-46f6-4413-a177-95a4c6090190",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "145"
+    },
+    "method": "PUT",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/67e54867a118c42448721d65",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 87
+}
+2025-03-27 14:07:55 PM INFO: GET /api/v1/products 200 9ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/products",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "b96d482f-1166-488b-ab64-e9e345da58ec",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "145"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/products",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 9
+}
+2025-03-27 14:09:17 PM INFO: GET /api/v1/carts 200 14ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "3cc3a478-2d93-494c-87ba-cf4c1b736e9a",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "249"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 14
+}
+2025-03-27 14:09:54 PM INFO: PUT /api/v1/carts/67e54867a118c42448721d65 200 20ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts/67e54867a118c42448721d65",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "17ea3794-4cde-41c9-9dd4-d761d24f4b71",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "249"
+    },
+    "method": "PUT",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/67e54867a118c42448721d65",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 20
+}
+2025-03-27 14:10:17 PM WARN: GET /api/v1/carts/67e54867a118c42448721d65 404 1ms (Status: 404)
+{
+  "req": {
+    "url": "/api/v1/carts/67e54867a118c42448721d65",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "f3c62149-5ffb-4a07-8012-6901c5716111",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "249"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/67e54867a118c42448721d65",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 1
+}
+2025-03-27 14:10:26 PM INFO: GET /api/v1/carts 200 6ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "6288bf1e-a8a4-4c99-9b1e-c76db51f30dc",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "249"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 6
+}
+2025-03-27 14:16:46 PM WARN: GET /api/v1/carts/67e54867a118c42448721d65 404 1ms (Status: 404)
+{
+  "req": {
+    "url": "/api/v1/carts/67e54867a118c42448721d65",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "b5c7091f-d61a-4b53-a826-bc72f0e1953f",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "249"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/67e54867a118c42448721d65",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 1
+}
+2025-03-27 14:48:58 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 14:48:58 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 14:48:58 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 14:48:59 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 14:49:03 PM WARN: GET /api/v1/carts/67e54867a118c42448721d65 404 2ms (Status: 404)
+{
+  "req": {
+    "url": "/api/v1/carts/67e54867a118c42448721d65",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "bfec0f8b-10b7-4e15-9cf5-b179a0ab8e89",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "249"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/67e54867a118c42448721d65",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 2
+}
+2025-03-27 15:16:06 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 15:16:06 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 15:16:06 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 15:16:06 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 15:16:10 PM WARN: GET /api/v1/carts/67e54867a118c42448721d65 404 3ms (Status: 404)
+{
+  "req": {
+    "url": "/api/v1/carts/67e54867a118c42448721d65",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "fae8dcda-cd70-4ce7-9854-4fa784861b65",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "249"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/67e54867a118c42448721d65",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 3
+}
+2025-03-27 15:16:32 PM INFO: GET /api/v1/carts 200 16ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "96cd1d54-b76e-4ecb-8631-7c0b12bb0f40",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "249"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 16
+}
+2025-03-27 15:16:56 PM WARN: GET /api/v1/carts/67e54867a118c42448721d65 404 5ms (Status: 404)
+{
+  "req": {
+    "url": "/api/v1/carts/67e54867a118c42448721d65",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "daa7359d-f34f-401f-823b-a50d19c21631",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "249"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/67e54867a118c42448721d65",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 5
+}
+2025-03-27 15:18:39 PM WARN: GET /api/v1/carts/67e54867a118c42448721d65 404 0ms (Status: 404)
+{
+  "req": {
+    "url": "/api/v1/carts/67e54867a118c42448721d65",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "616c63f0-d3d6-4fce-b28f-36189ac2c342",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "249"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/67e54867a118c42448721d65",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 0
+}
+2025-03-27 15:21:18 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 15:21:18 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 15:21:18 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 15:21:18 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 15:21:28 PM WARN: GET /api/v1/carts/67e54867a118c42448721d65 404 2ms (Status: 404)
+{
+  "req": {
+    "url": "/api/v1/carts/67e54867a118c42448721d65",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "02376460-06b4-45da-aaae-77b489b9eb5d",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "249"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/67e54867a118c42448721d65",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 2
+}
+2025-03-27 15:22:56 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 15:22:56 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 15:22:56 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 15:22:56 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 15:23:00 PM WARN: GET /api/v1/carts/67e54867a118c42448721d65 404 3ms (Status: 404)
+{
+  "req": {
+    "url": "/api/v1/carts/67e54867a118c42448721d65",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "26577f51-df7b-4b6b-b97b-70026207c0e6",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "249"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/67e54867a118c42448721d65",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 3
+}
+2025-03-27 15:23:01 PM WARN: GET /api/v1/carts/67e54867a118c42448721d65 404 0ms (Status: 404)
+{
+  "req": {
+    "url": "/api/v1/carts/67e54867a118c42448721d65",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "6e15769f-6f31-48ed-a638-51ba05de6051",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "249"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/67e54867a118c42448721d65",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 0
+}
+2025-03-27 15:25:14 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 15:25:14 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 15:25:14 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 15:25:14 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 15:25:22 PM WARN: GET /api/v1/carts/67e54867a118c42448721d65 404 2ms (Status: 404)
+{
+  "req": {
+    "url": "/api/v1/carts/67e54867a118c42448721d65",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "24e18d44-9f00-4c91-a481-7703d19fd720",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "249"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/67e54867a118c42448721d65",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 2
+}
+2025-03-27 15:26:17 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 15:26:17 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 15:26:17 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 15:26:17 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 15:26:20 PM INFO: GET /api/v1/carts/67e54867a118c42448721d65 200 15ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts/67e54867a118c42448721d65",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "904000b6-ad81-4334-bf32-d7854707f63a",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "249"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/67e54867a118c42448721d65",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 15
+}
+2025-03-27 15:29:47 PM INFO: GET /api/v1/carts 200 153ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "67866837-3915-4e49-8b29-f27f5cc7a41e",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "249"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 153
+}
+2025-03-27 15:33:13 PM INFO: GET /api/v1/carts/my-cart 200 9ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts/my-cart",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "8f9a0053-e2a3-4ee6-a4ab-b2d8df35370c",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "249"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/my-cart",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 9
+}
+2025-03-27 15:34:58 PM INFO: POST /api/v1/carts/remove 200 68ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts/remove",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "a548ee95-1961-451b-a8c0-61b515220b3d",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "49"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/remove",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 68
+}
+2025-03-27 15:35:22 PM INFO: GET /api/v1/carts/my-cart 200 4ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts/my-cart",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "c41cd5b4-e9c2-4d0d-8c0f-51ce3d625e76",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "49"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/my-cart",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 4
+}
+2025-03-27 15:37:06 PM INFO: GET /api/v1/carts/67e54867a118c42448721d65 200 3ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts/67e54867a118c42448721d65",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "0bf3feac-27ca-494c-afda-9d24b1d353e4",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "49"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/67e54867a118c42448721d65",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 3
+}
+2025-03-27 15:41:20 PM INFO: GET /api/v1/carts/my-cart 200 4ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts/my-cart",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "48ba49ad-d19b-4183-a4cb-cfd87f7b9044",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "49"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/my-cart",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 4
+}
+2025-03-27 15:41:43 PM WARN: POST /api/v1/carts/remove 404 11ms (Status: 404)
+{
+  "req": {
+    "url": "/api/v1/carts/remove",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "f454d14b-b159-406b-93fa-450bcef36f45",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "49"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/remove",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 11
+}
+2025-03-27 15:43:06 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 15:43:06 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 15:43:06 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 15:43:06 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 15:43:22 PM INFO: GET /api/v1/carts/my-cart 200 14ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts/my-cart",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "de501452-0ef8-4099-af21-36be8477bdfc",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "49"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/my-cart",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 14
+}
+2025-03-27 15:44:27 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 15:44:27 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 15:44:27 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 15:44:27 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 15:45:22 PM INFO: POST /api/v1/carts/clear 200 52ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts/clear",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "e2a92a8d-ec95-4372-a803-87f961fc878b",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "49"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/clear",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 52
+}
+2025-03-27 15:48:39 PM INFO: GET /api/v1/carts 200 44ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "0eaf4e19-eeda-4307-af2e-fc8966c1ce14",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "49"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 44
+}
+2025-03-27 15:48:54 PM WARN: GET /api/v1/my-cart 404 1ms (Status: 404)
+{
+  "req": {
+    "url": "/api/v1/my-cart",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "7eb84896-1c16-440c-8f6a-49088b807642",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "49"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/my-cart",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 1
+}
+2025-03-27 15:49:13 PM WARN: GET /api/v1/cart/my-cart 404 1ms (Status: 404)
+{
+  "req": {
+    "url": "/api/v1/cart/my-cart",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "09805830-5bb7-4a8e-8efe-47895934e093",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "49"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/cart/my-cart",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 1
+}
+2025-03-27 15:49:22 PM INFO: GET /api/v1/carts/my-cart 200 3ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts/my-cart",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "25b13ca4-8ab0-4f5e-a10f-5c08fdfc4a6a",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "49"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/my-cart",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 3
+}
+2025-03-27 15:50:07 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 15:50:07 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 15:50:07 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 15:50:07 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 15:50:10 PM INFO: GET /api/v1/carts/my-cart 200 18ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts/my-cart",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "69d3b72f-7b1a-4fd0-8d51-82b6311658f6",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "49"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/my-cart",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 18
+}
+2025-03-27 15:53:22 PM INFO: GET /api/v1/products 200 15ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/products",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "066ca759-31e8-47c4-9b82-9d36289da7e8",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "49"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/products",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 15
+}
+2025-03-27 15:54:09 PM WARN: POST /api/v1/carts 409 19ms (Status: 409)
+{
+  "req": {
+    "url": "/api/v1/carts",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "b95703e5-1d08-4bf5-b74d-379a203d4cfb",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "105"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 409
+  },
+  "responseTime": 19
+}
+2025-03-27 15:54:46 PM INFO: GET /api/v1/carts 200 13ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "9aec7671-d12d-4b6c-85e3-7c516ad8fd44",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "105"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 13
+}
+2025-03-27 15:55:42 PM WARN: POST /api/v1/carts/add 400 13ms (Status: 400)
+{
+  "req": {
+    "url": "/api/v1/carts/add",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "029dd153-f037-43e6-88ac-dc21564f07df",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "105"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/add",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 400
+  },
+  "responseTime": 13
+}
+2025-03-27 15:56:10 PM INFO: GET /api/v1/carts 200 5ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "c07ba6ea-5965-44c6-a9ba-5615e0a078fc",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "105"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 5
+}
+2025-03-27 15:56:29 PM INFO: PUT /api/v1/carts/67e54867a118c42448721d65 200 45ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts/67e54867a118c42448721d65",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "45cfdf0d-8641-4c01-98c5-8385da2db49c",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "105"
+    },
+    "method": "PUT",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/67e54867a118c42448721d65",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 45
+}
+2025-03-27 16:00:59 PM ERROR: POST /api/v1/orders 500 41ms (Status: 500)
+{
+  "req": {
+    "url": "/api/v1/orders",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "428bbdfd-c0fe-4aba-b1a7-b7bc054b81c7",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "175"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 500
+  },
+  "responseTime": 41
+}
+2025-03-27 16:01:29 PM INFO: POST /api/v1/orders 201 51ms (Status: 201)
+{
+  "req": {
+    "url": "/api/v1/orders",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "a5e79d9f-b304-4f1b-9ff1-3cb57da8ba34",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 201
+  },
+  "responseTime": 51
+}
+2025-03-27 16:09:18 PM INFO: GET /api/v1/orders 200 18ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "fd2824e9-7ad2-4cdd-a84d-e3d9aa4c430c",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 18
+}
+2025-03-27 16:13:46 PM INFO: POST /api/v1/orders/67e56849fb1f8929c3504c20/cancel 200 26ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/67e56849fb1f8929c3504c20/cancel",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "f20bc80b-1f3a-4c7f-9f60-43d5b9e79eea",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/67e56849fb1f8929c3504c20/cancel",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 26
+}
+2025-03-27 16:14:08 PM INFO: GET /api/v1/orders 200 24ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "d87c50a4-5d26-406d-87d5-158198c0e91a",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 24
+}
+2025-03-27 16:28:06 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 16:28:06 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 16:28:07 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 16:28:07 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 16:32:12 PM WARN: POST /api/v1/orders/67e56849fb1f8929c3504c20/cancel 400 19ms (Status: 400)
+{
+  "req": {
+    "url": "/api/v1/orders/67e56849fb1f8929c3504c20/cancel",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "aabee38d-8bca-4998-b50e-ce31077ece7f",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/67e56849fb1f8929c3504c20/cancel",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 400
+  },
+  "responseTime": 19
+}
+2025-03-27 16:32:44 PM INFO: GET /api/v1/orders/store_credit 200 36ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/store_credit",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "35d1a020-190b-4d76-866d-4ee769037e24",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/store_credit",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 36
+}
+2025-03-27 16:39:36 PM INFO: GET /api/v1/orders/income 200 24ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "2767a116-edbc-41fb-9d82-6f34774c74ba",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 24
+}
+2025-03-27 16:39:50 PM INFO: GET /api/v1/orders/income 200 5ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "decbadb1-f195-4415-9b35-daa3ce67c0e4",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 5
+}
+2025-03-27 16:40:46 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 16:40:46 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 16:40:46 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 16:40:46 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 16:40:52 PM INFO: GET /api/v1/orders/income 200 15ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "f0e8d994-b4d1-40fb-a4d2-03c2931c0c03",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 15
+}
+2025-03-27 16:40:54 PM INFO: GET /api/v1/orders/income 200 8ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "e47a266f-f410-4f9a-9de7-2982bda6640a",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 8
+}
+2025-03-27 16:41:19 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 16:41:19 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 16:41:19 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 16:41:19 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 16:41:26 PM INFO: GET /api/v1/orders/income 200 14ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "d4f4eb07-db13-4a75-9540-b71a5155bcde",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 14
+}
+2025-03-27 16:41:30 PM INFO: GET /api/v1/orders/income 200 7ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "a5b6022c-0edc-4733-8587-adaa8f1c12ae",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 7
+}
+2025-03-27 16:42:28 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 16:42:28 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 16:42:28 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 16:42:28 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 17:03:07 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 17:03:07 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 17:03:07 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 17:03:07 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 17:03:11 PM INFO: GET /api/v1/orders/income 200 36ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "6004bf7b-9f93-4729-99e5-f4c94469674c",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 36
+}
+2025-03-27 17:04:11 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 17:04:11 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 17:04:11 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 17:04:11 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 17:06:18 PM WARN: GET /api/v1/income 404 2ms (Status: 404)
+{
+  "req": {
+    "url": "/api/v1/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "a0659e22-3836-4580-a5ca-59fbf117ee61",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 2
+}
+2025-03-27 17:06:33 PM INFO: GET /api/v1/orders/income 200 16ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "389f8734-dc11-4ad9-8c9b-a7f53cf5a159",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 16
+}
+2025-03-27 17:11:07 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 17:11:07 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 17:11:07 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 17:11:07 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 17:11:15 PM INFO: GET /api/v1/orders 200 113ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "fa9d521e-9464-4928-89b1-4d7aa33a3c28",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 113
+}
+2025-03-27 17:20:06 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 17:20:06 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 17:20:06 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 17:20:06 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 17:20:21 PM INFO: GET /api/v1/orders/income 200 9ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "c875993f-26ab-4a03-a978-efb7d340bbf9",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 9
+}
+2025-03-27 17:46:48 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 17:46:48 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 17:46:48 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 17:46:48 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 17:47:10 PM INFO: GET /api/v1/orders/income 200 11ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "09b6a5e5-9f9c-4647-87ab-1602e7803256",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 11
+}
+2025-03-27 17:47:11 PM INFO: GET /api/v1/orders/income 200 3ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "eac86673-4095-4e51-9634-1bca421d9b4c",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 3
+}
+2025-03-27 17:47:12 PM INFO: GET /api/v1/orders/income 200 5ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "56c1ccc3-be61-49a6-ad76-7c894130a7f8",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 5
+}
+2025-03-27 17:47:31 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 17:47:31 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 17:47:31 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 17:47:32 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 17:47:52 PM INFO: GET /api/v1/orders/income 200 9ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "501d2f2d-fd53-4bf3-9dff-d7b9b6442418",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 9
+}
+2025-03-27 17:49:03 PM INFO: GET /api/v1/orders/store_credit 200 14ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/store_credit",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "2caa8ef5-0a5d-4940-93e2-3072c8bf89fa",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/store_credit",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 14
+}
+2025-03-27 17:50:03 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 17:50:03 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 17:50:03 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 17:50:03 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 17:50:09 PM INFO: GET /api/v1/orders/store_credit 200 13ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/store_credit",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "e92ecb0f-f176-4c25-b914-5be827fc418d",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/store_credit",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 13
+}
+2025-03-27 17:51:13 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 17:51:13 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 17:51:13 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 17:51:14 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 17:51:21 PM INFO: GET /api/v1/orders/income 200 11ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "e211f57b-26e3-4692-a877-4017a692534e",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 11
+}
+2025-03-27 17:51:34 PM WARN: GET /api/v1/income 404 1ms (Status: 404)
+{
+  "req": {
+    "url": "/api/v1/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "c176dd33-75c1-4f70-819c-2af4a05f91fc",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 1
+}
+2025-03-27 17:51:45 PM WARN: GET /api/income 404 0ms (Status: 404)
+{
+  "req": {
+    "url": "/api/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "13b4626c-7071-46e8-a820-c6f655b5caf6",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 0
+}
+2025-03-27 17:52:59 PM INFO: GET /api/v1/orders/income 200 5ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "00f6a94a-7841-464c-a37c-dad6f2f587af",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 5
+}
+2025-03-27 18:16:28 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 18:16:28 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 18:16:28 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 18:16:29 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 18:16:34 PM INFO: GET /api/v1/orders/income 200 10ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "a4f457a5-b2cc-4fb7-9ce0-bd33e599d54e",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 10
+}
+2025-03-27 18:19:25 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 18:19:25 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 18:19:25 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 18:19:25 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 18:19:31 PM INFO: GET /api/v1/orders/income 200 7ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "b1b9136c-4de7-4542-959c-97d3a5b03db1",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 7
+}
+2025-03-27 18:27:26 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 18:27:26 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 18:27:27 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 18:27:27 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 18:27:37 PM INFO: GET /api/v1/orders/income 200 9ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "884d8ac6-7a93-4aab-8422-d3c09b75fb98",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 9
+}
+2025-03-27 18:28:08 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 18:28:08 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 18:28:08 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 18:28:08 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 18:28:27 PM INFO: GET /api/v1/orders/income 200 14ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "8eabd69a-8f99-43d2-b198-76bc135aafd3",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 14
+}
+2025-03-27 18:29:32 PM INFO: GET /api/v1/orders/store_credit 200 12ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/store_credit",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "9e5c6822-1379-4ff7-804c-4623cd7cc0cd",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/store_credit",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 12
+}
+2025-03-27 18:29:42 PM INFO: GET /api/v1/orders 200 133ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "0af1beb4-9db8-4a8e-a7aa-d082e7660ab5",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 133
+}
+2025-03-27 18:30:32 PM WARN: POST /api/v1/orders/cancel 404 2ms (Status: 404)
+{
+  "req": {
+    "url": "/api/v1/orders/cancel",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "28033aa5-24ea-4c3c-951e-65928f32d867",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/cancel",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 2
+}
+2025-03-27 18:30:51 PM WARN: POST /api/v1/orders/67e56849fb1f8929c3504c20/cancel 400 15ms (Status: 400)
+{
+  "req": {
+    "url": "/api/v1/orders/67e56849fb1f8929c3504c20/cancel",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "a9c1b8ff-7994-470d-8d8a-309649f851f3",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/67e56849fb1f8929c3504c20/cancel",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 400
+  },
+  "responseTime": 15
+}
+2025-03-27 18:31:29 PM INFO: GET /api/v1/orders 200 6ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "3dbaa487-abf5-432c-913f-ece49213dbe5",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 6
+}
+2025-03-27 18:32:40 PM ERROR: GET /api/v1/orders/user 500 5ms (Status: 500)
+{
+  "req": {
+    "url": "/api/v1/orders/user",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "ecd97607-f8e2-4c92-99ee-1b591aff555a",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/user",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 500
+  },
+  "responseTime": 5
+}
+2025-03-27 18:52:45 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 18:52:46 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 18:52:46 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 18:52:46 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 18:55:08 PM ERROR: GET /api/v1/orders/user 500 12ms (Status: 500)
+{
+  "req": {
+    "url": "/api/v1/orders/user",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "0611756b-3e60-45bd-b846-6d5168a9ea3d",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/user",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 500
+  },
+  "responseTime": 12
+}
+2025-03-27 18:55:52 PM INFO: GET /api/v1/orders/income 200 6ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/income",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "818b67de-df98-4a1c-8b3d-0ca298dcd724",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/income",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 6
+}
+2025-03-27 18:56:09 PM ERROR: GET /api/v1/orders/user 500 5ms (Status: 500)
+{
+  "req": {
+    "url": "/api/v1/orders/user",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "058b6a6f-0505-4b34-afbf-c909d987a805",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/user",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 500
+  },
+  "responseTime": 5
+}
+2025-03-27 19:03:30 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 19:03:31 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 19:03:31 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 19:03:31 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 19:03:35 PM ERROR: GET /api/v1/orders/user 500 17ms (Status: 500)
+{
+  "req": {
+    "url": "/api/v1/orders/user",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "b8d9be33-9b84-404a-9c97-12e500425970",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/user",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 500
+  },
+  "responseTime": 17
+}
+2025-03-27 19:03:37 PM ERROR: GET /api/v1/orders/user 500 3ms (Status: 500)
+{
+  "req": {
+    "url": "/api/v1/orders/user",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "b8834585-00ec-45a6-88d4-ddf4a66bb213",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/user",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 500
+  },
+  "responseTime": 3
+}
+2025-03-27 19:05:04 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 19:05:04 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 19:05:04 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 19:05:04 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-27 19:05:05 PM INFO: GET /api/v1/orders/user 200 40ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders/user",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "171edc80-54d5-45a0-80b0-604b743a85c1",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders/user",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 40
+}
+2025-03-27 20:30:23 PM WARN: GET /api/v1/carts/my-cart 404 265ms (Status: 404)
+{
+  "req": {
+    "url": "/api/v1/carts/my-cart",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "67fb9c9e-1f86-4a37-8576-87121a052383",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/my-cart",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 265
+}
+2025-03-27 20:31:05 PM INFO: GET /api/v1/carts 200 123ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "5190792a-1786-4021-afb1-2ee1b2b9884b",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 123
+}
+2025-03-27 20:32:11 PM WARN: GET /api/v1/carts/my-cart 404 8ms (Status: 404)
+{
+  "req": {
+    "url": "/api/v1/carts/my-cart",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "be41cb23-895c-4d91-bc01-e428d430193b",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts/my-cart",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 8
+}
+2025-03-27 20:33:41 PM INFO: GET /api/v1/carts 200 8ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/carts",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "07b5940f-19ec-40f4-a30e-955042dd37a7",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 8
+}
+2025-03-27 20:34:27 PM INFO: GET /api/v1/orders 200 9ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/orders",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "51fb5f99-ac65-4d45-bc37-e480562a27fd",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 9
+}
+2025-03-27 20:36:59 PM INFO: GET /api/v1/products 200 27ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/products",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "bfe95b8b-3ba5-4196-b806-d19c5293ed9d",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/products",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 27
+}
+2025-03-27 20:41:34 PM INFO: POST /api/v1/carts 201 432ms (Status: 201)
+{
+  "req": {
+    "url": "/api/v1/carts",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "baf03651-96ed-476e-8e2d-af02da171d1f",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "98"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/carts",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 201
+  },
+  "responseTime": 432
+}
+2025-03-27 22:23:15 PM INFO: POST /api/v1/orders 201 364ms (Status: 201)
+{
+  "req": {
+    "url": "/api/v1/orders",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "a7b8c08f-55f9-4d64-851e-98fed53fa68e",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "167"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/orders",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 201
+  },
+  "responseTime": 364
+}
+2025-03-27 22:33:30 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-27 22:33:31 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-27 22:33:31 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-27 22:33:31 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
