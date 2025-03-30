@@ -103,7 +103,7 @@ async function startServer() {
         
         // 4️⃣ Start the server
         const server = app.listen(PORT, () => {
-            logger.info(`🚀 Server is running on port ${PORT} in ${process.env.NODE_ENV || "development"} mode`);
+            logger.info(`🚀 Sylessentials ecommerce Server is running on port ${PORT} in ${process.env.NODE_ENV || "development"} mode`);
         });
         
         // Handle graceful shutdown

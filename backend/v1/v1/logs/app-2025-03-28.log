@@ -1,0 +1,195 @@
+2025-03-28 15:34:56 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-28 15:35:01 PM ERROR: ❌ MongoDB connection failed: connect ECONNREFUSED 127.0.0.1:27017 (Status: N/A)
+2025-03-28 15:36:40 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-28 15:36:40 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-28 15:36:40 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-28 15:36:40 PM INFO: 🚀 Server is running on port 3000 in development mode (Status: N/A)
+2025-03-28 15:40:42 PM WARN: GET / 404 2ms (Status: 404)
+{
+  "req": {
+    "url": "/",
+    "headers": {
+      "host": "localhost:3000",
+      "user-agent": "curl/8.5.0",
+      "accept": "*/*"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 2
+}
+2025-03-28 15:43:26 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-28 15:43:26 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-28 15:43:26 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-28 15:43:26 PM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode (Status: N/A)
+2025-03-28 15:44:17 PM WARN: GET / 404 4ms (Status: 404)
+{
+  "req": {
+    "url": "/",
+    "headers": {
+      "host": "localhost:3000",
+      "user-agent": "curl/8.5.0",
+      "accept": "*/*"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 4
+}
+2025-03-28 17:20:25 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-28 17:20:25 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-28 17:20:25 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-28 17:20:25 PM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode (Status: N/A)
+2025-03-28 17:21:27 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-28 17:21:27 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-28 17:21:27 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-28 17:23:55 PM ERROR: POST /api/v1/auth/login 500 145ms (Status: 500)
+{
+  "req": {
+    "url": "/api/v1/auth/login",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "dcff80f4-e8ae-410e-acc3-baca4f4810a9",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "59"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/auth/login",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 500
+  },
+  "responseTime": 145
+}
+2025-03-28 17:27:10 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-28 17:27:10 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-28 17:27:10 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-28 17:27:11 PM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode (Status: N/A)
+2025-03-28 17:27:18 PM WARN: POST /api/v1/auth/login 401 143ms (Status: 401)
+{
+  "req": {
+    "url": "/api/v1/auth/login",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "152906e9-2d33-4d70-9f17-fa6a391ca76c",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "59"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/auth/login",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 401
+  },
+  "responseTime": 143
+}
+2025-03-28 17:29:33 PM WARN: POST /api/v1/auth/login 401 119ms (Status: 401)
+{
+  "req": {
+    "url": "/api/v1/auth/login",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "67251a6d-0582-4a3a-990a-5d6b202c3ef8",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "60"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/auth/login",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 401
+  },
+  "responseTime": 119
+}
+2025-03-28 17:33:51 PM WARN: POST /api/v1/auth/login 401 3ms (Status: 401)
+{
+  "req": {
+    "url": "/api/v1/auth/login",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "d87acaf0-7e87-485e-8af1-7f74f5cd0d3c",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "60"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/auth/login",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 401
+  },
+  "responseTime": 3
+}
+2025-03-28 17:35:52 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-28 17:35:52 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-28 17:35:52 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-28 17:37:54 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-28 17:37:54 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-28 17:37:54 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-28 17:46:19 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-03-28 17:46:19 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-03-28 17:46:19 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-03-28 17:46:19 PM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode (Status: N/A)
+2025-03-28 17:46:26 PM INFO: POST /api/v1/auth/login 200 181ms (Status: 200)
+{
+  "req": {
+    "url": "/api/v1/auth/login",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.2",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "9c997066-75f0-4ada-b4da-aba716c60063",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "60"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/auth/login",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 181
+}
+2025-03-28 17:55:18 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
