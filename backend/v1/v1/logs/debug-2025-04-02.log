@@ -58,3 +58,6 @@
 2025-04-02 08:52:48 AM INFO: ✅Database is ready for atomicity. 
 2025-04-02 08:52:48 AM INFO: ✅ Cart cleanup scheduler started 
 2025-04-02 08:52:48 AM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode 
+2025-04-02 15:57:06 PM INFO: ✅Database is ready for atomicity. 
+2025-04-02 15:57:08 PM INFO: ✅ Cart cleanup scheduler started 
+2025-04-02 15:57:08 PM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode 

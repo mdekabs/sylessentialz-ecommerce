@@ -7,20 +7,28 @@ import { v4 as uuidv4 } from 'uuid';
 import { responseHandler, emailQueue, generatePasswordResetEmail } from "../utils/index.js";
 import { updateBlacklist } from "../middlewares/index.js";
 
-dotenv.config();
+dotenv.config(); // Load environment variables
 
-const JWT_SECRET = process.env.JWT_SECRET;
-const JWT_EXPIRATION = "1d";
-const PASSWORD_RESET_EXPIRATION = 3600000; // 1 hour
-const TOKEN_BYTES = 32;
-const GUEST_TOKEN_EXPIRATION = '1h';
+const JWT_SECRET = process.env.JWT_SECRET;          // Secret for JWT signing
+const JWT_EXPIRATION = "1d";                        // JWT expiration: 1 day
+const PASSWORD_RESET_EXPIRATION = 3600000;          // Reset token expiration: 1 hour (in ms)
+const TOKEN_BYTES = 32;                             // Size of reset token in bytes
+const GUEST_TOKEN_EXPIRATION = '1h';                // Guest token expiration: 1 hour
 
+/**
+ * Authentication controller for user management and session handling.
+ */
 const AuthController = {
+  /**
+   * Creates an admin user if it doesn't already exist.
+   * Uses environment variables for admin credentials.
+   * @returns {Promise<void>}
+   */
   create_admin_user: async () => {
     try {
-      const adminEmail = process.env.ADMIN_EMAIL;
-      const adminUsername = process.env.ADMIN_USERNAME;
-      const adminPassword = process.env.ADMIN_PASSWORD;
+      const adminEmail = process.env.ADMIN_EMAIL;     // Admin email from env
+      const adminUsername = process.env.ADMIN_USERNAME; // Admin username from env
+      const adminPassword = process.env.ADMIN_PASSWORD; // Admin password from env
 
       const existingAdmin = await User.findOne({ email: adminEmail });
       if (existingAdmin) {
@@ -32,7 +40,7 @@ const AuthController = {
         username: adminUsername,
         email: adminEmail,
         password: adminPassword,
-        isAdmin: true,
+        isAdmin: true,                        // Set as admin
       });
 
       await newAdmin.save();
@@ -42,6 +50,12 @@ const AuthController = {
     }
   },
 
+  /**
+   * Registers a new user.
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @returns {Promise<void>}
+   */
   create_user: async (req, res) => {
     try {
       const { username, email, password } = req.body;
@@ -63,6 +77,12 @@ const AuthController = {
     }
   },
 
+  /**
+   * Logs in a user and issues a JWT token.
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @returns {Promise<void>}
+   */
   login_user: async (req, res) => {
     try {
       const { username, password } = req.body;
@@ -81,14 +101,14 @@ const AuthController = {
 
       const isPasswordValid = await user.comparePassword(password);
       if (!isPasswordValid) {
-        await user.incrementLoginAttempts();
+        await user.incrementLoginAttempts(); // Increment failed attempts
         return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", "Incorrect password.");
       }
 
-      await user.resetLoginAttempts();
+      await user.resetLoginAttempts();       // Reset attempts on success
 
       const accessToken = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, JWT_SECRET, { expiresIn: JWT_EXPIRATION });
-      const { password: _, ...data } = user._doc;
+      const { password: _, ...data } = user._doc; // Exclude password from response
 
       responseHandler(res, HttpStatus.OK, "success", "Successfully logged in", { ...data, accessToken });
     } catch (err) {
@@ -96,16 +116,28 @@ const AuthController = {
     }
   },
 
+  /**
+   * Logs out a user by blacklisting their token.
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @returns {Promise<void>}
+   */
   logout_user: async (req, res) => {
     try {
-      const token = req.header("Authorization");
-      await updateBlacklist(token);
+      const token = req.header("Authorization"); // Get token from header
+      await updateBlacklist(token);              // Blacklist token
       responseHandler(res, HttpStatus.OK, "success", "Successfully logged out.");
     } catch (err) {
       responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Logout failed: " + err.message);
     }
   },
 
+  /**
+   * Initiates a password reset process by sending an email.
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @returns {Promise<void>}
+   */
   forgot_password: async (req, res) => {
     try {
       const { email } = req.body;
@@ -114,29 +146,38 @@ const AuthController = {
         return responseHandler(res, HttpStatus.NOT_FOUND, "error", "User not found.");
       }
 
-      const resetToken = crypto.randomBytes(TOKEN_BYTES).toString("hex");
+      const resetToken = crypto.randomBytes(TOKEN_BYTES).toString("hex"); // Generate secure token
       user.resetPasswordToken = resetToken;
-      user.resetPasswordExpires = Date.now() + PASSWORD_RESET_EXPIRATION;
+      user.resetPasswordExpires = Date.now() + PASSWORD_RESET_EXPIRATION; // Set expiration
       await user.save();
 
-      await emailQueue.add("sendEmail", generatePasswordResetEmail(user.email, resetToken));
+      await emailQueue.add("sendEmail", generatePasswordResetEmail(user.email, resetToken)); // Queue email
       responseHandler(res, HttpStatus.OK, "success", "Password reset email sent.");
     } catch (err) {
       responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Forgot password failed: " + err.message);
     }
   },
 
+  /**
+   * Resets a user's password using a valid token.
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @returns {Promise<void>}
+   */
   reset_password: async (req, res) => {
     try {
       const { token, newPassword } = req.body;
-      const user = await User.findOne({ resetPasswordToken: token, resetPasswordExpires: { $gt: Date.now() } });
+      const user = await User.findOne({ 
+        resetPasswordToken: token, 
+        resetPasswordExpires: { $gt: Date.now() } // Check token validity
+      });
       if (!user) {
         return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Invalid or expired token.");
       }
 
       user.password = newPassword;
-      user.resetPasswordToken = undefined;
-      user.resetPasswordExpires = undefined;
+      user.resetPasswordToken = undefined;   // Clear token
+      user.resetPasswordExpires = undefined; // Clear expiration
       await user.save();
 
       responseHandler(res, HttpStatus.OK, "success", "Password reset successful.");
@@ -145,9 +186,15 @@ const AuthController = {
     }
   },
 
+  /**
+   * Generates a guest ID and token for unauthenticated users.
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @returns {Promise<void>}
+   */
   generateGuestId: async (req, res) => {
     try {
-      const guestId = uuidv4();
+      const guestId = uuidv4(); // Unique guest identifier
       const token = jwt.sign({ guestId, isGuest: true }, JWT_SECRET, { expiresIn: GUEST_TOKEN_EXPIRATION });
 
       responseHandler(res, HttpStatus.OK, "success", "Guest ID and token generated successfully", {

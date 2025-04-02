@@ -2,19 +2,29 @@ import cron from 'node-cron';
 import { Cart } from '../models/index.js';
 import CartController from '../controllers/_cartController.js';
 
+/**
+ * Schedules a cron job to clean up expired carts.
+ * Runs every 10 minutes to remove carts inactive for over 30 minutes.
+ * @returns {void}
+ */
 const cleanupExpiredCarts = () => {
-    cron.schedule('*/10 * * * *', async () => {
+    // Schedule task to run every 10 minutes
+    cron.schedule('*/10 * * * *', async () => { // Cron pattern: every 10th minute
         try {
-            const now = new Date();
-            const timeoutThreshold = new Date(now - 30 * 60 * 1000);
-            const expiredCarts = await Cart.find({ lastUpdated: { $lt: timeoutThreshold } }).select('_id');
+            const now = new Date();                     // Current timestamp
+            const timeoutThreshold = new Date(now - 30 * 60 * 1000); // 30 minutes ago
+            // Find carts not updated in the last 30 minutes
+            const expiredCarts = await Cart.find({ 
+                lastUpdated: { $lt: timeoutThreshold }  // Less than threshold
+            }).select('_id');                           // Only fetch cart IDs
 
+            // Clear each expired cart using the controller
             for (const cart of expiredCarts) {
-                await CartController.clearExpiredCart(cart._id);
+                await CartController.clearExpiredCart(cart._id); // Delegate cleanup to controller
             }
             console.log(`Cleared ${expiredCarts.length} expired carts`);
         } catch (err) {
-            console.error('Cart cleanup error:', err);
+            console.error('Cart cleanup error:', err);  // Log any errors during cleanup
         }
     });
 };

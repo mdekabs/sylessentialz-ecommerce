@@ -14,12 +14,12 @@ const PAGINATION_CONSTANTS = {
 };
 
 /**
- * Generates HATEOAS-style pagination links.
- * @param {number} page - Current page number.
- * @param {number} limit - Items per page.
- * @param {number} totalItems - Total items in the collection.
- * @param {string} baseUrl - Base URL for the request.
- * @returns {Array} Array containing pagination links with "rel" attributes.
+ * Generates HATEOAS-style pagination links for navigation.
+ * @param {number} page - Current page number
+ * @param {number} limit - Number of items per page
+ * @param {number} totalItems - Total number of items in the collection
+ * @param {string} baseUrl - Base URL for constructing links
+ * @returns {Array<Object>} Array of pagination link objects with "rel" and "href" properties
  */
 function generatePaginationLinks(page, limit, totalItems, baseUrl) {
   const totalPages = Math.ceil(totalItems / limit);
@@ -30,14 +30,14 @@ function generatePaginationLinks(page, limit, totalItems, baseUrl) {
     { rel: "self", href: `${baseUrl}?${PAGINATION_CONSTANTS.PAGE_PARAM}=${page}&${PAGINATION_CONSTANTS.LIMIT_PARAM}=${limit}` },
     { rel: "next", href: page < totalPages ? `${baseUrl}?${PAGINATION_CONSTANTS.PAGE_PARAM}=${page + 1}&${PAGINATION_CONSTANTS.LIMIT_PARAM}=${limit}` : null },
     { rel: "last", href: `${baseUrl}?${PAGINATION_CONSTANTS.PAGE_PARAM}=${totalPages}&${PAGINATION_CONSTANTS.LIMIT_PARAM}=${limit}` },
-  ].filter(link => link.href !== null); // Remove null links
+  ].filter(link => link.href !== null); // Remove links with null href
 }
 
 /**
- * Validates and sanitizes pagination parameters.
- * @param {string|number} page - Page number from query.
- * @param {string|number} limit - Limit from query.
- * @returns {Object} Sanitized page and limit values.
+ * Validates and sanitizes pagination parameters from query strings.
+ * @param {string|number} page - Raw page number from request query
+ * @param {string|number} limit - Raw limit value from request query
+ * @returns {Object} Object containing sanitized page and limit values
  */
 function sanitizePaginationParams(page, limit) {
   const parsedPage = parseInt(page, 10);
@@ -50,23 +50,32 @@ function sanitizePaginationParams(page, limit) {
 }
 
 /**
- * Express middleware for handling pagination.
- * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
- * @param {Function} next - Next middleware function.
+ * Middleware to handle pagination for Express routes.
+ * Sets up pagination data in res.locals and provides a method to set total items.
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
+ * @returns {void}
  */
 export const pagination = (req, res, next) => {
   try {
+    // Sanitize pagination parameters from query
     const { page, limit } = sanitizePaginationParams(
       req.query[PAGINATION_CONSTANTS.PAGE_PARAM],
       req.query[PAGINATION_CONSTANTS.LIMIT_PARAM]
     );
 
+    // Construct base URL for pagination links
     const baseUrl = `${req.protocol}://${req.get("host")}${req.baseUrl || ""}`;
 
+    // Initialize pagination object in res.locals
     res.locals.pagination = { page, limit, links: [], hasMorePages: false };
 
-    // Middleware will require `totalItems` to be set in the response locals in the route handler
+    /**
+     * Sets total items and generates pagination links.
+     * Must be called in route handlers after determining totalItems.
+     * @param {number} totalItems - Total number of items in the dataset
+     */
     res.locals.setPagination = (totalItems) => {
       if (typeof totalItems !== "number" || totalItems < 0) {
         logger.error("Invalid totalItems value in pagination middleware");

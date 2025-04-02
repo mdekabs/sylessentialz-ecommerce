@@ -3,15 +3,26 @@ import mongoose from 'mongoose';
 import { Order, StoreCredit, Product, Cart } from "../models/index.js";
 import { responseHandler } from '../utils/index.js';
 
-// Constants
+/**
+ * Constants for order operations.
+ */
 const CONSTANTS = {
-  STORE_CREDIT_EXPIRY_DAYS: 3 * 30,
-  FIXED_SHIPPING_FEE: 2,
-  VALID_ORDER_STATUSES: ["pending", "processing", "shipped", "delivered", "cancelled"],
-  ORDER_STATUSES_FOR_INCOME: ["pending", "processing", "shipped", "delivered"]
+  STORE_CREDIT_EXPIRY_DAYS: 3 * 30,                  // Store credit expires in 3 months
+  FIXED_SHIPPING_FEE: 2,                             // Fixed shipping cost
+  VALID_ORDER_STATUSES: ["pending", "processing", "shipped", "delivered", "cancelled"], // Valid order states
+  ORDER_STATUSES_FOR_INCOME: ["pending", "processing", "shipped", "delivered"] // Income-relevant statuses
 };
 
+/**
+ * Controller for managing order operations.
+ */
 const OrderController = {
+  /**
+   * Creates a new order from the user's cart.
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @returns {Promise<void>}
+   */
   create_order: async (req, res) => {
     const session = await mongoose.startSession();
     session.startTransaction();
@@ -23,15 +34,17 @@ const OrderController = {
         return responseHandler(res, HttpStatus.BAD_REQUEST, 'error', 'Address is required.');
       }
 
-      const cart = await Cart.findOne({ userId }).populate('products.productId', 'name price stock image').session(session);
+      const cart = await Cart.findOne({ userId })
+        .populate('products.productId', 'name price stock image') // Populate product details
+        .session(session);
       if (!cart || cart.products.length === 0) {
         return responseHandler(res, HttpStatus.BAD_REQUEST, 'error', 'Your cart is empty.');
       }
 
       const now = new Date();
-      const timeoutThreshold = new Date(now - 30 * 60 * 1000); // 30 minutes expiration from CartController
+      const timeoutThreshold = new Date(now - 30 * 60 * 1000); // 30-minute expiration threshold
       if (cart.lastUpdated < timeoutThreshold) {
-        await CartController.clearExpiredCart(cart._id);
+        await CartController.clearExpiredCart(cart._id);      // Clear expired cart
         await session.commitTransaction();
         return responseHandler(res, HttpStatus.NOT_FOUND, 'error', 'Cart has expired and been cleared.');
       }
@@ -42,23 +55,23 @@ const OrderController = {
         if (!product) {
           throw new Error(`Product not found: ${cartItem.productId}`);
         }
-        orderTotal += product.price * cartItem.quantity;
+        orderTotal += product.price * cartItem.quantity;      // Calculate total
         return { productId: cartItem.productId._id, quantity: cartItem.quantity };
       });
 
-      let payableAmount = orderTotal + CONSTANTS.FIXED_SHIPPING_FEE;
+      let payableAmount = orderTotal + CONSTANTS.FIXED_SHIPPING_FEE; // Add shipping fee
       let creditToApply = 0;
 
       const storeCredit = await StoreCredit.findOne({ userId }).session(session);
       if (storeCredit && storeCredit.amount > 0 && storeCredit.expiryDate > now) {
-        creditToApply = Math.min(storeCredit.amount, payableAmount);
+        creditToApply = Math.min(storeCredit.amount, payableAmount); // Apply available credit
         payableAmount -= creditToApply;
 
         await StoreCredit.findOneAndUpdate(
           { userId, version: storeCredit.version },
           {
-            $inc: { amount: -creditToApply, version: 1 },
-            $set: { expiryDate: storeCredit.amount - creditToApply === 0 ? null : storeCredit.expiryDate }
+            $inc: { amount: -creditToApply, version: 1 },    // Deduct credit, increment version
+            $set: { expiryDate: storeCredit.amount - creditToApply === 0 ? null : storeCredit.expiryDate } // Clear expiry if depleted
           },
           { new: true, session }
         );
@@ -69,8 +82,8 @@ const OrderController = {
         products: orderedProducts,
         amount: payableAmount,
         address,
-        status: 'pending',
-        version: 0
+        status: 'pending',                              // Initial status
+        version: 0                                      // Initial version
       });
 
       await newOrder.save({ session });
@@ -78,7 +91,7 @@ const OrderController = {
       const currentCartVersion = cart.version;
       const updatedCart = await Cart.findOneAndUpdate(
         { _id: cart._id, version: currentCartVersion },
-        { products: [], lastUpdated: new Date(), $inc: { version: 1 } },
+        { products: [], lastUpdated: new Date(), $inc: { version: 1 } }, // Clear cart
         { new: true, session }
       );
       if (!updatedCart) {
@@ -96,24 +109,30 @@ const OrderController = {
       console.error('Create order error:', error);
       responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', error.message);
     } finally {
-      session.endSession();
+      session.endSession();                                 // Clean up session
     }
   },
 
+  /**
+   * Retrieves all orders with pagination.
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @returns {Promise<void>}
+   */
   get_all_orders: async (req, res) => {
     try {
-      const { page, limit } = res.locals.pagination;
+      const { page, limit } = res.locals.pagination;      // From pagination middleware
       const skip = (page - 1) * limit;
 
       const totalItems = await Order.countDocuments();
       const orders = await Order.find()
-        .populate('products.productId', 'name price stock image')
-        .sort({ createdAt: -1 })
-        .skip(skip)
-        .limit(limit)
+        .populate('products.productId', 'name price stock image') // Populate product details
+        .sort({ createdAt: -1 })                        // Sort by creation date (desc)
+        .skip(skip)                                     // Pagination skip
+        .limit(limit)                                   // Pagination limit
         .lean();
 
-      res.locals.setPagination(totalItems);
+      res.locals.setPagination(totalItems);              // Set pagination metadata
 
       responseHandler(res, HttpStatus.OK, 'success', 'Orders retrieved successfully', {
         orders,
@@ -132,6 +151,12 @@ const OrderController = {
     }
   },
 
+  /**
+   * Retrieves orders for the authenticated user.
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @returns {Promise<void>}
+   */
   get_user_orders: async (req, res) => {
     try {
       const userId = req.user.id;
@@ -140,8 +165,8 @@ const OrderController = {
 
       const totalItems = await Order.countDocuments({ userId });
       const orders = await Order.find({ userId })
-        .populate('products.productId', 'name price stock image')
-        .sort({ createdAt: -1 })
+        .populate('products.productId', 'name price stock image') // Populate product details
+        .sort({ createdAt: -1 })                        // Sort by creation date (desc)
         .skip(skip)
         .limit(limit)
         .lean();
@@ -165,6 +190,12 @@ const OrderController = {
     }
   },
 
+  /**
+   * Updates the status of an order.
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @returns {Promise<void>}
+   */
   update_order_status: async (req, res) => {
     const session = await mongoose.startSession();
     session.startTransaction();
@@ -184,7 +215,7 @@ const OrderController = {
       const currentVersion = order.version;
       const updatedOrder = await Order.findOneAndUpdate(
         { _id: orderId, version: currentVersion },
-        { status, $inc: { version: 1 } },
+        { status, $inc: { version: 1 } },             // Update status, increment version
         { new: true, session }
       );
       if (!updatedOrder) {
@@ -203,6 +234,12 @@ const OrderController = {
     }
   },
 
+  /**
+   * Cancels an order and issues store credit.
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @returns {Promise<void>}
+   */
   cancelOrderAndIssueStoreCredit: async (req, res) => {
     const session = await mongoose.startSession();
     session.startTransaction();
@@ -222,7 +259,7 @@ const OrderController = {
         for (const item of order.products) {
           const product = await Product.findOneAndUpdate(
             { _id: item.productId, version: { $gte: 0 } },
-            { $inc: { stock: item.quantity, version: 1 } },
+            { $inc: { stock: item.quantity, version: 1 } }, // Restore stock
             { new: true, session }
           );
           if (!product) {
@@ -232,21 +269,21 @@ const OrderController = {
       }
 
       let storeCredit = await StoreCredit.findOne({ userId: order.userId }).session(session);
-      const newExpiryDate = new Date(Date.now() + CONSTANTS.STORE_CREDIT_EXPIRY_DAYS * 24 * 60 * 60 * 1000);
+      const newExpiryDate = new Date(Date.now() + CONSTANTS.STORE_CREDIT_EXPIRY_DAYS * 24 * 60 * 60 * 1000); // 3 months
 
       if (!storeCredit) {
         storeCredit = new StoreCredit({
           userId: order.userId,
           amount: order.amount,
           expiryDate: newExpiryDate,
-          version: 0
+          version: 0                                  // Initial version
         });
       } else {
         storeCredit = await StoreCredit.findOneAndUpdate(
           { userId: order.userId, version: storeCredit.version },
           { 
-            $inc: { amount: order.amount, version: 1 },
-            $set: { expiryDate: newExpiryDate }
+            $inc: { amount: order.amount, version: 1 }, // Add refund amount
+            $set: { expiryDate: newExpiryDate }       // Update expiry
           },
           { new: true, session }
         );
@@ -256,7 +293,7 @@ const OrderController = {
       const currentOrderVersion = order.version;
       const updatedOrder = await Order.findOneAndUpdate(
         { _id: orderId, version: currentOrderVersion },
-        { status: 'cancelled', $inc: { version: 1 } },
+        { status: 'cancelled', $inc: { version: 1 } },  // Mark as cancelled
         { new: true, session }
       );
       if (!updatedOrder) {
@@ -278,28 +315,34 @@ const OrderController = {
     }
   },
 
+  /**
+   * Calculates total income from orders and store credit.
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @returns {Promise<void>}
+   */
   get_income: async (req, res) => {
     try {
       const [activeOrdersResult, allOrdersResult, storeCreditResult] = await Promise.all([
         Order.aggregate([
-          { $match: { status: { $in: CONSTANTS.ORDER_STATUSES_FOR_INCOME } } },
+          { $match: { status: { $in: CONSTANTS.ORDER_STATUSES_FOR_INCOME } } }, // Active orders
           { $group: { _id: null, total: { $sum: "$amount" } } },
         ]),
         Order.aggregate([
-          { $group: { _id: null, total: { $sum: "$amount" } } },
+          { $group: { _id: null, total: { $sum: "$amount" } } }, // All orders
         ]),
         StoreCredit.aggregate([
-          { $match: { expiryDate: { $gt: new Date() } } }, // Only active credits
+          { $match: { expiryDate: { $gt: new Date() } } },     // Active credits only
           { $group: { _id: null, total: { $sum: "$amount" } } },
         ])
       ]);
 
-      const activeOrderIncome = activeOrdersResult.length ? activeOrdersResult[0].total : 0;
-      const totalOrderValue = allOrdersResult.length ? allOrdersResult[0].total : 0;
-      const totalStoreCredit = storeCreditResult.length ? storeCreditResult[0].total : 0;
+      const activeOrderIncome = activeOrdersResult.length ? activeOrdersResult[0].total : 0; // Income from active orders
+      const totalOrderValue = allOrdersResult.length ? allOrdersResult[0].total : 0;         // Total order value
+      const totalStoreCredit = storeCreditResult.length ? storeCreditResult[0].total : 0;    // Total active credits
 
-      const redeemedStoreCredit = totalOrderValue - activeOrderIncome - totalStoreCredit;
-      const totalIncome = activeOrderIncome + (redeemedStoreCredit > 0 ? redeemedStoreCredit : 0);
+      const redeemedStoreCredit = totalOrderValue - activeOrderIncome - totalStoreCredit;    // Credits used
+      const totalIncome = activeOrderIncome + (redeemedStoreCredit > 0 ? redeemedStoreCredit : 0); // Total income
 
       responseHandler(res, HttpStatus.OK, 'success', 'Total income calculated successfully', {
         totalIncome,
@@ -315,6 +358,12 @@ const OrderController = {
     }
   },
 
+  /**
+   * Retrieves the user's store credit.
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @returns {Promise<void>}
+   */
   get_store_credit: async (req, res) => {
     try {
       const userId = req.user.id;
@@ -323,7 +372,7 @@ const OrderController = {
 
       if (!storeCredit || storeCredit.amount <= 0 || storeCredit.expiryDate < new Date()) {
         return responseHandler(res, HttpStatus.OK, 'success', 'No active store credit available.', {
-          storeCredit: { amount: 0, expiryDate: null }
+          storeCredit: { amount: 0, expiryDate: null }   // Default response if no credit
         });
       }
 

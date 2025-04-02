@@ -1,17 +1,26 @@
 import sendMail from "./_sendMail.js";
 
+/**
+ * Processes an email job and sends it using the sendMail utility.
+ * Designed for use with a job queue (e.g., Bull).
+ * @param {Object} job - The job object containing email data
+ * @param {Object} job.data - Email details (to, subject, text)
+ * @param {Function} done - Callback to signal job completion or failure
+ * @returns {Promise<Object>} Success object if email is sent
+ * @throws {Error} If email sending fails
+ */
 export default async function (job, done) {
     try {
-        const emailData = job.data;
+        const emailData = job.data;              // Extract email data from job
         await sendMail({
-            email: emailData.to,
-            subject: emailData.subject,
-            message: emailData.text,
+            email: emailData.to,                 // Recipient email address
+            subject: emailData.subject,          // Email subject line
+            message: emailData.text,             // Email body content
         });
-        done();
-        return { success: true };
+        done();                                  // Signal successful completion
+        return { success: true };               // Return success indicator
     } catch (error) {
-        done(error);
-        throw new Error(error.message);
+        done(error);                            // Signal failure with error
+        throw new Error(error.message);         // Re-throw for upstream handling
     }
 }
