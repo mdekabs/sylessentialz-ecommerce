@@ -24,7 +24,7 @@ class RedisClient {
 
       this.client.once("ready", () => {
         this.alive = true;
-        console.log("ready");
+        console.log("Redis says \"bring it on...!\"");
       });
     }
 

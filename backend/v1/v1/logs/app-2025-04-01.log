@@ -1,0 +1,5 @@
+2025-04-01 23:19:21 PM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-04-01 23:19:21 PM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-04-01 23:19:21 PM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-04-01 23:19:21 PM INFO: ✅ Cart cleanup scheduler started (Status: N/A)
+2025-04-01 23:19:21 PM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode (Status: N/A)

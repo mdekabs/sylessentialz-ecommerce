@@ -7,7 +7,8 @@
   "scripts": {
     "start": "nodemon app.js",
     "worker": "nodemon worker.js",
-    "dev": "concurrently \"npm run start\" \"npm run worker\""
+    "dev": "concurrently \"npm run start\" \"npm run worker\"",
+    "test": "mocha test/**/*.test.js --exit"
   },
   "author": "mawoda Ekabua",
   "license": "ISC",
@@ -28,6 +29,7 @@
     "mongoosastic": "^5.0.0",
     "mongoose": "^8.12.2",
     "mongoose-elasticsearch-xp": "^5.8.0",
+    "node-cron": "^3.0.3",
     "nodemailer": "^6.9.13",
     "redis": "^4.6.14",
     "stripe": "^15.8.0",
@@ -37,6 +39,10 @@
     "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
-    "concurrently": "^9.1.2"
+    "chai": "^5.2.0",
+    "chai-as-promised": "^8.0.1",
+    "concurrently": "^9.1.2",
+    "mocha": "^11.1.0",
+    "sinon": "^20.0.0"
   }
 }

@@ -1,4 +1,5 @@
 import HttpStatus from 'http-status-codes';
+import mongoose from 'mongoose';
 import { Order, StoreCredit, Product, Cart } from "../models/index.js";
 import { responseHandler } from '../utils/index.js';
 
@@ -10,49 +11,56 @@ const CONSTANTS = {
   ORDER_STATUSES_FOR_INCOME: ["pending", "processing", "shipped", "delivered"]
 };
 
-const orderController = {
+const OrderController = {
   create_order: async (req, res) => {
+    const session = await mongoose.startSession();
+    session.startTransaction();
     try {
       const userId = req.user.id;
       const { address } = req.body;
 
-      const cart = await Cart.findOne({ userId });
+      if (!address) {
+        return responseHandler(res, HttpStatus.BAD_REQUEST, 'error', 'Address is required.');
+      }
+
+      const cart = await Cart.findOne({ userId }).populate('products.productId', 'name price stock image').session(session);
       if (!cart || cart.products.length === 0) {
         return responseHandler(res, HttpStatus.BAD_REQUEST, 'error', 'Your cart is empty.');
       }
 
-      const productIds = cart.products.map(cartItem => cartItem.productId);
-      const products = await Product.find({ _id: { $in: productIds } });
-
-      const productMap = new Map(products.map(p => [p._id.toString(), p]));
+      const now = new Date();
+      const timeoutThreshold = new Date(now - 30 * 60 * 1000); // 30 minutes expiration from CartController
+      if (cart.lastUpdated < timeoutThreshold) {
+        await CartController.clearExpiredCart(cart._id);
+        await session.commitTransaction();
+        return responseHandler(res, HttpStatus.NOT_FOUND, 'error', 'Cart has expired and been cleared.');
+      }
 
       let orderTotal = 0;
-      const orderedProducts = [];
-
-      for (const cartItem of cart.products) {
-        const product = productMap.get(cartItem.productId.toString());
+      const orderedProducts = cart.products.map(cartItem => {
+        const product = cartItem.productId;
         if (!product) {
-          return responseHandler(res, HttpStatus.BAD_REQUEST, 'error', `Product not found: ${cartItem.productId}`);
+          throw new Error(`Product not found: ${cartItem.productId}`);
         }
         orderTotal += product.price * cartItem.quantity;
-        orderedProducts.push({ productId: cartItem.productId, quantity: cartItem.quantity });
-      }
+        return { productId: cartItem.productId._id, quantity: cartItem.quantity };
+      });
 
       let payableAmount = orderTotal + CONSTANTS.FIXED_SHIPPING_FEE;
       let creditToApply = 0;
 
-      const storeCredit = await StoreCredit.findOne({ userId });
-      if (storeCredit && storeCredit.amount > 0) {
+      const storeCredit = await StoreCredit.findOne({ userId }).session(session);
+      if (storeCredit && storeCredit.amount > 0 && storeCredit.expiryDate > now) {
         creditToApply = Math.min(storeCredit.amount, payableAmount);
         payableAmount -= creditToApply;
 
         await StoreCredit.findOneAndUpdate(
-          { userId },
+          { userId, version: storeCredit.version },
           {
-            $inc: { amount: -creditToApply },
+            $inc: { amount: -creditToApply, version: 1 },
             $set: { expiryDate: storeCredit.amount - creditToApply === 0 ? null : storeCredit.expiryDate }
           },
-          { new: true }
+          { new: true, session }
         );
       }
 
@@ -62,18 +70,33 @@ const orderController = {
         amount: payableAmount,
         address,
         status: 'pending',
+        version: 0
       });
 
-      await newOrder.save();
-      await Cart.findOneAndDelete({ userId });
+      await newOrder.save({ session });
+
+      const currentCartVersion = cart.version;
+      const updatedCart = await Cart.findOneAndUpdate(
+        { _id: cart._id, version: currentCartVersion },
+        { products: [], lastUpdated: new Date(), $inc: { version: 1 } },
+        { new: true, session }
+      );
+      if (!updatedCart) {
+        throw new Error('Cart was modified by another request. Please retry.');
+      }
+
+      await session.commitTransaction();
 
       responseHandler(res, HttpStatus.CREATED, 'success', 'Order placed successfully', { 
         order: newOrder,
         creditApplied: creditToApply
       });
     } catch (error) {
+      await session.abortTransaction();
       console.error('Create order error:', error);
       responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', error.message);
+    } finally {
+      session.endSession();
     }
   },
 
@@ -84,9 +107,11 @@ const orderController = {
 
       const totalItems = await Order.countDocuments();
       const orders = await Order.find()
+        .populate('products.productId', 'name price stock image')
         .sort({ createdAt: -1 })
         .skip(skip)
-        .limit(limit);
+        .limit(limit)
+        .lean();
 
       res.locals.setPagination(totalItems);
 
@@ -115,9 +140,11 @@ const orderController = {
 
       const totalItems = await Order.countDocuments({ userId });
       const orders = await Order.find({ userId })
+        .populate('products.productId', 'name price stock image')
         .sort({ createdAt: -1 })
         .skip(skip)
-        .limit(limit);
+        .limit(limit)
+        .lean();
 
       res.locals.setPagination(totalItems);
 
@@ -139,6 +166,8 @@ const orderController = {
   },
 
   update_order_status: async (req, res) => {
+    const session = await mongoose.startSession();
+    session.startTransaction();
     try {
       const { orderId } = req.params;
       const { status } = req.body;
@@ -147,24 +176,40 @@ const orderController = {
         return responseHandler(res, HttpStatus.BAD_REQUEST, 'error', 'Invalid status provided.');
       }
 
-      const order = await Order.findByIdAndUpdate(orderId, { status }, { new: true });
-
+      const order = await Order.findById(orderId).session(session);
       if (!order) {
         return responseHandler(res, HttpStatus.NOT_FOUND, 'error', 'Order not found.');
       }
 
-      responseHandler(res, HttpStatus.OK, 'success', 'Order status updated successfully', { order });
+      const currentVersion = order.version;
+      const updatedOrder = await Order.findOneAndUpdate(
+        { _id: orderId, version: currentVersion },
+        { status, $inc: { version: 1 } },
+        { new: true, session }
+      );
+      if (!updatedOrder) {
+        throw new Error('Order was modified by another request. Please retry.');
+      }
+
+      await session.commitTransaction();
+
+      responseHandler(res, HttpStatus.OK, 'success', 'Order status updated successfully', { order: updatedOrder });
     } catch (error) {
+      await session.abortTransaction();
       console.error('Update order status error:', error);
-      responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', error.message);
+      responseHandler(res, error.message.includes('modified') ? HttpStatus.CONFLICT : HttpStatus.INTERNAL_SERVER_ERROR, 'error', error.message);
+    } finally {
+      session.endSession();
     }
   },
 
   cancelOrderAndIssueStoreCredit: async (req, res) => {
+    const session = await mongoose.startSession();
+    session.startTransaction();
     try {
       const { orderId } = req.params;
 
-      const order = await Order.findById(orderId);
+      const order = await Order.findById(orderId).session(session);
       if (!order) {
         return responseHandler(res, HttpStatus.NOT_FOUND, 'error', 'Order not found.');
       }
@@ -173,7 +218,20 @@ const orderController = {
         return responseHandler(res, HttpStatus.BAD_REQUEST, 'error', 'Order is already cancelled.');
       }
 
-      let storeCredit = await StoreCredit.findOne({ userId: order.userId });
+      if (order.status === 'pending') {
+        for (const item of order.products) {
+          const product = await Product.findOneAndUpdate(
+            { _id: item.productId, version: { $gte: 0 } },
+            { $inc: { stock: item.quantity, version: 1 } },
+            { new: true, session }
+          );
+          if (!product) {
+            console.warn(`Product ${item.productId} not found during cancellation`);
+          }
+        }
+      }
+
+      let storeCredit = await StoreCredit.findOne({ userId: order.userId }).session(session);
       const newExpiryDate = new Date(Date.now() + CONSTANTS.STORE_CREDIT_EXPIRY_DAYS * 24 * 60 * 60 * 1000);
 
       if (!storeCredit) {
@@ -181,23 +239,42 @@ const orderController = {
           userId: order.userId,
           amount: order.amount,
           expiryDate: newExpiryDate,
+          version: 0
         });
       } else {
-        storeCredit.amount += order.amount;
-        storeCredit.expiryDate = newExpiryDate;
+        storeCredit = await StoreCredit.findOneAndUpdate(
+          { userId: order.userId, version: storeCredit.version },
+          { 
+            $inc: { amount: order.amount, version: 1 },
+            $set: { expiryDate: newExpiryDate }
+          },
+          { new: true, session }
+        );
       }
-      await storeCredit.save();
+      await storeCredit.save({ session });
 
-      order.status = 'cancelled';
-      await order.save();
+      const currentOrderVersion = order.version;
+      const updatedOrder = await Order.findOneAndUpdate(
+        { _id: orderId, version: currentOrderVersion },
+        { status: 'cancelled', $inc: { version: 1 } },
+        { new: true, session }
+      );
+      if (!updatedOrder) {
+        throw new Error('Order was modified by another request. Please retry.');
+      }
+
+      await session.commitTransaction();
 
       responseHandler(res, HttpStatus.OK, 'success', 'Order cancelled and store credit issued.', { 
         orderId, 
         storeCredit 
       });
     } catch (error) {
+      await session.abortTransaction();
       console.error('Cancel order error:', error);
-      responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', error.message);
+      responseHandler(res, error.message.includes('modified') ? HttpStatus.CONFLICT : HttpStatus.INTERNAL_SERVER_ERROR, 'error', error.message);
+    } finally {
+      session.endSession();
     }
   },
 
@@ -212,6 +289,7 @@ const orderController = {
           { $group: { _id: null, total: { $sum: "$amount" } } },
         ]),
         StoreCredit.aggregate([
+          { $match: { expiryDate: { $gt: new Date() } } }, // Only active credits
           { $group: { _id: null, total: { $sum: "$amount" } } },
         ])
       ]);
@@ -241,10 +319,10 @@ const orderController = {
     try {
       const userId = req.user.id;
 
-      const storeCredit = await StoreCredit.findOne({ userId });
+      const storeCredit = await StoreCredit.findOne({ userId }).lean();
 
-      if (!storeCredit) {
-        return responseHandler(res, HttpStatus.OK, 'success', 'No store credit available.', {
+      if (!storeCredit || storeCredit.amount <= 0 || storeCredit.expiryDate < new Date()) {
+        return responseHandler(res, HttpStatus.OK, 'success', 'No active store credit available.', {
           storeCredit: { amount: 0, expiryDate: null }
         });
       }
@@ -254,7 +332,7 @@ const orderController = {
       console.error('Get store credit error:', error);
       responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, 'error', error.message);
     }
-  },
+  }
 };
 
-export default orderController;
+export default OrderController;

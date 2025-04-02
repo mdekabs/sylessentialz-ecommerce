@@ -1,0 +1,60 @@
+2025-04-02 06:23:56 AM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-04-02 06:23:56 AM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-04-02 06:23:56 AM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-04-02 06:23:56 AM INFO: ✅ Cart cleanup scheduler started (Status: N/A)
+2025-04-02 06:23:56 AM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode (Status: N/A)
+2025-04-02 06:27:27 AM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-04-02 06:27:27 AM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-04-02 06:27:27 AM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-04-02 06:27:27 AM INFO: ✅ Cart cleanup scheduler started (Status: N/A)
+2025-04-02 06:27:27 AM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode (Status: N/A)
+2025-04-02 06:29:28 AM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-04-02 06:29:28 AM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-04-02 06:29:28 AM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-04-02 06:29:29 AM INFO: ✅ Cart cleanup scheduler started (Status: N/A)
+2025-04-02 06:29:29 AM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode (Status: N/A)
+2025-04-02 06:32:28 AM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-04-02 06:32:28 AM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-04-02 06:32:28 AM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-04-02 06:32:28 AM INFO: ✅ Cart cleanup scheduler started (Status: N/A)
+2025-04-02 06:32:28 AM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode (Status: N/A)
+2025-04-02 06:37:23 AM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: N/A)
+2025-04-02 06:37:23 AM INFO: ✅ Successfully connected to MongoDB (Status: N/A)
+2025-04-02 06:37:23 AM INFO: ✅ Elasticsearch connected successfully (Status: N/A)
+2025-04-02 06:37:23 AM INFO: ✅ Cart cleanup scheduler started (Status: N/A)
+2025-04-02 06:37:23 AM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode (Status: N/A)
+2025-04-02 06:53:19 AM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: undefined)
+2025-04-02 06:53:19 AM INFO: ✅ Successfully connected to MongoDB (Status: undefined)
+2025-04-02 06:53:19 AM INFO: ✅ Elasticsearch connected successfully (Status: undefined)
+2025-04-02 06:53:19 AM INFO: ✅ Cart cleanup scheduler started (Status: undefined)
+2025-04-02 06:53:19 AM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode (Status: undefined)
+2025-04-02 07:20:06 AM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: undefined)
+2025-04-02 07:20:06 AM INFO: ✅ Successfully connected to MongoDB (Status: undefined)
+2025-04-02 07:20:06 AM INFO: ✅ Elasticsearch connected successfully (Status: undefined)
+2025-04-02 07:20:06 AM INFO: ✅ Cart cleanup scheduler started (Status: undefined)
+2025-04-02 07:20:06 AM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode (Status: undefined)
+2025-04-02 08:19:22 AM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 (Status: undefined)
+2025-04-02 08:19:22 AM INFO: ✅ Successfully connected to MongoDB (Status: undefined)
+2025-04-02 08:19:22 AM INFO: ✅ Elasticsearch connected successfully (Status: undefined)
+2025-04-02 08:19:22 AM INFO: ✅ Cart cleanup scheduler started (Status: undefined)
+2025-04-02 08:19:22 AM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode (Status: undefined)
+2025-04-02 08:23:30 AM INFO: 🔄 Connecting to MongoDB at: mongodb://localhost:27017 
+2025-04-02 08:23:30 AM INFO: ✅ Successfully connected to MongoDB 
+2025-04-02 08:23:30 AM INFO: ✅ Elasticsearch connected successfully 
+2025-04-02 08:23:30 AM INFO: ✅ Cart cleanup scheduler started 
+2025-04-02 08:23:30 AM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode 
+2025-04-02 08:32:07 AM INFO: ✅ Successfully connected to MongoDB 
+2025-04-02 08:32:07 AM INFO: ✅ Cart cleanup scheduler started 
+2025-04-02 08:32:07 AM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode 
+2025-04-02 08:34:17 AM INFO: ✅ Successfully connected to MongoDB 
+2025-04-02 08:34:17 AM INFO: ✅ Cart cleanup scheduler started 
+2025-04-02 08:34:17 AM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode 
+2025-04-02 08:36:05 AM INFO: ✅ Successfully connected to MongoDB 
+2025-04-02 08:36:05 AM INFO: ✅ Cart cleanup scheduler started 
+2025-04-02 08:36:05 AM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode 
+2025-04-02 08:45:23 AM INFO: ✅ Successfully connected to MongoDB 
+2025-04-02 08:45:23 AM INFO: ✅ Cart cleanup scheduler started 
+2025-04-02 08:45:23 AM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode 
+2025-04-02 08:52:48 AM INFO: ✅Database is ready for atomicity. 
+2025-04-02 08:52:48 AM INFO: ✅ Cart cleanup scheduler started 
+2025-04-02 08:52:48 AM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode 

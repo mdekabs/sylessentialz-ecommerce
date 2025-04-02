@@ -13,10 +13,10 @@ const customTimestamp = format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss A' });
 
 // Custom format with filtered metadata
 const prettyPrintFormat = format.printf(({ level, message, timestamp, meta }) => {
-  const statusCode = meta?.res?.statusCode || 'N/A';
+ // const statusCode = meta?.res?.statusCode;
   if (meta?.req?.headers?.authorization) delete meta.req.headers.authorization; // Mask sensitive data
   const metaString = meta ? `\n${JSON.stringify(meta, null, 2)}` : '';
-  return `${timestamp} ${level.toUpperCase()}: ${message} (Status: ${statusCode})${metaString}`;
+  return `${timestamp} ${level.toUpperCase()}: ${message} ${metaString}`;
 });
 
 export const logger = createLogger({

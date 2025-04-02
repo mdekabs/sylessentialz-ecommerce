@@ -16,11 +16,76 @@ const router = express.Router();
  * /products:
  *   get:
  *     summary: Get all products
- *     description: Retrieve a list of all products
+ *     description: Retrieve a paginated list of products with optional sorting and filtering by new or category.
  *     tags: [Products]
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Page number for pagination
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: Number of products per page
+ *       - in: query
+ *         name: new
+ *         schema:
+ *           type: boolean
+ *         description: Filter to get the newest products (limits to 5)
+ *       - in: query
+ *         name: category
+ *         schema:
+ *           type: string
+ *         description: Filter by product category
+ *       - in: query
+ *         name: sort
+ *         schema:
+ *           type: string
+ *           default: createdAt
+ *         description: Field to sort by
+ *       - in: query
+ *         name: order
+ *         schema:
+ *           type: string
+ *           enum: [asc, desc]
+ *           default: desc
+ *         description: Sort order
  *     responses:
  *       200:
  *         description: Successfully retrieved list of products
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message: 
+ *                   type: string
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     products:
+ *                       type: array
+ *                       items:
+ *                         $ref: '#/components/schemas/Product'
+ *                     pagination:
+ *                       type: object
+ *                       properties:
+ *                         page:
+ *                           type: integer
+ *                         limit:
+ *                           type: integer
+ *                         totalItems:
+ *                           type: integer
+ *                         totalPages:
+ *                           type: integer
+ *                         hasMorePages:
+ *                           type: boolean
+ *                         links:
+ *                           type: object
  *       500:
  *         description: Internal server error
  */
@@ -31,7 +96,7 @@ router.get('/', pagination, cacheMiddleware, ProductController.get_products);
  * /products/search:
  *   get:
  *     summary: Search for products
- *     description: Search for products by query
+ *     description: Search products using Elasticsearch by name, description, or category
  *     tags: [Products]
  *     parameters:
  *       - in: query
@@ -39,10 +104,41 @@ router.get('/', pagination, cacheMiddleware, ProductController.get_products);
  *         schema:
  *           type: string
  *         required: true
- *         description: The search query
+ *         description: Search query
  *     responses:
  *       200:
  *         description: Successfully retrieved search results
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     products:
+ *                       type: array
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           id:
+ *                             type: string
+ *                           name:
+ *                             type: string
+ *                           description:
+ *                             type: string
+ *                           price:
+ *                             type: number
+ *                           category:
+ *                             type: string
+ *                           image:
+ *                             type: string
+ *                           score:
+ *                             type: number
+ *       400:
+ *         description: Search query is required
  *       500:
  *         description: Internal server error
  */
@@ -61,16 +157,30 @@ router.get('/search', cacheMiddleware, ProductController.search_products);
  *         schema:
  *           type: string
  *         required: true
- *         description: The product ID
+ *         description: The product ID (MongoDB ObjectId)
  *     responses:
  *       200:
  *         description: Successfully retrieved the product
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     product:
+ *                       $ref: '#/components/schemas/Product'
+ *       400:
+ *         description: Invalid product ID format
  *       404:
  *         description: Product not found
  *       500:
  *         description: Internal server error
  */
-router.get('/:id', accessLevelVerifier, cacheMiddleware, ProductController.get_product);
+router.get('/:id', authenticationVerifier, cacheMiddleware, ProductController.get_product);
 
 /**
  * @swagger
@@ -86,30 +196,39 @@ router.get('/:id', accessLevelVerifier, cacheMiddleware, ProductController.get_p
  *           schema:
  *             type: object
  *             properties:
- *               title:
+ *               name:
  *                 type: string
  *               description:
  *                 type: string
- *               image:
- *                 type: string
- *               categories:
- *                 type: array
- *                 items:
- *                   type: string
- *               size:
- *                 type: string
- *               color:
- *                 type: string
  *               price:
  *                 type: number
+ *               category:
+ *                 type: string
+ *               image:
+ *                 type: string
+ *               stock:
+ *                 type: number
+ *                 default: 0
  *             required:
- *               - title
+ *               - name
  *               - description
- *               - image
  *               - price
+ *               - category
  *     responses:
  *       201:
  *         description: Product created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     savedProduct:
+ *                       $ref: '#/components/schemas/Product'
  *       401:
  *         description: Unauthorized - Admin access required
  *       500:
@@ -117,7 +236,7 @@ router.get('/:id', accessLevelVerifier, cacheMiddleware, ProductController.get_p
  *     security:
  *       - accessToken: []
  */
-router.post('/', isAdminVerifier, clearCache, ProductController.create_product);
+router.post('/', authenticationVerifier, isAdminVerifier, clearCache, ProductController.create_product);
 
 /**
  * @swagger
@@ -132,7 +251,7 @@ router.post('/', isAdminVerifier, clearCache, ProductController.create_product);
  *         schema:
  *           type: string
  *         required: true
- *         description: The product ID
+ *         description: The product ID (MongoDB ObjectId)
  *     requestBody:
  *       required: true
  *       content:
@@ -140,35 +259,47 @@ router.post('/', isAdminVerifier, clearCache, ProductController.create_product);
  *           schema:
  *             type: object
  *             properties:
- *               title:
+ *               name:
  *                 type: string
  *               description:
  *                 type: string
+ *               price:
+ *                 type: number
+ *               category:
+ *                 type: string
  *               image:
  *                 type: string
- *               categories:
- *                 type: array
- *                 items:
- *                   type: string
- *               size:
- *                 type: string
- *               color:
- *                 type: string
- *               price:
+ *               stock:
  *                 type: number
  *     responses:
  *       200:
  *         description: Product updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     updatedProduct:
+ *                       $ref: '#/components/schemas/Product'
+ *       400:
+ *         description: Invalid product ID format
  *       401:
  *         description: Unauthorized - Admin access required
  *       404:
  *         description: Product not found
+ *       409:
+ *         description: Concurrency conflict - Product modified by another request
  *       500:
  *         description: Internal server error
  *     security:
  *       - accessToken: []
  */
-router.put('/:id', isAdminVerifier, clearCache, ProductController.update_product);
+router.put('/:id', authenticationVerifier, isAdminVerifier, clearCache, ProductController.update_product);
 
 /**
  * @swagger
@@ -183,19 +314,54 @@ router.put('/:id', isAdminVerifier, clearCache, ProductController.update_product
  *         schema:
  *           type: string
  *         required: true
- *         description: The product ID
+ *         description: The product ID (MongoDB ObjectId)
  *     responses:
  *       200:
  *         description: Product deleted successfully
+ *       400:
+ *         description: Invalid product ID format
  *       401:
  *         description: Unauthorized - Admin access required
  *       404:
  *         description: Product not found
+ *       409:
+ *         description: Concurrency conflict - Product modified by another request
  *       500:
  *         description: Internal server error
  *     security:
  *       - accessToken: []
  */
-router.delete('/:id', isAdminVerifier, clearCache, ProductController.delete_product);
+router.delete('/:id', authenticationVerifier, isAdminVerifier, clearCache, ProductController.delete_product);
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Product:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *         name:
+ *           type: string
+ *         description:
+ *           type: string
+ *         price:
+ *           type: number
+ *         category:
+ *           type: string
+ *         image:
+ *           type: string
+ *         stock:
+ *           type: number
+ *         version:
+ *           type: number
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ */
 
 export default router;

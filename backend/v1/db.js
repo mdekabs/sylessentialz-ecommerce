@@ -6,16 +6,11 @@ import { AuthController } from "./controllers/index.js";
 
 dotenv.config();
 
-if (!process.env.DB_URI) {
-    console.error("❌ DB_URI is not defined in environment variables");
-    process.exit(1);
-}
 
 async function connectToDatabase() {
     try {
-        logger.info(`🔄 Connecting to MongoDB at: ${process.env.DB_URI}`);
         await mongoose.connect(process.env.DB_URI, { serverSelectionTimeoutMS: 5000 });
-        logger.info("✅ Successfully connected to MongoDB");
+        logger.info("✅Database is ready for atomicity.");
 
         // Ensure the admin user exists
         await AuthController.create_admin_user();

@@ -12,7 +12,7 @@ const esClient = new Client({
 async function checkElasticsearch() {
     try {
         const health = await esClient.cluster.health();
-        console.log(`✅ Elasticsearch Connected: ${health.status}`);
+        console.log(`✅ Elasticsearch is ready for semantic search..: ${health.status}`);
     } catch (error) {
         console.error("❌ Elasticsearch Connection Failed:", error.message);
     }

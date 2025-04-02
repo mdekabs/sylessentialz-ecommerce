@@ -3,6 +3,7 @@ import { User } from "../models/index.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import crypto from "crypto";
+import { v4 as uuidv4 } from 'uuid';
 import { responseHandler, emailQueue, generatePasswordResetEmail } from "../utils/index.js";
 import { updateBlacklist } from "../middlewares/index.js";
 
@@ -12,6 +13,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRATION = "1d";
 const PASSWORD_RESET_EXPIRATION = 3600000; // 1 hour
 const TOKEN_BYTES = 32;
+const GUEST_TOKEN_EXPIRATION = '1h';
 
 const AuthController = {
   create_admin_user: async () => {
@@ -27,9 +29,9 @@ const AuthController = {
       }
 
       const newAdmin = new User({
-        username: adminUsername, // Pre-save will lowercase
+        username: adminUsername,
         email: adminEmail,
-        password: adminPassword, // Pre-save will hash
+        password: adminPassword,
         isAdmin: true,
       });
 
@@ -52,7 +54,7 @@ const AuthController = {
         return responseHandler(res, HttpStatus.CONFLICT, "error", "Email is already in use.");
       }
 
-      const newUser = new User({ username, email, password }); // Pre-save handles hashing and lowercasing
+      const newUser = new User({ username, email, password });
       const user = await newUser.save();
 
       responseHandler(res, HttpStatus.CREATED, "success", "User has been created successfully", { user });
@@ -68,7 +70,7 @@ const AuthController = {
         return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Username and password are required.");
       }
 
-      const user = await User.findOne({ username }); // Model lowercases username
+      const user = await User.findOne({ username });
       if (!user) {
         return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", "Invalid username or password.");
       }
@@ -80,7 +82,6 @@ const AuthController = {
       const isPasswordValid = await user.comparePassword(password);
       if (!isPasswordValid) {
         await user.incrementLoginAttempts();
-        // Simplified error message; lockout message handled by canLogin check
         return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", "Incorrect password.");
       }
 
@@ -97,7 +98,7 @@ const AuthController = {
 
   logout_user: async (req, res) => {
     try {
-      const token = req.header("Authorization").replace("Bearer ", "");
+      const token = req.header("Authorization");
       await updateBlacklist(token);
       responseHandler(res, HttpStatus.OK, "success", "Successfully logged out.");
     } catch (err) {
@@ -133,7 +134,7 @@ const AuthController = {
         return responseHandler(res, HttpStatus.BAD_REQUEST, "error", "Invalid or expired token.");
       }
 
-      user.password = newPassword; // Pre-save will hash
+      user.password = newPassword;
       user.resetPasswordToken = undefined;
       user.resetPasswordExpires = undefined;
       await user.save();
@@ -143,6 +144,21 @@ const AuthController = {
       responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Password reset failed: " + err.message);
     }
   },
+
+  generateGuestId: async (req, res) => {
+    try {
+      const guestId = uuidv4();
+      const token = jwt.sign({ guestId, isGuest: true }, JWT_SECRET, { expiresIn: GUEST_TOKEN_EXPIRATION });
+
+      responseHandler(res, HttpStatus.OK, "success", "Guest ID and token generated successfully", {
+        guestId,
+        token
+      });
+    } catch (err) {
+      console.error('Guest ID generation error:', err);
+      responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Failed to generate guest ID", { error: err.message });
+    }
+  }
 };
 
 export default AuthController;

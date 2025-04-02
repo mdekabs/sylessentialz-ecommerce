@@ -1,7 +1,6 @@
 import express from 'express';
 import { CartController } from '../controllers/index.js';
-import { authenticationVerifier, accessLevelVerifier, isAdminVerifier, cacheMiddleware, pagination, clearCache } from '../middlewares/index.js';
-
+import { authenticationVerifier, accessLevelVerifier, isAdminVerifier, optionalVerifier, cacheMiddleware, pagination, clearCache } from '../middlewares/index.js';
 
 const router = express.Router();
 
@@ -19,6 +18,32 @@ const router = express.Router();
  *     summary: Get all carts
  *     description: Retrieve all carts (admin only)
  *     tags: [Carts]
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: Items per page
+ *       - in: query
+ *         name: sort
+ *         schema:
+ *           type: string
+ *           default: createdAt
+ *         description: Field to sort by
+ *       - in: query
+ *         name: order
+ *         schema:
+ *           type: string
+ *           enum: [asc, desc]
+ *           default: asc
+ *         description: Sort order
  *     responses:
  *       200:
  *         description: Carts retrieved successfully
@@ -35,12 +60,53 @@ router.get('/', isAdminVerifier, pagination, cacheMiddleware, CartController.get
  * @swagger
  * /carts/my-cart:
  *   get:
- *     summary: Get current user's cart
- *     description: Retrieve the cart of the currently authenticated user
+ *     summary: Get current user's or guest's cart
+ *     description: Retrieve the cart of the authenticated user or guest (via token or guestId)
  *     tags: [Carts]
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               guestId:
+ *                 type: string
+ *                 description: Guest ID (optional if token provided)
  *     responses:
  *       200:
  *         description: Cart retrieved successfully
+ *       400:
+ *         description: Bad request - No identifier provided
+ *       401:
+ *         description: Unauthorized - Invalid token (if provided)
+ *       404:
+ *         description: Cart not found or expired
+ *       500:
+ *         description: Internal server error
+ *     security:
+ *       - bearerAuth: []
+ */
+router.get('/my-cart', optionalVerifier, cacheMiddleware, CartController.get_cart);
+
+/**
+ * @swagger
+ * /carts/{id}:
+ *   get:
+ *     summary: Get cart by ID
+ *     description: Retrieve a specific cart by its ID (authenticated users only)
+ *     tags: [Carts]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The cart ID
+ *     responses:
+ *       200:
+ *         description: Cart retrieved successfully
+ *       400:
+ *         description: Bad request - Invalid cart ID
  *       401:
  *         description: Unauthorized - Authentication required
  *       404:
@@ -50,7 +116,7 @@ router.get('/', isAdminVerifier, pagination, cacheMiddleware, CartController.get
  *     security:
  *       - bearerAuth: []
  */
-router.get('/my-cart', authenticationVerifier, cacheMiddleware, CartController.get_cart);
+router.get('/:id', authenticationVerifier, cacheMiddleware, CartController.get_cart_by_id);
 
 /**
  * @swagger
@@ -133,6 +199,8 @@ router.post('/', authenticationVerifier, clearCache, CartController.create_cart)
  *         description: Forbidden - Not authorized to update this cart
  *       404:
  *         description: Cart not found
+ *       409:
+ *         description: Conflict - Concurrency issue
  *       500:
  *         description: Internal server error
  *     security:
@@ -145,7 +213,7 @@ router.put('/:id', accessLevelVerifier, clearCache, CartController.update_cart);
  * /carts/add:
  *   post:
  *     summary: Add item to cart
- *     description: Add a product to the authenticated user's cart
+ *     description: Add a product to the authenticated user's or guest's cart
  *     tags: [Carts]
  *     requestBody:
  *       required: true
@@ -159,26 +227,31 @@ router.put('/:id', accessLevelVerifier, clearCache, CartController.update_cart);
  *               quantity:
  *                 type: number
  *                 default: 1
+ *               guestId:
+ *                 type: string
+ *                 description: Guest ID (optional if token provided)
  *     responses:
  *       200:
  *         description: Item added to cart successfully
  *       400:
- *         description: Bad request - Invalid productId or quantity
+ *         description: Bad request - Invalid productId, quantity, or no identifier
  *       401:
- *         description: Unauthorized - Authentication required
+ *         description: Unauthorized - Invalid token (if provided)
+ *       409:
+ *         description: Conflict - Concurrency issue
  *       500:
  *         description: Internal server error
  *     security:
  *       - bearerAuth: []
  */
-router.post('/add', authenticationVerifier, clearCache, CartController.add_to_cart);
+router.post('/add', optionalVerifier, clearCache, CartController.add_to_cart);
 
 /**
  * @swagger
  * /carts/remove:
  *   post:
  *     summary: Remove item from cart
- *     description: Remove a product from the authenticated user's cart
+ *     description: Remove a product from the authenticated user's or guest's cart
  *     tags: [Carts]
  *     requestBody:
  *       required: true
@@ -189,43 +262,59 @@ router.post('/add', authenticationVerifier, clearCache, CartController.add_to_ca
  *             properties:
  *               productId:
  *                 type: string
+ *               guestId:
+ *                 type: string
+ *                 description: Guest ID (optional if token provided)
  *     responses:
  *       200:
  *         description: Item removed from cart successfully
  *       400:
- *         description: Bad request - Invalid productId
+ *         description: Bad request - Invalid productId or no identifier
  *       401:
- *         description: Unauthorized - Authentication required
+ *         description: Unauthorized - Invalid token (if provided)
  *       404:
  *         description: Product or cart not found
+ *       409:
+ *         description: Conflict - Concurrency issue
  *       500:
  *         description: Internal server error
  *     security:
  *       - bearerAuth: []
  */
-router.post('/remove', authenticationVerifier, clearCache, CartController.remove_from_cart);
+router.post('/remove', optionalVerifier, clearCache, CartController.remove_from_cart);
 
 /**
  * @swagger
  * /carts/clear:
  *   post:
  *     summary: Clear cart
- *     description: Remove all items from the authenticated user's cart
+ *     description: Remove all items from the authenticated user's or guest's cart
  *     tags: [Carts]
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               guestId:
+ *                 type: string
+ *                 description: Guest ID (optional if token provided)
  *     responses:
  *       200:
  *         description: Cart cleared successfully
+ *       400:
+ *         description: Bad request - No identifier provided
  *       401:
- *         description: Unauthorized - Authentication required
+ *         description: Unauthorized - Invalid token (if provided)
  *       404:
  *         description: Cart not found
+ *       409:
+ *         description: Conflict - Concurrency issue
  *       500:
  *         description: Internal server error
  *     security:
  *       - bearerAuth: []
  */
-router.post('/clear', authenticationVerifier, clearCache, CartController.clear_cart);
-
-router.get('/:id', authenticationVerifier, cacheMiddleware, CartController.get_cart_by_id);
+router.post('/clear', optionalVerifier, clearCache, CartController.clear_cart);
 
 export default router;

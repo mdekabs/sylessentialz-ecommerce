@@ -1,8 +1,8 @@
 import HttpStatus from "http-status-codes";
 import mongoose from "mongoose";
-import { Product } from "../models/index.js";
+import { Product } from "../models/index.js"; // Assumes this imports the updated Product model
 import { responseHandler } from "../utils/index.js";
-import { esClient } from "../elasticsearch.js"; // Import Elasticsearch client
+import { esClient } from "../elasticsearch.js";
 
 // Constants
 const DEFAULT_SORT_FIELD = "createdAt";
@@ -19,6 +19,7 @@ const PRODUCT_DELETED = "Product has been deleted successfully";
 const PRODUCT_CREATED = "Product created successfully";
 const PRODUCT_UPDATED = "Product updated successfully";
 const SEARCH_QUERY_REQUIRED = "Search query is required";
+const CONCURRENCY_CONFLICT = "Product was modified by another request. Please retry.";
 
 const ProductController = {
     /* Get all products with pagination */
@@ -37,7 +38,7 @@ const ProductController = {
                 sort = { createdAt: SORT_DESC };
                 limitOverride = NEW_PRODUCTS_LIMIT;
             } else if (qCategory) {
-                query = { categories: { $in: [qCategory] } };
+                query = { category: qCategory }; // Adjusted to match single category field
             }
 
             if (!qNew) {
@@ -48,7 +49,11 @@ const ProductController = {
 
             const [totalItems, products] = await Promise.all([
                 Product.countDocuments(query),
-                Product.find(query).sort(sort).skip(qNew ? 0 : skip).limit(qNew ? limitOverride : limit),
+                Product.find(query)
+                    .sort(sort)
+                    .skip(qNew ? 0 : skip)
+                    .limit(qNew ? limitOverride : limit)
+                    .lean()
             ]);
 
             res.locals.setPagination(totalItems);
@@ -65,7 +70,8 @@ const ProductController = {
                 },
             });
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGE_TYPE, ERROR_MESSAGE, { err });
+            console.error("Get products error:", err);
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGE_TYPE, ERROR_MESSAGE, { error: err.message });
         }
     },
 
@@ -84,8 +90,8 @@ const ProductController = {
                     query: {
                         multi_match: {
                             query: query,
-                            fields: ["name", "description", "category", "title"],
-                          //  fuzziness: "AUTO",
+                            fields: ["name", "description", "category"],
+                            fuzziness: "AUTO",
                         },
                     },
                 },
@@ -100,7 +106,7 @@ const ProductController = {
             return responseHandler(res, HttpStatus.OK, SUCCESS_MESSAGE, "", { products });
         } catch (err) {
             console.error("Elasticsearch search error:", err);
-            return responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGE_TYPE, ERROR_MESSAGE, { err });
+            return responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGE_TYPE, ERROR_MESSAGE, { error: err.message });
         }
     },
 
@@ -113,81 +119,157 @@ const ProductController = {
         }
 
         try {
-            const product = await Product.findById(id);
+            const product = await Product.findById(id).lean();
             if (!product) {
                 return responseHandler(res, HttpStatus.NOT_FOUND, ERROR_MESSAGE_TYPE, PRODUCT_NOT_FOUND);
             }
             responseHandler(res, HttpStatus.OK, SUCCESS_MESSAGE, "", { product });
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGE_TYPE, ERROR_MESSAGE, { err });
+            console.error("Get product error:", err);
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGE_TYPE, ERROR_MESSAGE, { error: err.message });
         }
     },
 
     /* Create a new product */
     create_product: async (req, res) => {
-        const newProduct = new Product(req.body);
+        const session = await mongoose.startSession();
+        session.startTransaction();
         try {
-            const savedProduct = await newProduct.save();
+            const newProduct = new Product({
+                ...req.body,
+                stock: req.body.stock || 0, // Ensure stock is defined
+                version: 0 // Initialize version for optimistic locking
+            });
+
+            const savedProduct = await newProduct.save({ session });
+
+            // Manually index in Elasticsearch since indexAutomatically is false
+            await esClient.index({
+                index: DEFAULT_INDEX,
+                id: savedProduct._id.toString(),
+                body: {
+                    name: savedProduct.name,
+                    description: savedProduct.description,
+                    price: savedProduct.price,
+                    category: savedProduct.category,
+                    image: savedProduct.image
+                },
+            });
+
+            await session.commitTransaction();
 
             responseHandler(res, HttpStatus.CREATED, SUCCESS_MESSAGE, PRODUCT_CREATED, { savedProduct });
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGE_TYPE, ERROR_MESSAGE, { err });
+            await session.abortTransaction();
+            console.error("Create product error:", err);
+            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGE_TYPE, ERROR_MESSAGE, { error: err.message });
+        } finally {
+            session.endSession();
         }
     },
 
     /* Update a product */
     update_product: async (req, res) => {
-        const { id } = req.params;
-
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return responseHandler(res, HttpStatus.BAD_REQUEST, ERROR_MESSAGE_TYPE, INVALID_PRODUCT_ID);
-        }
-
+        const session = await mongoose.startSession();
+        session.startTransaction();
         try {
-            const updatedProduct = await Product.findByIdAndUpdate(id, { $set: req.body }, { new: true });
+            const { id } = req.params;
 
-            if (!updatedProduct) {
+            if (!mongoose.Types.ObjectId.isValid(id)) {
+                return responseHandler(res, HttpStatus.BAD_REQUEST, ERROR_MESSAGE_TYPE, INVALID_PRODUCT_ID);
+            }
+
+            const product = await Product.findById(id).session(session);
+            if (!product) {
                 return responseHandler(res, HttpStatus.NOT_FOUND, ERROR_MESSAGE_TYPE, PRODUCT_NOT_FOUND);
             }
 
-            // Update Elasticsearch index
+            const currentVersion = product.version || 0; // Fallback to 0 if version isn’t present
+            const updatedProduct = await Product.findOneAndUpdate(
+                { _id: id, version: currentVersion },
+                { $set: { ...req.body, version: currentVersion + 1 } },
+                { new: true, runValidators: true, session }
+            );
+
+            if (!updatedProduct) {
+                throw new Error(CONCURRENCY_CONFLICT);
+            }
+
+            // Manually update Elasticsearch
             await esClient.update({
                 index: DEFAULT_INDEX,
                 id: id,
                 body: {
-                    doc: req.body,
+                    doc: {
+                        name: updatedProduct.name,
+                        description: updatedProduct.description,
+                        price: updatedProduct.price,
+                        category: updatedProduct.category,
+                        image: updatedProduct.image
+                    },
                 },
             });
 
+            await session.commitTransaction();
+
             responseHandler(res, HttpStatus.OK, SUCCESS_MESSAGE, PRODUCT_UPDATED, { updatedProduct });
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGE_TYPE, ERROR_MESSAGE, { err });
+            await session.abortTransaction();
+            console.error("Update product error:", err);
+            responseHandler(res, 
+                err.message === CONCURRENCY_CONFLICT ? HttpStatus.CONFLICT : HttpStatus.INTERNAL_SERVER_ERROR, 
+                ERROR_MESSAGE_TYPE, 
+                err.message
+            );
+        } finally {
+            session.endSession();
         }
     },
 
     /* Delete a product */
     delete_product: async (req, res) => {
-        const { id } = req.params;
-
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return responseHandler(res, HttpStatus.BAD_REQUEST, ERROR_MESSAGE_TYPE, INVALID_PRODUCT_ID);
-        }
-
+        const session = await mongoose.startSession();
+        session.startTransaction();
         try {
-            const deletedProduct = await Product.findByIdAndDelete(id);
-            if (!deletedProduct) {
+            const { id } = req.params;
+
+            if (!mongoose.Types.ObjectId.isValid(id)) {
+                return responseHandler(res, HttpStatus.BAD_REQUEST, ERROR_MESSAGE_TYPE, INVALID_PRODUCT_ID);
+            }
+
+            const product = await Product.findById(id).session(session);
+            if (!product) {
                 return responseHandler(res, HttpStatus.NOT_FOUND, ERROR_MESSAGE_TYPE, PRODUCT_NOT_FOUND);
             }
 
-            // Remove from Elasticsearch index
+            const currentVersion = product.version || 0; // Fallback to 0 if version isn’t present
+            const deletedProduct = await Product.findOneAndDelete(
+                { _id: id, version: currentVersion },
+                { session }
+            );
+            if (!deletedProduct) {
+                throw new Error(CONCURRENCY_CONFLICT);
+            }
+
+            // Manually remove from Elasticsearch
             await esClient.delete({
                 index: DEFAULT_INDEX,
                 id: id,
             });
 
+            await session.commitTransaction();
+
             responseHandler(res, HttpStatus.OK, SUCCESS_MESSAGE, PRODUCT_DELETED);
         } catch (err) {
-            responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGE_TYPE, ERROR_MESSAGE, { err });
+            await session.abortTransaction();
+            console.error("Delete product error:", err);
+            responseHandler(res, 
+                err.message === CONCURRENCY_CONFLICT ? HttpStatus.CONFLICT : HttpStatus.INTERNAL_SERVER_ERROR, 
+                ERROR_MESSAGE_TYPE, 
+                err.message
+            );
+        } finally {
+            session.endSession();
         }
     },
 };

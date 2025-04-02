@@ -15,9 +15,10 @@ import {
     cartRoute, 
     orderRoute 
 } from "./routes/index.js";
-import { responseHandler } from "./utils/index.js";
+import { responseHandler, cleanupExpiredCarts } from "./utils/index.js";
 import { appLogger, errorLogger, logger } from "./middlewares/index.js";
 import { swaggerOptions } from "./swaggerConfig.js";
+
 
 dotenv.config();
 
@@ -81,7 +82,6 @@ async function startServer() {
         
         // 2️⃣ Check Elasticsearch connection
         await esClient.ping();
-        logger.info("✅ Elasticsearch connected successfully");
         
         // 3️⃣ Sync products with retry logic
         const maxRetries = 3;
@@ -101,7 +101,11 @@ async function startServer() {
             }
         }
         
-        // 4️⃣ Start the server
+        // 4️⃣ Start the cart cleanup task
+        cleanupExpiredCarts();
+        logger.info("✅ Cart cleanup scheduler started");
+
+        // 5️⃣ Start the server
         const server = app.listen(PORT, () => {
             logger.info(`🚀 Sylessentials ecommerce Server is running on port ${PORT} in ${process.env.NODE_ENV || "development"} mode`);
         });
