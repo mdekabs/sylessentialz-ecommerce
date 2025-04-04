@@ -61,3 +61,597 @@
 2025-04-02 15:57:06 PM INFO: ✅Database is ready for atomicity. 
 2025-04-02 15:57:08 PM INFO: ✅ Cart cleanup scheduler started 
 2025-04-02 15:57:08 PM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode 
+2025-04-02 17:47:30 PM INFO: ✅Database is ready for atomicity. 
+2025-04-02 17:47:30 PM INFO: ✅ Cart cleanup scheduler started 
+2025-04-02 17:47:30 PM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode 
+2025-04-02 17:50:40 PM INFO: ✅Database is ready for atomicity. 
+2025-04-02 17:50:40 PM INFO: ✅ Cart cleanup scheduler started 
+2025-04-02 17:50:40 PM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode 
+2025-04-02 17:55:52 PM INFO: GET /api-docs 301 11ms 
+{
+  "req": {
+    "url": "/api-docs",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Brave\";v=\"134\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-US,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 301
+  },
+  "responseTime": 11
+}
+2025-04-02 17:55:52 PM INFO: GET /api-docs/ 200 15ms 
+{
+  "req": {
+    "url": "/api-docs/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-US,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "sec-ch-ua": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Brave\";v=\"134\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 15
+}
+2025-04-02 17:55:52 PM INFO: GET /api-docs/swagger-ui.css 200 27ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui.css",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Brave\";v=\"134\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "text/css,*/*;q=0.1",
+      "sec-gpc": "1",
+      "accept-language": "en-US,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "style",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui.css",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 27
+}
+2025-04-02 17:55:52 PM INFO: GET /api-docs/swagger-ui-init.js 200 0ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-init.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Brave\";v=\"134\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-US,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-init.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 0
+}
+2025-04-02 17:55:52 PM INFO: GET /api-docs/swagger-ui-standalone-preset.js 200 54ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-standalone-preset.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Brave\";v=\"134\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-US,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-standalone-preset.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 54
+}
+2025-04-02 17:55:53 PM INFO: GET /api-docs/swagger-ui-bundle.js 200 146ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-bundle.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Brave\";v=\"134\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-US,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-bundle.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 146
+}
+2025-04-02 17:55:53 PM INFO: GET /api-docs/favicon-32x32.png 200 4ms 
+{
+  "req": {
+    "url": "/api-docs/favicon-32x32.png",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Brave\";v=\"134\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-US,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "image",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/favicon-32x32.png",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 4
+}
+2025-04-02 18:28:12 PM INFO: ✅Database is ready for atomicity. 
+2025-04-02 18:28:12 PM INFO: ✅ Cart cleanup scheduler started 
+2025-04-02 18:28:12 PM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode 
+2025-04-02 18:28:34 PM INFO: GET /api-docs/ 304 10ms 
+{
+  "req": {
+    "url": "/api-docs/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "cache-control": "max-age=0",
+      "sec-ch-ua": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Brave\";v=\"134\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-US,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"c22-H8FH9nKD8DeX/nvIRrte6ZjP2a4\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 10
+}
+2025-04-02 18:28:34 PM INFO: GET /api-docs/swagger-ui.css 304 3ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui.css",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Brave\";v=\"134\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "text/css,*/*;q=0.1",
+      "sec-gpc": "1",
+      "accept-language": "en-US,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "style",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"25d69-19594a28c8d\"",
+      "if-modified-since": "Fri, 14 Mar 2025 12:30:35 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui.css",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 3
+}
+2025-04-02 18:28:34 PM INFO: GET /api-docs/swagger-ui-bundle.js 304 0ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-bundle.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Brave\";v=\"134\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-US,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"165fd4-19594a28ee5\"",
+      "if-modified-since": "Fri, 14 Mar 2025 12:30:36 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-bundle.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 0
+}
+2025-04-02 18:28:34 PM INFO: GET /api-docs/swagger-ui-standalone-preset.js 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-standalone-preset.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Brave\";v=\"134\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-US,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"37f67-19594a29043\"",
+      "if-modified-since": "Fri, 14 Mar 2025 12:30:36 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-standalone-preset.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-04-02 18:28:34 PM INFO: GET /api-docs/swagger-ui-init.js 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-init.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Brave\";v=\"134\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-US,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"ddc5-b6Pxdksf6mw4nSTc0ocFhphq+uc\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-init.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-04-02 18:28:35 PM INFO: GET /api-docs/favicon-32x32.png 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/favicon-32x32.png",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Brave\";v=\"134\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-US,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "image",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"274-19594a29561\"",
+      "if-modified-since": "Fri, 14 Mar 2025 12:30:37 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/favicon-32x32.png",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-04-02 18:30:45 PM INFO: ✅Database is ready for atomicity. 
+2025-04-02 18:30:46 PM INFO: ✅ Cart cleanup scheduler started 
+2025-04-02 18:30:46 PM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode 
+2025-04-02 18:33:44 PM INFO: POST /api/v1/auth/register 201 213ms 
+{
+  "req": {
+    "url": "/api/v1/auth/register",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.3",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "6cd45f3f-818e-4b1f-a296-bd599d5513a0",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "91"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/auth/register",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 201
+  },
+  "responseTime": 213
+}
+2025-04-02 18:38:27 PM WARN: POST /api/v1/auth/login 401 246ms 
+{
+  "req": {
+    "url": "/api/v1/auth/login",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.3",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "3cc12143-e77e-41be-8a04-d816438ec23d",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "59"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/auth/login",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 401
+  },
+  "responseTime": 246
+}
+2025-04-02 18:39:17 PM INFO: ✅Database is ready for atomicity. 
+2025-04-02 18:39:17 PM INFO: ✅ Cart cleanup scheduler started 
+2025-04-02 18:39:17 PM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode 
+2025-04-02 18:39:28 PM INFO: POST /api/v1/auth/login 200 235ms 
+{
+  "req": {
+    "url": "/api/v1/auth/login",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.3",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "8908406b-5926-4510-86b6-c881c96b9843",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "60"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/auth/login",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 235
+}
+2025-04-02 18:42:55 PM INFO: GET /api/v1/products 200 20ms 
+{
+  "req": {
+    "url": "/api/v1/products",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.3",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "d7051589-f2b8-4fdc-a8c5-1003b4a5a486",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "60"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/products",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 20
+}
+2025-04-02 18:51:26 PM INFO: GET /api/v1/products 200 23ms 
+{
+  "req": {
+    "url": "/api/v1/products",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.3",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "d6c8be8e-506e-4431-995f-f04f49576d3d",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "60"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/products",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 23
+}
+2025-04-02 18:51:38 PM INFO: GET /api/v1/products 200 3ms 
+{
+  "req": {
+    "url": "/api/v1/products",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.3",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "b8cf86e5-f4ca-46d7-ad24-671b61ff66b8",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "60"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/products",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 3
+}
+2025-04-02 18:55:04 PM ERROR: POST /api/v1/products 500 84ms 
+{
+  "req": {
+    "url": "/api/v1/products",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.3",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "7ba81856-22a2-4324-a6b0-fefe64caa8b4",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "287"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/products",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 500
+  },
+  "responseTime": 84
+}

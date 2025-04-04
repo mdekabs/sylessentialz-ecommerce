@@ -1,60 +1,274 @@
-import mongoose from "mongoose";
+import express from "express";
+import { OrderController } from "../controllers/index.js"; // Path to OrderController
+import { 
+  authenticationVerifier, 
+  accessLevelVerifier, 
+  isAdminVerifier, 
+  optionalVerifier, 
+  cacheMiddleware, 
+  pagination, 
+  clearCache 
+} from "../middlewares/index.js"; // Updated middleware imports
 
-const OrderSchema = new mongoose.Schema({
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true
-    },
-    products: [
-        {
-            productId: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Product",
-                required: true
-            },
-            quantity: {
-                type: Number,
-                default: 1,
-                min: 1
-            }
-        }
-    ],
-    amount: {
-        type: Number,
-        required: true,
-        min: 0
-    },
-    address: {
-        type: Object,
-        required: true
-    },
-    status: {
-        type: String,
-        enum: ["pending", "processing", "shipped", "delivered", "cancelled"],
-        default: "pending"
-    },
-    version: {
-        type: Number,
-        default: 0
-    }
-}, { timestamps: true });
+const router = express.Router();
 
-// Ensure indexes are only defined once
-const existingIndexes = OrderSchema.indexes();
-if (!existingIndexes.some(index => JSON.stringify(index[0]) === JSON.stringify({ userId: 1 }))) {
-    OrderSchema.index({ userId: 1 });
-}
+/**
+ * @swagger
+ * /api/v1/orders:
+ *   post:
+ *     summary: Create a new order
+ *     tags: [Orders]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               address:
+ *                 type: string
+ *                 description: Shipping address for the order
+ *                 example: "123 Main St, City, Country"
+ *     responses:
+ *       201:
+ *         description: Order created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 type: { type: string, example: "success" }
+ *                 message: { type: string, example: "Order placed successfully" }
+ *                 data: { type: object }
+ *       400:
+ *         description: Bad request (e.g., missing address or empty cart)
+ *       401:
+ *         description: Unauthorized
+ */
+router.post(
+  "/",
+  authenticationVerifier,                // Verify user authentication via token
+  clearCache,                  // Clear cache for orders after creation
+  OrderController.create_order // Handle order creation
+);
 
-// Virtual field for total items
-OrderSchema.virtual('totalItems').get(function () {
-    return this.products.reduce((total, item) => total + item.quantity, 0);
-});
+/**
+ * @swagger
+ * /api/v1/orders:
+ *   get:
+ *     summary: Retrieve all orders (Admin only)
+ *     tags: [Orders]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema: { type: integer, default: 1 }
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         schema: { type: integer, default: 10 }
+ *         description: Number of orders per page
+ *     responses:
+ *       200:
+ *         description: Orders retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 type: { type: string, example: "success" }
+ *                 message: { type: string, example: "Orders retrieved successfully" }
+ *                 data: { type: object, properties: { orders: { type: array }, pagination: { type: object } } }
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden (non-admin)
+ */
+router.get(
+  "/",
+  authenticationVerifier,                // Verify user authentication
+  isAdminVerifier,                       // Restrict to admin users
+  pagination,                            // Apply pagination middleware
+  cacheMiddleware,    // Cache results for 5 minutes
+  OrderController.get_all_orders // Handle retrieving all orders
+);
 
-OrderSchema.set('toJSON', { virtuals: true });
-OrderSchema.set('toObject', { virtuals: true });
+/**
+ * @swagger
+ * /api/v1/orders/user:
+ *   get:
+ *     summary: Retrieve orders for the authenticated user
+ *     tags: [Orders]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema: { type: integer, default: 1 }
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         schema: { type: integer, default: 10 }
+ *         description: Number of orders per page
+ *     responses:
+ *       200:
+ *         description: User orders retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 type: { type: string, example: "success" }
+ *                 message: { type: string, example: "Orders retrieved successfully" }
+ *                 data: { type: object, properties: { orders: { type: array }, pagination: { type: object } } }
+ *       401:
+ *         description: Unauthorized
+ */
+router.get(
+  "/user",
+  authenticationVerifier,                // Verify user authentication
+  pagination,                            // Apply pagination middleware
+  cacheMiddleware,   // Cache user-specific orders for 5 minutes
+  OrderController.get_user_orders// Handle retrieving user orders
+);
 
-// Prevent OverwriteModelError
-const Order = mongoose.models.Order || mongoose.model("Order", OrderSchema);
+/**
+ * @swagger
+ * /api/v1/orders/{orderId}/status:
+ *   put:
+ *     summary: Update an order's status (Admin only)
+ *     tags: [Orders]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: orderId
+ *         required: true
+ *         schema: { type: string }
+ *         description: The ID of the order
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               status:
+ *                 type: string
+ *                 enum: [pending, processing, shipped, delivered, cancelled]
+ *                 description: New status for the order
+ *     responses:
+ *       200:
+ *         description: Order status updated successfully
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden (non-admin)
+ *       404:
+ *         description: Order not found
+ */
+router.put(
+  "/:orderId/status",
+  authenticationVerifier,                // Verify user authentication
+  isAdminVerifier,                       // Restrict to admin users
+  clearCache,                  // Clear cache after status update
+  OrderController.update_order_status // Handle status update
+);
 
-export default Order;
+/**
+ * @swagger
+ * /api/v1/orders/{orderId}/cancel:
+ *   put:
+ *     summary: Cancel an order and issue store credit (Admin only)
+ *     tags: [Orders]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: orderId
+ *         required: true
+ *         schema: { type: string }
+ *         description: The ID of the order
+ *     responses:
+ *       200:
+ *         description: Order cancelled and store credit issued
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden (non-admin)
+ *       404:
+ *         description: Order not found
+ */
+router.put(
+  "/:orderId/cancel",
+  authenticationVerifier,                // Verify user authentication
+  isAdminVerifier,                       // Restrict to admin users
+  clearCache,                  // Clear cache after cancellation
+  OrderController.cancelOrderAndIssueStoreCredit // Handle cancellation and credit issuance
+);
+
+/**
+ * @swagger
+ * /api/v1/orders/income:
+ *   get:
+ *     summary: Calculate total income from orders (Admin only)
+ *     tags: [Orders]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Total income calculated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 type: { type: string, example: "success" }
+ *                 message: { type: string, example: "Total income calculated successfully" }
+ *                 data: { type: object, properties: { totalIncome: { type: number }, breakdown: { type: object } } }
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden (non-admin)
+ */
+router.get(
+  "/income",
+  authenticationVerifier,                // Verify user authentication
+  isAdminVerifier,                       // Restrict to admin users
+  cacheMiddleware,  // Cache income data for 10 minutes
+  OrderController.get_income // Handle income calculation
+);
+
+/**
+ * @swagger
+ * /api/v1/orders/store-credit:
+ *   get:
+ *     summary: Retrieve user's store credit
+ *     tags: [Orders]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Store credit retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 type: { type: string, example: "success" }
+ *                 message: { type: string, example: "Store credit retrieved successfully" }
+ *                 data: { type: object, properties: { storeCredit: { type: object } } }
+ *       401:
+ *         description: Unauthorized
+ */
+router.get(
+  "/store-credit",
+  authenticationVerifier,                // Verify user authentication
+  cacheMiddleware,  // Cache store credit for 5 minutes
+  OrderController.get_store_credit // Handle store credit retrieval
+);
+
+export default router;

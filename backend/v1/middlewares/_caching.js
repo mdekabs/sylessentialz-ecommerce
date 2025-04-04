@@ -38,7 +38,7 @@ export const cacheMiddleware = async (req, res, next) => {
       if (res.statusCode >= 200 && res.statusCode < 300) {
         redisClient.set(key, JSON.stringify(body), "EX", TTL);
       }
-      originalJson(body);
+      return originalJson(body); // Ensure response is sent
     };
 
     next();
@@ -50,7 +50,7 @@ export const cacheMiddleware = async (req, res, next) => {
 
 /**
  * Middleware to clear Redis cache for a specific key derived from the request.
- * Continues request flow even if cache clearing fails.
+ * Clears related cache keys as well.
  * @param {Object} req - Express request object
  * @param {Object} res - Express response object
  * @param {Function} next - Express next middleware function
@@ -60,19 +60,27 @@ export const clearCache = async (req, res, next) => {
   try {
     // Derive cache key from request URL, falling back to path if needed
     const key = req.originalUrl || req.path;
+    console.log(`Attempting to clear cache for key: ${key}`);
 
-    // Validate the derived key
     if (!key || typeof key !== "string") {
       console.error(`Invalid cache key derived from request: ${key}`);
       return next(); // Skip cache clearing and proceed
     }
 
-    // Attempt to clear the cache for the specified key
+    // Clear exact key
     await redisClient.del(key);
-    console.log(`Cache cleared for key: ${key}`);
+
+    // Clear all variations of the key
+    const wildcardKey = key.includes("/") ? key.split("/")[1] : key;
+    const keysToDelete = await redisClient.keys(`*${wildcardKey}*`);
+    
+    if (keysToDelete.length) {
+      await redisClient.del(...keysToDelete);
+      console.log(`Cleared related cache keys: ${keysToDelete}`);
+    }
+
   } catch (error) {
     console.error(`⚠️ ERROR CLEARING CACHE: ${error.message}`);
-    // Log error but do not block request flow
   }
   next(); // Always proceed to next middleware
 };

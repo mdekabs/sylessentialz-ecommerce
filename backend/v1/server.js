@@ -13,7 +13,8 @@ import {
     authRoute, 
     userRoute, 
     productRoute, 
-    cartRoute, 
+    cartRoute,
+    paymentRoute,
     orderRoute 
 } from "./routes/index.js";
 import { responseHandler, cleanupExpiredCarts } from "./utils/index.js";
@@ -42,7 +43,7 @@ app.use("/api/v1/users", userRoute);
 app.use("/api/v1/products", productRoute);
 app.use("/api/v1/carts", cartRoute);
 app.use("/api/v1/orders", orderRoute);
-
+app.use("/api/v1/payments", paymentRoute);
 app.get("/api/v1/health", asyncHandler(async (req, res) => {
     const dbStatus = mongoose.connection.readyState === 1 ? "connected" : "disconnected";
     const esStatus = await esClient.ping()

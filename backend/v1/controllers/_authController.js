@@ -107,7 +107,7 @@ const AuthController = {
 
       await user.resetLoginAttempts();       // Reset attempts on success
 
-      const accessToken = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, JWT_SECRET, { expiresIn: JWT_EXPIRATION });
+      const accessToken = jwt.sign({ id: user._id.toString(), isAdmin: user.isAdmin }, JWT_SECRET, { expiresIn: JWT_EXPIRATION });
       const { password: _, ...data } = user._doc; // Exclude password from response
 
       responseHandler(res, HttpStatus.OK, "success", "Successfully logged in", { ...data, accessToken });

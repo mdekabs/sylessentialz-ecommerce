@@ -1,5 +1,5 @@
 import express from 'express';
-import { accessLevelVerifier } from '../middlewares/_verifyToken.js';
+import { authenticationVerifier } from '../middlewares/index.js';
 import { PaymentController } from '../controllers/index.js';
 
 const router = express.Router();
@@ -44,6 +44,6 @@ const router = express.Router();
  *     security:
  *       - bearerAuth: []
  */
-router.post('/payment', accessLevelVerifier, PaymentController.create_payment);
+router.post('/', authenticationVerifier, PaymentController.create_payment);
 
 export default router;

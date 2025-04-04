@@ -12,3 +12,27 @@ OverwriteModelError: Cannot overwrite `Order` model once compiled.
     at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5) (Status: N/A)
+2025-04-02 19:04:57 PM ERROR: uncaughtException: write EPIPE
+Error: write EPIPE
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:971:11)
+    at Socket._write (node:net:983:8)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+    at _write (node:internal/streams/writable:501:10)
+    at Writable.write (node:internal/streams/writable:510:10)
+    at console.value (node:internal/console/constructor:291:16)
+    at console.log (node:internal/console/constructor:374:26)
+    at checkElasticsearch (file:///home/mdstorms/sylessentialz-ecommerce/backend/v1/elasticsearch.js:15:17) 
+2025-04-03 22:24:08 PM ERROR: uncaughtException: write EPIPE
+Error: write EPIPE
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:971:11)
+    at Socket._write (node:net:983:8)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+    at _write (node:internal/streams/writable:501:10)
+    at Writable.write (node:internal/streams/writable:510:10)
+    at console.value (node:internal/console/constructor:291:16)
+    at console.log (node:internal/console/constructor:374:26)
+    at checkElasticsearch (file:///home/mdstorms/sylessentialz-ecommerce/backend/v1/elasticsearch.js:15:17) 

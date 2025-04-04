@@ -1,0 +1,29 @@
+2025-04-04 07:51:41 AM ERROR: ❌ MongoDB connection failed: connect ECONNREFUSED 127.0.0.1:27017 
+2025-04-04 08:11:00 AM INFO: ✅Database is ready for atomicity. 
+2025-04-04 08:11:00 AM INFO: ✅ Cart cleanup scheduler started 
+2025-04-04 08:11:00 AM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode 
+2025-04-04 08:11:14 AM WARN: POST /api/v1/payments 400 1193ms 
+{
+  "req": {
+    "url": "/api/v1/payments",
+    "headers": {
+      "content-type": "application/json",
+      "user-agent": "PostmanRuntime/7.43.3",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "09512d1e-0675-4b78-bb0a-e6fd23e7166d",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "60"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/payments",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 400
+  },
+  "responseTime": 1193
+}
