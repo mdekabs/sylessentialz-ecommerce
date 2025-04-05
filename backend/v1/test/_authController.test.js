@@ -180,7 +180,7 @@ describe('AuthController', () => {
     it('should generate guestuid and token successfully', async () => {
       const req = {};
       const res = mockResponse();
-      const uuidStub = sandbox.stub(uuid 'generate').returns('guest-uid-123'); // Changed to sinon.stub
+      const uuidStub = sandbox.stub(uuid, 'generate').returns('guest-uid-123'); // Changed to sinon.stub
       const jwtSignStub = sandbox.stub(jwt, 'sign').returns('guest-token'); // Changed to sinon.stub
 
       await AuthController.generateGuestId(req, res);

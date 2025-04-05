@@ -1,0 +1,27 @@
+2025-04-05 16:28:08 PM INFO: ✅Database is ready for atomicity. 
+2025-04-05 16:28:08 PM INFO: ✅ Cart cleanup scheduler started 
+2025-04-05 16:28:09 PM INFO: 🚀 Sylessentials ecommerce Server is running on port 3000 in development mode 
+2025-04-05 16:30:04 PM INFO: POST /api/v1/auth/guest 200 37ms 
+{
+  "req": {
+    "url": "/api/v1/auth/guest",
+    "headers": {
+      "user-agent": "PostmanRuntime/7.43.3",
+      "accept": "*/*",
+      "cache-control": "no-cache",
+      "postman-token": "1e5a5cc3-da21-4f5a-a4e5-64bc572d5d71",
+      "host": "localhost:3000",
+      "accept-encoding": "gzip, deflate, br",
+      "connection": "keep-alive",
+      "content-length": "0"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/v1/auth/guest",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 37
+}
