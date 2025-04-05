@@ -3,7 +3,8 @@ import { User } from "../models/index.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import crypto from "crypto";
-import { v4 as uuidv4 } from 'uuid';
+import uuid from '../utils/_uuid.js';
+//import { v4 as uuidv4 } from 'uuid';
 import { responseHandler, emailQueue, generatePasswordResetEmail } from "../utils/index.js";
 import { updateBlacklist } from "../middlewares/index.js";
 
@@ -194,7 +195,7 @@ const AuthController = {
    */
   generateGuestId: async (req, res) => {
     try {
-      const guestId = uuidv4(); // Unique guest identifier
+      const guestId = uuid.generate(); // Unique guest identifier
       const token = jwt.sign({ guestId, isGuest: true }, JWT_SECRET, { expiresIn: GUEST_TOKEN_EXPIRATION });
 
       responseHandler(res, HttpStatus.OK, "success", "Guest ID and token generated successfully", {

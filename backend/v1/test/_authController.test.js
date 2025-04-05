@@ -1,3 +1,4 @@
+import uuid from '../utils/_uuid.js';
 import * as chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import sinon from 'sinon';
@@ -5,7 +6,7 @@ import HttpStatus from 'http-status-codes';
 import { User } from '../models/index.js';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
-import { v4 as uuidv4 } from 'uuid';
+//import { v4 as uuidv4 } from 'uuid';
 import { responseHandler, emailQueue, generatePasswordResetEmail } from '../utils/index.js';
 import { updateBlacklist } from '../middlewares/index.js';
 import AuthController from '../controllers/_authController.js';
@@ -179,17 +180,18 @@ describe('AuthController', () => {
     it('should generate guestuid and token successfully', async () => {
       const req = {};
       const res = mockResponse();
-      sinon.stub(uuidv4).returns('guest-uid-123'); // Changed to sinon.stub
-      sinon.stub(jwt, 'sign').returns('guest-token'); // Changed to sinon.stub
+      const uuidStub = sandbox.stub(uuid 'generate').returns('guest-uid-123'); // Changed to sinon.stub
+      const jwtSignStub = sandbox.stub(jwt, 'sign').returns('guest-token'); // Changed to sinon.stub
 
       await AuthController.generateGuestId(req, res);
-
+      expect(uuidStub.calledOnce).to.be.true;
+      expect(jwtSignStub.calledOnce).to.be.true;
       expect(res.status.calledWith(HttpStatus.OK)).to.be.true;
       expect(res.json.calledWith({
         type: 'success',
         message: 'Guest ID and token generated successfully',
         guestuid: 'guest-uid-123',
-        accessToken: 'guest-token'
+        token: 'guest-token'
       })).to.be.true;
     });
   });
