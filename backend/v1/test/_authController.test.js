@@ -190,7 +190,7 @@ describe('AuthController', () => {
       expect(res.json.calledWith({
         type: 'success',
         message: 'Guest ID and token generated successfully',
-        guestuid: 'guest-uid-123',
+        guestId: 'guest-uid-123',
         token: 'guest-token'
       })).to.be.true;
     });
