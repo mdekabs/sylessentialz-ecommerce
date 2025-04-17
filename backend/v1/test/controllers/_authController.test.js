@@ -1,15 +1,15 @@
-import uuid from '../utils/_uuid.js';
+import uuid from '../../utils/_uuid.js';
 import * as chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import sinon from 'sinon';
 import HttpStatus from 'http-status-codes';
-import { User } from '../models/index.js';
+import { User } from '../../models/index.js';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 //import { v4 as uuidv4 } from 'uuid';
-import { responseHandler, emailQueue, generatePasswordResetEmail } from '../utils/index.js';
-import { updateBlacklist } from '../middlewares/index.js';
-import AuthController from '../controllers/_authController.js';
+import { responseHandler, emailQueue, generatePasswordResetEmail } from '../../utils/index.js';
+import { updateBlacklist } from '../../middlewares/index.js';
+import AuthController from '../../controllers/_authController.js';
 import dotenv from 'dotenv';
 
 dotenv.config();

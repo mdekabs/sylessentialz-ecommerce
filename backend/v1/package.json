@@ -33,6 +33,7 @@
     "nodemailer": "^6.9.13",
     "redis": "^4.6.14",
     "stripe": "^15.8.0",
+    "supertest": "^7.1.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
     "winston": "^3.13.0",
