@@ -541,12 +541,12 @@ describe('CartController', () => {
 
       expect(mongoose.startSession.calledOnce).to.be.true;
       expect(session.startTransaction.calledOnce).to.be.true;
-      expect(Cart.findById.calledOnceWith('cart1')).to.be.true;
+      expect(session.abortTransaction.calledOnce).to.be.true;
       expect(session.endSession.calledOnce).to.be.true;
       expect(res.status.calledWith(HttpStatus.BAD_REQUEST)).to.be.true;
       expect(res.json.calledWith({
         type: 'error',
-        message: 'Valid products array is required',
+        message: 'No products provided to update',
       })).to.be.true;
     });
 
