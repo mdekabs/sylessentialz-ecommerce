@@ -13,7 +13,8 @@ const CART_CONSTANTS = {
     ORDER_DESCENDING: -1,                       // Descending sort order
     PRODUCTS_VALIDATION_RULES: {
         PRODUCT_ID_REQUIRED: true,              // Product ID is mandatory
-        QUANTITY_MIN_VALUE: 0                   // Minimum quantity allowed
+        QUANTITY_MIN_VALUE: 0,                  // Minimum quantity allowed
+        MAX_PRODUCTS_IN_CART: 50                // Maximum quantity allowed
     },
     CART_TIMEOUT_MINUTES: 30                    // Cart expiration time in minutes
 };
@@ -184,7 +185,11 @@ const CartController = {
             if (!req.body.products || !Array.isArray(req.body.products)) {
                 return responseHandler(res, HttpStatus.BAD_REQUEST, "error", ERROR_MESSAGES.INVALID_PRODUCTS_ARRAY);
             }
-
+            
+            if (req.body.products.length > CART_CONSTANTS.PRODUCTS_VALIDATION_RULES.MAX_PRODUCTS_IN_CART) {
+                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", `You can add a maximum of ${CART_CONSTANTS.PRODUCTS_VALIDATION_RULES.MAX_PRODUCTS_IN_CART} products to the cart.`);
+            }
+            
             const existingCart = await Cart.findOne({ userId: req.user.id }).session(session);
             if (existingCart) {
                 return responseHandler(res, HttpStatus.CONFLICT, "error", ERROR_MESSAGES.CART_ALREADY_EXISTS);

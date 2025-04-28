@@ -864,11 +864,13 @@ describe('CartController', () => {
         version: 1,
       });
       sandbox.stub(Cart, 'findOneAndUpdate').resolves(updatedCart);
-      sandbox.stub(Cart, 'findById').withArgs('cart1').returns({
+      const findByIdStub = sandbox.stub(Cart, 'findById');
+
+      findByIdStub.withArgs('cart1').returns({
         populate: sandbox.stub().returnsThis(),
         lean: sandbox.stub().resolves(populatedCart),
       });
-
+: 
       await CartController.remove_from_cart(req, res);
 
       expect(mongoose.startSession.calledOnce).to.be.true;
