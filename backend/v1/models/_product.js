@@ -4,37 +4,54 @@ import { esClient } from "../elasticsearch.js";
 
 /**
  * Mongoose schema for a product.
- * Defines product details with Elasticsearch indexing support.
+ * Defines product details with Elasticsearch indexing support and strict validation.
  */
 const ProductSchema = new mongoose.Schema({
     name: { 
         type: String, 
         required: true,           // Product must have a name
+        trim: true,               // Remove leading/trailing whitespace
+        minlength: 3,             // Minimum length for name
+        maxlength: 100,           // Maximum length for name
         es_indexed: true          // Indexed in Elasticsearch for search
     },
     description: { 
         type: String, 
+        trim: true,               // Remove leading/trailing whitespace
+        maxlength: 1000,          // Maximum length for description
         es_indexed: true          // Indexed for full-text search
     },
     price: { 
         type: Number, 
         required: true,           // Price is mandatory
+        min: 0,                   // Prevent negative or zero prices
+        max: 1000000,             // Reasonable upper limit for price
         es_indexed: true          // Indexed for filtering/sorting
     },
     category: { 
         type: String, 
         required: true,           // Category is mandatory
+        enum: [                   // Restrict to predefined categories
+            'electronics', 
+            'clothing', 
+            'books', 
+            'home', 
+            'toys', 
+            'sports'
+        ],
         es_indexed: true          // Indexed as keyword for exact match
     },
     image: { 
         type: String, 
         required: true,           // Image URL is mandatory
+        match: /^https?:\/\/.+\.(png|jpg|jpeg|gif)$/i, // Validate image URL format
         es_indexed: true          // Indexed for potential search
     },
     stock: { 
         type: Number, 
         required: true,           // Stock quantity is mandatory
         min: 0,                   // Prevents negative stock
+        max: 100000,              // Reasonable upper limit for stock
         default: 0,               // Defaults to 0 if not specified
         es_indexed: true          // Indexed for availability filtering
     },

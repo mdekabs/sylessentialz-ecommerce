@@ -31,8 +31,60 @@ const OrderSchema = new mongoose.Schema(
             min: 0                    // Ensures amount is non-negative
         },
         address: {
-            type: Object,             // Flexible structure for shipping address
-            required: true            // Ensures delivery address is provided
+            type: {
+                street: {
+                    type: String,
+                    required: true,       // Street is mandatory
+                    trim: true,           // Remove leading/trailing whitespace
+                    minlength: 3,         // Minimum length for street
+                    maxlength: 200        // Maximum length for street
+                },
+                city: {
+                    type: String,
+                    required: false,      // City is optional
+                    trim: true,           // Remove whitespace
+                    maxlength: 100,       // Maximum length for city
+                    default: "FCT Abuja"  // Default to FCT Abuja
+                },
+                state: {
+                    type: String,
+                    required: false,      // State is optional
+                    trim: true,           // Remove whitespace
+                    maxlength: 100,       // Maximum length for state
+                    default: "Abuja"      // Default to Abuja
+                },
+                zip: {
+                    type: String,
+                    required: false,      // Zip code is optional
+                    trim: true,           // Remove whitespace
+                    match: /^\d{6}$/,     // Nigerian 6-digit postal code (e.g., 900001)
+                    default: "900001"     // Default to Abuja postal code
+                },
+                country: {
+                    type: String,
+                    required: false,      // Country is optional
+                    trim: true,           // Remove whitespace
+                    maxlength: 100,       // Maximum length for country
+                    default: "Nigeria"    // Default to Nigeria
+                },
+                phone: {
+                    type: String,
+                    required: true,      // Phone number is optional
+                    trim: true,           // Remove whitespace
+                    match: /^(?:\+234|0)[789]\d{8}$/, // Nigerian phone number (e.g., +2349012345678 or 09012345678)
+                    maxlength: 13,        // Maximum length for phone number
+                    default: null         // Default to null
+                },
+                landmark: {
+                    type: String,
+                    required: true,      // Landmark is optional
+                    trim: true,           // Remove whitespace
+                    minlength: 3,         // Minimum length if provided
+                    maxlength: 200,       // Maximum length for landmark
+                    default: null         // Default to null
+                }
+            },
+            required: true                // Ensure address object is provided
         },
         status: {
             type: String,

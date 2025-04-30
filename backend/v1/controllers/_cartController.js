@@ -1,7 +1,7 @@
 import HttpStatus from 'http-status-codes';
 import mongoose from 'mongoose';
 import { Cart, Product } from "../models/index.js";
-import { responseHandler } from '../utils/index.js';
+import { responseHandler, validateCartProducts } from '../utils/index.js';
 
 /**
  * Constants for cart operations.
@@ -104,7 +104,7 @@ const CartController = {
      * @returns {Promise<void>}
      */
     get_cart: async (req, res) => {
-        const session = await mongoose.startSession();
+        const session = awaited mongoose.startSession();
         session.startTransaction();
         try {
             const { guestId } = req.body;
@@ -185,24 +185,16 @@ const CartController = {
             if (!req.body.products || !Array.isArray(req.body.products)) {
                 return responseHandler(res, HttpStatus.BAD_REQUEST, "error", ERROR_MESSAGES.INVALID_PRODUCTS_ARRAY);
             }
-            
-            if (req.body.products.length > CART_CONSTANTS.PRODUCTS_VALIDATION_RULES.MAX_PRODUCTS_IN_CART) {
-                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", `You can add a maximum of ${CART_CONSTANTS.PRODUCTS_VALIDATION_RULES.MAX_PRODUCTS_IN_CART} products to the cart.`);
+
+            // Validate products using validateCartProducts
+            const validationResult = validateCartProducts(req.body.products);
+            if (!validationResult.valid) {
+                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", validationResult.message);
             }
-            
+
             const existingCart = await Cart.findOne({ userId: req.user.id }).session(session);
             if (existingCart) {
                 return responseHandler(res, HttpStatus.CONFLICT, "error", ERROR_MESSAGES.CART_ALREADY_EXISTS);
-            }
-
-            const validProducts = req.body.products.every(product =>
-                product.productId &&
-                mongoose.Types.ObjectId.isValid(product.productId) &&
-                (!product.quantity || (typeof product.quantity === 'number' && product.quantity > CART_CONSTANTS.PRODUCTS_VALIDATION_RULES.QUANTITY_MIN_VALUE))
-            );
-
-            if (!validProducts) {
-                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", ERROR_MESSAGES.INVALID_PRODUCT_FORMAT);
             }
 
             const products = req.body.products.map(product => ({
@@ -265,71 +257,62 @@ const CartController = {
                 return responseHandler(res, HttpStatus.FORBIDDEN, "error", "Not authorized to update this cart");
             }
 
-            if (req.body.products) {
-                if (!Array.isArray(req.body.products)) {
-                    return responseHandler(res, HttpStatus.BAD_REQUEST, "error", ERROR_MESSAGES.INVALID_PRODUCTS_ARRAY);
-                }
+            if (!req.body.products || !Array.isArray(req.body.products)) {
+                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", ERROR_MESSAGES.INVALID_PRODUCTS_ARRAY);
+            }
 
-                const validProducts = req.body.products.every(product =>
-                    product.productId &&
-                    mongoose.Types.ObjectId.isValid(product.productId) &&
-                    (!product.quantity || (typeof product.quantity === 'number' && product.quantity >= CART_CONSTANTS.PRODUCTS_VALIDATION_RULES.QUANTITY_MIN_VALUE))
-                );
+            // Validate products using validateCartProducts
+            const validationResult = validateCartProducts(req.body.products);
+            if (!validationResult.valid) {
+                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", validationResult.message);
+            }
 
-                if (!validProducts) {
-                    return responseHandler(res, HttpStatus.BAD_REQUEST, "error", ERROR_MESSAGES.INVALID_PRODUCT_FORMAT);
-                }
-
-                const currentVersion = cart.version;
-                for (const item of cart.products) {
-                    const product = await Product.findOneAndUpdate(
-                        { _id: item.productId, version: { $gte: 0 } },
-                        { $inc: { stock: item.quantity, version: 1 } }, // Restore stock
-                        { new: true, session }
-                    );
-                    if (!product) {
-                        throw new Error(`${ERROR_MESSAGES.PRODUCT_NOT_FOUND}: ${item.productId}`);
-                    }
-                }
-
-                const newProducts = req.body.products.map(product => ({
-                    productId: new mongoose.Types.ObjectId(product.productId),
-                    quantity: product.quantity || CART_CONSTANTS.DEFAULT_QUANTITY
-                }));
-
-                for (const item of newProducts) {
-                    const product = await Product.findOneAndUpdate(
-                        { _id: item.productId, version: { $gte: 0 } },
-                        { $inc: { stock: -item.quantity, version: 1 } }, // Reduce stock
-                        { new: true, session }
-                    );
-                    if (!product) {
-                        throw new Error(`${ERROR_MESSAGES.PRODUCT_NOT_FOUND}: ${item.productId}`);
-                    }
-                    if (product.stock < 0) {
-                        throw new Error(`${ERROR_MESSAGES.INSUFFICIENT_STOCK}: ${product.name}`);
-                    }
-                }
-
-                const updatedCart = await Cart.findOneAndUpdate(
-                    { _id: req.params.id, version: currentVersion },
-                    { products: newProducts, lastUpdated: new Date(), $inc: { version: 1 } }, // Update with version check
+            const currentVersion = cart.version;
+            for (const item of cart.products) {
+                const product = await Product.findOneAndUpdate(
+                    { _id: item.productId, version: { $gte: 0 } },
+                    { $inc: { stock: item.quantity, version: 1 } }, // Restore stock
                     { new: true, session }
                 );
-                if (!updatedCart) {
-                    throw new Error(ERROR_MESSAGES.CONCURRENCY_CONFLICT);
+                if (!product) {
+                    throw new Error(`${ERROR_MESSAGES.PRODUCT_NOT_FOUND}: ${item.productId}`);
                 }
-
-                await session.commitTransaction();
-                const populatedCart = await Cart.findById(updatedCart._id)
-                    .populate('products.productId', 'name price stock image')
-                    .lean();
-
-                responseHandler(res, HttpStatus.OK, "success", SUCCESS_MESSAGES.CART_UPDATED, { cart: populatedCart });
-            } else {
-                await session.abortTransaction();
-                responseHandler(res, HttpStatus.BAD_REQUEST, "error", "No products provided to update");
             }
+
+            const newProducts = req.body.products.map(product => ({
+                productId: new mongoose.Types.ObjectId(product.productId),
+                quantity: product.quantity || CART_CONSTANTS.DEFAULT_QUANTITY
+            }));
+
+            for (const item of newProducts) {
+                const product = await Product.findOneAndUpdate(
+                    { _id: item.productId, version: { $gte: 0 } },
+                    { $inc: { stock: -item.quantity, version: 1 } }, // Reduce stock
+                    { new: true, session }
+                );
+                if (!product) {
+                    throw new Error(`${ERROR_MESSAGES.PRODUCT_NOT_FOUND}: ${item.productId}`);
+                }
+                if (product.stock < 0) {
+                    throw new Error(`${ERROR_MESSAGES.INSUFFICIENT_STOCK}: ${product.name}`);
+                }
+            }
+
+            const updatedCart = await Cart.findOneAndUpdate(
+                { _id: req.params.id, version: currentVersion },
+                { products: newProducts, lastUpdated: new Date(), $inc: { version: 1 } }, // Update with version check
+                { new: true, session }
+            );
+            if (!updatedCart) {
+                throw new Error(ERROR_MESSAGES.CONCURRENCY_CONFLICT);
+            }
+
+            await session.commitTransaction();
+            const populatedCart = await Cart.findById(updatedCart._id)
+                .populate('products.productId', 'name price stock image')
+                .lean();
+
+            responseHandler(res, HttpStatus.OK, "success", SUCCESS_MESSAGES.CART_UPDATED, { cart: populatedCart });
         } catch (err) {
             await session.abortTransaction();
             responseHandler(res, err.message === ERROR_MESSAGES.CONCURRENCY_CONFLICT ? HttpStatus.CONFLICT : HttpStatus.INTERNAL_SERVER_ERROR, "error", err.message);
@@ -351,16 +334,14 @@ const CartController = {
             const { productId, quantity = CART_CONSTANTS.DEFAULT_QUANTITY, guestId } = req.body;
             const identifier = req.user?.id || (req.user?.guestId ? req.user.guestId : guestId);
 
-            if (!productId || !mongoose.Types.ObjectId.isValid(productId)) {
-                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", ERROR_MESSAGES.VALID_PRODUCT_ID_REQUIRED);
-            }
-
-            if (typeof quantity !== 'number' || quantity <= CART_CONSTANTS.PRODUCTS_VALIDATION_RULES.QUANTITY_MIN_VALUE) {
-                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", ERROR_MESSAGES.INVALID_QUANTITY);
-            }
-
             if (!identifier) {
                 return responseHandler(res, HttpStatus.BAD_REQUEST, "error", ERROR_MESSAGES.IDENTIFIER_REQUIRED);
+            }
+
+            // Validate single product using validateCartProducts
+            const validationResult = validateCartProducts([{ productId, quantity }]);
+            if (!validationResult.valid) {
+                return responseHandler(res, HttpStatus.BAD_REQUEST, "error", validationResult.message);
             }
 
             const query = req.user?.id ? { userId: req.user.id } : { guestId: identifier };
