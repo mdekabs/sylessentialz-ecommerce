@@ -46,7 +46,8 @@ const SUCCESS_MESSAGES = {
     CART_UPDATED: "Cart updated successfully",
     ITEM_ADDED: "Item added to cart",
     ITEM_REMOVED: "Item removed from cart",
-    CART_CLEARED: "Cart cleared successfully"
+    CART_CLEARED: "Cart cleared successfully",
+    CART_RETRIEVED: "Cart retrieved successfully" // Added for get_cart
 };
 
 /**
@@ -104,8 +105,6 @@ const CartController = {
      * @returns {Promise<void>}
      */
     get_cart: async (req, res) => {
-        const session = awaited mongoose.startSession();
-        session.startTransaction();
         try {
             const { guestId } = req.body;
             const identifier = req.user?.id || (req.user?.guestId ? req.user.guestId : guestId); // User or guest ID
@@ -115,7 +114,7 @@ const CartController = {
             }
 
             const query = req.user?.id ? { userId: req.user.id } : { guestId: identifier }; // Query based on identifier
-            let cart = await Cart.findOne(query).session(session);
+            let cart = await Cart.findOne(query);
 
             if (!cart) {
                 return responseHandler(res, HttpStatus.NOT_FOUND, "error", ERROR_MESSAGES.CART_NOT_FOUND);
@@ -125,21 +124,16 @@ const CartController = {
             const timeoutThreshold = new Date(now - CART_CONSTANTS.CART_TIMEOUT_MINUTES * 60 * 1000); // 30-min threshold
             if (cart.lastUpdated < timeoutThreshold) {
                 await CartController.clearExpiredCart(cart._id); // Clear expired cart
-                await session.commitTransaction();
                 return responseHandler(res, HttpStatus.NOT_FOUND, "error", ERROR_MESSAGES.CART_EXPIRED);
             }
 
-            await session.commitTransaction();
             cart = await Cart.findOne(query)
                 .populate('products.productId', 'name price stock image') // Populate product details
                 .lean();
 
-            responseHandler(res, HttpStatus.OK, "success", SUCCESS_MESSAGES.CART_CREATED, { cart });
+            responseHandler(res, HttpStatus.OK, "success", SUCCESS_MESSAGES.CART_RETRIEVED, { cart });
         } catch (err) {
-            await session.abortTransaction();
             responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Failed to retrieve cart", { error: err.message });
-        } finally {
-            session.endSession();                          // Clean up session
         }
     },
 
@@ -165,7 +159,7 @@ const CartController = {
                 return responseHandler(res, HttpStatus.NOT_FOUND, "error", ERROR_MESSAGES.CART_NOT_FOUND);
             }
 
-            responseHandler(res, HttpStatus.OK, "success", "Cart retrieved successfully", { cart });
+            responseHandler(res, HttpStatus.OK, "success", SUCCESS_MESSAGES.CART_RETRIEVED, { cart });
         } catch (err) {
             console.error('Get cart by ID error:', err);
             responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Failed to retrieve cart", { error: err.message });
