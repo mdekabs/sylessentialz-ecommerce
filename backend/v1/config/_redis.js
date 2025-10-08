@@ -1,47 +1,37 @@
 import { createClient } from "redis";
-import dotenv from "dotenv";
 import { logger } from "./_logger.js";
 
-// Load environment variables
-dotenv.config();
-
-// Redis connection URL from environment variables
-const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
-
-// Create Redis client
 const redisClient = createClient({
-  url: REDIS_URL,
+  url: process.env.REDIS_URI,
 });
 
-// Handle Redis client errors
-redisClient.on("error", (err) => {
-  logger.error(`Redis Client Error: ${err.message}`);
-});
-
-// Connect to Redis
-async function connectRedis() {
+const connectRedis = async () => {
   try {
+    if (redisClient.isOpen) {
+      logger.info("Redis client already connected");
+      return;
+    }
     await redisClient.connect();
-    logger.info("Connected to Redis successfully");
+    logger.info("Redis connected");
   } catch (error) {
-    logger.error(`Failed to connect to Redis: ${error.message}`);
-    throw new Error(`Redis connection failed: ${error.message}`);
+    logger.error(`Redis connection error: ${error.message}`);
+    throw error;
   }
-}
+};
 
-// Disconnect from Redis
-async function disconnectRedis() {
+const disconnectRedis = async () => {
   try {
-    await redisClient.quit();
-    logger.info("Redis connection closed");
+    if (redisClient.isOpen) {
+      await redisClient.quit();
+      logger.info("Redis disconnected");
+    } else {
+      logger.info("Redis client already disconnected");
+    }
   } catch (error) {
-    logger.error(`Failed to close Redis connection: ${error.message}`);
-    throw new Error(`Failed to close Redis connection: ${error.message}`);
+    logger.error(`Redis disconnection error: ${error.message}`);
+    throw error;
   }
-}
-
-// Connect on initialization
-connectRedis();
+};
 
 export default redisClient;
 export { connectRedis, disconnectRedis };

@@ -2,7 +2,8 @@ import { User } from "../models/index.js";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import uuid from "../utils/_uuid.js";
-import { emailQueue, generatePasswordResetEmail } from "../utils/index.js";
+import { emailQueue } from "../jobs/queues/_emailQueue.js";
+import { generatePasswordResetEmail } from "../utils/index.js";
 import { updateBlacklist } from "../middlewares/index.js";
 
 const JWT_SECRET = process.env.JWT_SECRET;

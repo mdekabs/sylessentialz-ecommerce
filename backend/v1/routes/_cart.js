@@ -54,7 +54,7 @@ const router = express.Router();
  *     security:
  *       - bearerAuth: []
  */
-router.get('/', isAdminVerifier, pagination, cacheMiddleware, CartController.get_carts);
+router.get('/', isAdminVerifier, pagination, cacheMiddleware, CartController.getCarts);
 
 /**
  * @swagger
@@ -86,7 +86,7 @@ router.get('/', isAdminVerifier, pagination, cacheMiddleware, CartController.get
  *     security:
  *       - bearerAuth: []
  */
-router.get('/my-cart', optionalVerifier, cacheMiddleware, CartController.get_cart);
+router.get('/my-cart', optionalVerifier, cacheMiddleware, CartController.getCart);
 
 /**
  * @swagger
@@ -116,7 +116,7 @@ router.get('/my-cart', optionalVerifier, cacheMiddleware, CartController.get_car
  *     security:
  *       - bearerAuth: []
  */
-router.get('/:id', authenticationVerifier, cacheMiddleware, CartController.get_cart_by_id);
+router.get('/:id', authenticationVerifier, cacheMiddleware, CartController.getCartById);
 
 /**
  * @swagger
@@ -156,7 +156,7 @@ router.get('/:id', authenticationVerifier, cacheMiddleware, CartController.get_c
  *     security:
  *       - bearerAuth: []
  */
-router.post('/', authenticationVerifier, clearCache, CartController.create_cart);
+router.post('/', authenticationVerifier, clearCache, CartController.createCart);
 
 /**
  * @swagger
@@ -206,7 +206,7 @@ router.post('/', authenticationVerifier, clearCache, CartController.create_cart)
  *     security:
  *       - bearerAuth: []
  */
-router.put('/:id', accessLevelVerifier, clearCache, CartController.update_cart);
+router.put('/:id', accessLevelVerifier, clearCache, CartController.updateCart);
 
 /**
  * @swagger
@@ -244,7 +244,7 @@ router.put('/:id', accessLevelVerifier, clearCache, CartController.update_cart);
  *     security:
  *       - bearerAuth: []
  */
-router.post('/add', optionalVerifier, clearCache, CartController.add_to_cart);
+router.post('/add', optionalVerifier, clearCache, CartController.addToCart);
 
 /**
  * @swagger
@@ -281,7 +281,7 @@ router.post('/add', optionalVerifier, clearCache, CartController.add_to_cart);
  *     security:
  *       - bearerAuth: []
  */
-router.post('/remove', optionalVerifier, clearCache, CartController.remove_from_cart);
+router.post('/remove', optionalVerifier, clearCache, CartController.removeFromCart);
 
 /**
  * @swagger
@@ -315,6 +315,6 @@ router.post('/remove', optionalVerifier, clearCache, CartController.remove_from_
  *     security:
  *       - bearerAuth: []
  */
-router.post('/clear', optionalVerifier, clearCache, CartController.clear_cart);
+router.post('/clear', optionalVerifier, clearCache, CartController.clearCart);
 
 export default router;

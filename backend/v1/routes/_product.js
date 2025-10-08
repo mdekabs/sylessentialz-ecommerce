@@ -89,60 +89,7 @@ const router = express.Router();
  *       500:
  *         description: Internal server error
  */
-router.get('/', pagination, cacheMiddleware, ProductController.get_products);
-
-/**
- * @swagger
- * /products/search:
- *   get:
- *     summary: Search for products
- *     description: Search products using Elasticsearch by name, description, or category
- *     tags: [Products]
- *     parameters:
- *       - in: query
- *         name: q
- *         schema:
- *           type: string
- *         required: true
- *         description: Search query
- *     responses:
- *       200:
- *         description: Successfully retrieved search results
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                 data:
- *                   type: object
- *                   properties:
- *                     products:
- *                       type: array
- *                       items:
- *                         type: object
- *                         properties:
- *                           id:
- *                             type: string
- *                           name:
- *                             type: string
- *                           description:
- *                             type: string
- *                           price:
- *                             type: number
- *                           category:
- *                             type: string
- *                           image:
- *                             type: string
- *                           score:
- *                             type: number
- *       400:
- *         description: Search query is required
- *       500:
- *         description: Internal server error
- */
-router.get('/search', cacheMiddleware, ProductController.search_products);
+router.get('/', pagination, cacheMiddleware, ProductController.getProducts);
 
 /**
  * @swagger
@@ -180,7 +127,7 @@ router.get('/search', cacheMiddleware, ProductController.search_products);
  *       500:
  *         description: Internal server error
  */
-router.get('/:id', authenticationVerifier, cacheMiddleware, ProductController.get_product);
+router.get('/:id', authenticationVerifier, cacheMiddleware, ProductController.getProduct);
 
 /**
  * @swagger
@@ -236,7 +183,7 @@ router.get('/:id', authenticationVerifier, cacheMiddleware, ProductController.ge
  *     security:
  *       - accessToken: []
  */
-router.post('/', authenticationVerifier, isAdminVerifier, clearCache, ProductController.create_product);
+router.post('/', authenticationVerifier, isAdminVerifier, clearCache, ProductController.createProduct);
 
 /**
  * @swagger
@@ -299,7 +246,7 @@ router.post('/', authenticationVerifier, isAdminVerifier, clearCache, ProductCon
  *     security:
  *       - accessToken: []
  */
-router.put('/:id', authenticationVerifier, isAdminVerifier, clearCache, ProductController.update_product);
+router.put('/:id', authenticationVerifier, isAdminVerifier, clearCache, ProductController.updateProduct);
 
 /**
  * @swagger
@@ -331,7 +278,7 @@ router.put('/:id', authenticationVerifier, isAdminVerifier, clearCache, ProductC
  *     security:
  *       - accessToken: []
  */
-router.delete('/:id', authenticationVerifier, isAdminVerifier, clearCache, ProductController.delete_product);
+router.delete('/:id', authenticationVerifier, isAdminVerifier, clearCache, ProductController.deleteProduct);
 
 /**
  * @swagger

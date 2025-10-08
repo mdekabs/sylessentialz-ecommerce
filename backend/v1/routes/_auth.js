@@ -81,7 +81,7 @@ router.post('/guest', AuthController.generateGuestId);
  *       500:
  *         description: Internal server error
  */
-router.post('/register', AuthController.create_user);
+router.post('/register', AuthController.createUser);
 
 /**
  * @swagger
@@ -137,7 +137,7 @@ router.post('/register', AuthController.create_user);
  *       500:
  *         description: Internal server error
  */
-router.post('/login', AuthController.login_user);
+router.post('/login', AuthController.loginUser);
 
 /**
  * @swagger
@@ -155,7 +155,7 @@ router.post('/login', AuthController.login_user);
  *       500:
  *         description: Internal server error
  */
-router.post('/logout', authenticationVerifier, AuthController.logout_user);
+router.post('/logout', authenticationVerifier, AuthController.logoutUser);
 
 /**
  * @swagger
@@ -182,7 +182,7 @@ router.post('/logout', authenticationVerifier, AuthController.logout_user);
  *       500:
  *         description: Internal server error
  */
-router.post('/forgot-password', AuthController.forgot_password);
+router.post('/forgot-password', AuthController.forgotPassword);
 
 /**
  * @swagger
@@ -212,6 +212,6 @@ router.post('/forgot-password', AuthController.forgot_password);
  *       500:
  *         description: Internal server error
  */
-router.post('/reset-password', AuthController.reset_password);
+router.post('/reset-password', AuthController.resetPassword);
 
 export default router;

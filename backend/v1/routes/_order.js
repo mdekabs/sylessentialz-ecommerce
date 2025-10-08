@@ -1,5 +1,5 @@
 import express from "express";
-import { OrderController } from "../controllers/index.js"; // Path to OrderController
+import { OrderController } from "../controllers/index.js";
 import { 
   authenticationVerifier, 
   accessLevelVerifier, 
@@ -8,7 +8,7 @@ import {
   cacheMiddleware, 
   pagination, 
   clearCache 
-} from "../middlewares/index.js"; // Updated middleware imports
+} from "../middlewares/index.js";
 
 const router = express.Router();
 
@@ -49,9 +49,9 @@ const router = express.Router();
  */
 router.post(
   "/",
-  authenticationVerifier,                // Verify user authentication via token
-  clearCache,                  // Clear cache for orders after creation
-  OrderController.create_order // Handle order creation
+  authenticationVerifier, 
+  clearCache, 
+  OrderController.createOrder
 );
 
 /**
@@ -93,7 +93,7 @@ router.get(
   isAdminVerifier,                       // Restrict to admin users
   pagination,                            // Apply pagination middleware
   cacheMiddleware,    // Cache results for 5 minutes
-  OrderController.get_all_orders // Handle retrieving all orders
+  OrderController.getAllOrders // Handle retrieving all orders
 );
 
 /**
@@ -132,7 +132,7 @@ router.get(
   authenticationVerifier,                // Verify user authentication
   pagination,                            // Apply pagination middleware
   cacheMiddleware,   // Cache user-specific orders for 5 minutes
-  OrderController.get_user_orders// Handle retrieving user orders
+  OrderController.getUserOrders// Handle retrieving user orders
 );
 
 /**
@@ -175,7 +175,7 @@ router.put(
   authenticationVerifier,                // Verify user authentication
   isAdminVerifier,                       // Restrict to admin users
   clearCache,                  // Clear cache after status update
-  OrderController.update_order_status // Handle status update
+  OrderController.updateOrderStatus // Handle status update
 );
 
 /**
@@ -239,7 +239,7 @@ router.get(
   authenticationVerifier,                // Verify user authentication
   isAdminVerifier,                       // Restrict to admin users
   cacheMiddleware,  // Cache income data for 10 minutes
-  OrderController.get_income // Handle income calculation
+  OrderController.getIncome // Handle income calculation
 );
 
 /**
@@ -268,7 +268,7 @@ router.get(
   "/store-credit",
   authenticationVerifier,                // Verify user authentication
   cacheMiddleware,  // Cache store credit for 5 minutes
-  OrderController.get_store_credit // Handle store credit retrieval
+  OrderController.getStoreCredit // Handle store credit retrieval
 );
 
 export default router;

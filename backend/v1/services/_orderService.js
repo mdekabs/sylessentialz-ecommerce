@@ -1,13 +1,12 @@
 import mongoose from "mongoose";
 import { Order, StoreCredit, Product, Cart } from "../models/index.js";
-import { CartService } from "./cart.service.js"; // Import CartService for clearExpiredCart
-
+import { CartService } from "./_cartService.js";
 const CONSTANTS = {
   STORE_CREDIT_EXPIRY_DAYS: 3 * 30,
   FIXED_SHIPPING_FEE: 2,
   VALID_ORDER_STATUSES: ["pending", "processing", "shipped", "delivered", "cancelled"],
   ORDER_STATUSES_FOR_INCOME: ["pending", "processing", "shipped", "delivered"],
-  CART_TIMEOUT_MINUTES: 30, // Added for cart expiration check
+  CART_TIMEOUT_MINUTES: 30,
 };
 
 const ERROR_MESSAGES = {

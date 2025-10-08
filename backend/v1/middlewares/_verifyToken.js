@@ -1,11 +1,9 @@
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 import redisClient from "../config/_redis.js";
 import { responseHandler } from "../utils/index.js";
 import HttpStatus from "http-status-codes";
 import { logger } from "../config/_logger.js";
 
-dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 

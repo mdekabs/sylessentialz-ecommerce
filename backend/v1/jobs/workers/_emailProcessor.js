@@ -1,4 +1,4 @@
-import { logger } from "../../config/logger.js";
+import { logger } from "../../config/_logger.js";
 import sendMail from "../../utils/sendMail.js";
 
 /**

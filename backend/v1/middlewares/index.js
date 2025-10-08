@@ -1,7 +1,3 @@
-// index.js
-
-// Import all middleware from their respective files
-import { logger, appLogger, errorLogger } from "./_logger.js";
 import { authenticationVerifier, isTokenBlacklisted, updateBlacklist, permissionVerifier, optionalVerifier, accessLevelVerifier, isAdminVerifier } from "./_verifyToken.js";
 import { clearCache, cacheMiddleware } from "./_caching.js";
 import { pagination } from "./_pagination.js";
@@ -15,9 +11,6 @@ export {
   isAdminVerifier,
   clearCache,
   cacheMiddleware,
-  logger,
-  appLogger,
   optionalVerifier,
-  errorLogger,
   pagination
 };

@@ -21,7 +21,7 @@ const customTimestamp = format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss A' });
  */
 const prettyPrintFormat = format.printf(({ level, message, timestamp, meta }) => {
   // const statusCode = meta?.res?.statusCode; // Commented out but preserved
-  if (meta?.req?.headers?.authorization) delete meta.req.headers.authorization; // Mask sensitive data
+  if (meta?.req?.headers?.authorization) delete meta.req.headers.authorization;
   const metaString = meta ? `\n${JSON.stringify(meta, null, 2)}` : '';
   return `${timestamp} ${level.toUpperCase()}: ${message} ${metaString}`;
 });
@@ -39,8 +39,8 @@ export const logger = createLogger({
     new DailyRotateFile({
       filename: `${LOG_DIR}/app-%DATE%.log`,
       datePattern: 'YYYY-MM-DD',
-      maxSize: '20m', // Maximum file size: 20MB
-      maxFiles: '14d', // Retain logs for 14 days
+      maxSize: '20m',
+      maxFiles: '14d',
       level: LOG_LEVEL,
     }),
     // Error-specific logs
@@ -62,7 +62,7 @@ export const logger = createLogger({
     }),
   ],
   exceptionHandlers: [
-    new transports.File({ filename: `${LOG_DIR}/exceptions.log` }) // Log uncaught exceptions
+    new transports.File({ filename: `${LOG_DIR}/exceptions.log` })
   ],
 });
 
@@ -89,9 +89,9 @@ process.on('unhandledRejection', (reason) => {
  */
 export const appLogger = expressWinston.logger({
   winstonInstance: logger,
-  meta: true, // Include request/response metadata
-  statusLevels: true, // Log based on status: info (<400), error (>=400)
-  expressFormat: true, // Use Express-style log format
+  meta: true,
+  statusLevels: true,
+  expressFormat: true,
   colorize: false,
 });
 

@@ -1,9 +1,8 @@
-import env from "../config/env.js";
+import "..config/env.js";
 import mongoose from "mongoose";
 import { User } from "../models/index.js";
 import { connectDB } from "../config/_database.js";
 
-dotenv.config();
 
 const ADMIN_ROLE = "admin";
 const ERROR_MESSAGES = {

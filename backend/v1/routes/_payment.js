@@ -44,6 +44,6 @@ const router = express.Router();
  *     security:
  *       - bearerAuth: []
  */
-router.post('/', authenticationVerifier, PaymentController.create_payment);
+router.post('/', authenticationVerifier, PaymentController.createPayment);
 
 export default router;

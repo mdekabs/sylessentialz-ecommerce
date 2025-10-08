@@ -1,6 +1,5 @@
-import "dotenv/config";
 import Queue from "bull";
-import { logger } from "../../config/logger.js";
+import { logger } from "../../config/_logger.js";
 
 /**
  * Bull queue instance for processing email jobs.

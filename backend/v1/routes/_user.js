@@ -1,7 +1,8 @@
 import express from 'express';
 import { accessLevelVerifier, isAdminVerifier, cacheMiddleware, clearCache, pagination } from '../middlewares/index.js';
 import { UserController } from '../controllers/index.js';
- 
+
+ 
 const router = express.Router();
 
 /**
@@ -39,7 +40,7 @@ const router = express.Router();
  *     security:
  *       - bearerAuth: []
  */
-router.get('/', isAdminVerifier, pagination, cacheMiddleware, UserController.get_users);
+router.get('/', isAdminVerifier, pagination, cacheMiddleware, UserController.getUsers);
 
 /**
  * @swagger
@@ -67,7 +68,7 @@ router.get('/', isAdminVerifier, pagination, cacheMiddleware, UserController.get
  *     security:
  *       - bearerAuth: []
  */
-router.get('/:id', accessLevelVerifier, cacheMiddleware, UserController.get_user);
+router.get('/:id', accessLevelVerifier, cacheMiddleware, UserController.getUser);
 
 /**
  * @swagger
@@ -86,7 +87,7 @@ router.get('/:id', accessLevelVerifier, cacheMiddleware, UserController.get_user
  *     security:
  *       - bearerAuth: []
  */
-router.get('/stats', isAdminVerifier, cacheMiddleware, UserController.get_stats);
+router.get('/stats', isAdminVerifier, cacheMiddleware, UserController.getStats);
 
 /**
  * @swagger
@@ -116,7 +117,7 @@ router.get('/stats', isAdminVerifier, cacheMiddleware, UserController.get_stats)
  *     security:
  *       - bearerAuth: []
  */
-router.put('/:id', accessLevelVerifier, clearCache, UserController.update_user);
+router.put('/:id', accessLevelVerifier, clearCache, UserController.updateUser);
 
 /**
  * @swagger
@@ -144,6 +145,6 @@ router.put('/:id', accessLevelVerifier, clearCache, UserController.update_user);
  *     security:
  *       - bearerAuth: []
  */
-router.delete('/:id', isAdminVerifier, clearCache, UserController.delete_user);
+router.delete('/:id', isAdminVerifier, clearCache, UserController.deleteUser);
 
 export default router;
