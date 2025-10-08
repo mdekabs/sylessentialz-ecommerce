@@ -1,6 +1,7 @@
-import redisClient from "../redis.js";
+import redisClient from "../config/_redis.js";
 import { responseHandler } from "../utils/index.js";
 import HttpStatus from "http-status-codes";
+import { logger } from "../config/_logger.js";
 
 /**
  * Middleware to cache successful GET request responses in Redis.
@@ -27,7 +28,9 @@ export const cacheMiddleware = async (req, res, next) => {
       // Prevent serving cached error responses
       if (parsedData.type === "error") {
         await redisClient.del(key); // Remove invalid cached error
+        logger.info(`Removed invalid cached error for key: ${key}`);
       } else {
+        logger.info(`Serving cached response for key: ${key}`);
         return res.json(parsedData); // Serve cached data
       }
     }
@@ -37,13 +40,14 @@ export const cacheMiddleware = async (req, res, next) => {
     res.json = (body) => {
       if (res.statusCode >= 200 && res.statusCode < 300) {
         redisClient.set(key, JSON.stringify(body), "EX", TTL);
+        logger.info(`Cached response for key: ${key}`);
       }
       return originalJson(body); // Ensure response is sent
     };
 
     next();
   } catch (error) {
-    console.error(`⚠️ Cache Error: ${error.message}`);
+    logger.error(`Cache Error: ${error.message}`);
     return responseHandler(res, HttpStatus.INTERNAL_SERVER_ERROR, "error", "Cache error");
   }
 };
@@ -60,27 +64,27 @@ export const clearCache = async (req, res, next) => {
   try {
     // Derive cache key from request URL, falling back to path if needed
     const key = req.originalUrl || req.path;
-    console.log(`Attempting to clear cache for key: ${key}`);
+    logger.info(`Attempting to clear cache for key: ${key}`);
 
     if (!key || typeof key !== "string") {
-      console.error(`Invalid cache key derived from request: ${key}`);
+      logger.error(`Invalid cache key derived from request: ${key}`);
       return next(); // Skip cache clearing and proceed
     }
 
     // Clear exact key
     await redisClient.del(key);
+    logger.info(`Cleared cache for key: ${key}`);
 
     // Clear all variations of the key
     const wildcardKey = key.includes("/") ? key.split("/")[1] : key;
     const keysToDelete = await redisClient.keys(`*${wildcardKey}*`);
-    
+
     if (keysToDelete.length) {
       await redisClient.del(...keysToDelete);
-      console.log(`Cleared related cache keys: ${keysToDelete}`);
+      logger.info(`Cleared related cache keys: ${keysToDelete.join(", ")}`);
     }
-
   } catch (error) {
-    console.error(`⚠️ ERROR CLEARING CACHE: ${error.message}`);
+    logger.error(`Error clearing cache: ${error.message}`);
   }
   next(); // Always proceed to next middleware
 };

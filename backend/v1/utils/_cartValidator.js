@@ -1,77 +1,78 @@
-import mongoose from "mongoose";
-
+/**
+ * Validates an array of cart products.
+ * @param {Array} products - Array of products with productId and quantity
+ * @returns {Object} - { valid: boolean, message?: string }
+ */
 export function validateCartProducts(products) {
-    // Define constants directly in the file
-    const MAX_PRODUCTS = 10; // Maximum number of products allowed in the cart
-    const MIN_QUANTITY = 1;  // Minimum quantity for a product
+  // Define constants directly in the file
+  const MAX_PRODUCTS = 10; // Maximum number of products allowed in the cart
+  const MIN_QUANTITY = 1; // Minimum quantity for a product
 
-    // Validate constants
-    if (!Number.isInteger(MAX_PRODUCTS) || MAX_PRODUCTS <= 0) {
-        throw new Error("MAX_PRODUCTS must be a positive integer.");
+  // Validate constants
+  if (!Number.isInteger(MAX_PRODUCTS) || MAX_PRODUCTS <= 0) {
+    throw new Error("MAX_PRODUCTS must be a positive integer.");
+  }
+  if (!Number.isInteger(MIN_QUANTITY) || MIN_QUANTITY < 0) {
+    throw new Error("MIN_QUANTITY must be a non-negative integer.");
+  }
+
+  // Check if products is an array
+  if (!Array.isArray(products)) {
+    return { valid: false, message: "Products must be an array." };
+  }
+
+  // Check for empty cart
+  if (products.length === 0) {
+    return { valid: false, message: "Cart cannot be empty." };
+  }
+
+  // Check maximum products
+  if (products.length > MAX_PRODUCTS) {
+    return { valid: false, message: `A cart cannot have more than ${MAX_PRODUCTS} products.` };
+  }
+
+  // Check for duplicate products
+  const productIds = products.map((p, index) => {
+    if (!p.productId) {
+      return { invalid: true, index };
     }
-    if (!Number.isInteger(MIN_QUANTITY) || MIN_QUANTITY < 0) {
-        throw new Error("MIN_QUANTITY must be a non-negative integer.");
-    }
+    return p.productId.toString();
+  });
 
-    // Check if products is an array
-    if (!Array.isArray(products)) {
-        return { valid: false, message: "Products must be an array." };
-    }
+  const invalidId = productIds.find((p) => p.invalid);
+  if (invalidId) {
+    return {
+      valid: false,
+      message: `Product at index ${invalidId.index} is missing a productId.`,
+    };
+  }
 
-    // Check for empty cart
-    if (products.length === 0) {
-        return { valid: false, message: "Cart cannot be empty." };
-    }
+  const uniqueProductIds = new Set(productIds);
+  if (uniqueProductIds.size !== productIds.length) {
+    return { valid: false, message: "Duplicate products are not allowed in the cart." };
+  }
 
-    // Check maximum products
-    if (products.length > MAX_PRODUCTS) {
-        return { valid: false, message: `A cart cannot have more than ${MAX_PRODUCTS} products.` };
-    }
+  // Validate product format and quantity
+  const invalidProduct = products.findIndex((p) => {
+    // Validate productId as a 24-character hexadecimal string
+    const isValidId =
+      typeof p.productId === "string" && /^[0-9a-fA-F]{24}$/.test(p.productId);
 
-    // Check for duplicate products
-    const productIds = products.map((p, index) => {
-        if (!p.productId) {
-            return { invalid: true, index };
-        }
-        return p.productId.toString();
-    });
+    const isValidQuantity =
+      typeof p.quantity === "number" &&
+      Number.isInteger(p.quantity) &&
+      p.quantity >= MIN_QUANTITY &&
+      p.quantity > 0;
 
-    const invalidId = productIds.find(p => p.invalid);
-    if (invalidId) {
-        return {
-            valid: false,
-            message: `Product at index ${invalidId.index} is missing a productId.`
-        };
-    }
+    return !isValidId || !isValidQuantity;
+  });
 
-    const uniqueProductIds = new Set(productIds);
-    if (uniqueProductIds.size !== productIds.length) {
-        return { valid: false, message: "Duplicate products are not allowed in the cart." };
-    }
+  if (invalidProduct !== -1) {
+    return {
+      valid: false,
+      message: `Invalid product at index ${invalidProduct}: productId or quantity is invalid.`,
+    };
+  }
 
-    // Validate product format and quantity
-    const invalidProduct = products.findIndex(p => {
-        const isValidId =
-            typeof p.productId === "string" ||
-            p.productId instanceof mongoose.Types.ObjectId
-                ? mongoose.Types.ObjectId.isValid(p.productId)
-                : false;
-
-        const isValidQuantity =
-            typeof p.quantity === "number" &&
-            Number.isInteger(p.quantity) &&
-            p.quantity >= MIN_QUANTITY &&
-            p.quantity > 0;
-
-        return !isValidId || !isValidQuantity;
-    });
-
-    if (invalidProduct !== -1) {
-        return {
-            valid: false,
-            message: `Invalid product at index ${invalidProduct}: productId or quantity is invalid.`
-        };
-    }
-
-    return { valid: true };
+  return { valid: true };
 }

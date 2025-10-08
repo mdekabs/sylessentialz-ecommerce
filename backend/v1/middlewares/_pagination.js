@@ -1,4 +1,4 @@
-import { logger } from "../middlewares/index.js";
+import { logger } from "../config/_logger.js";
 import { responseHandler } from "../utils/index.js";
 import HttpStatus from "http-status-codes";
 

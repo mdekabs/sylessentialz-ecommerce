@@ -1,8 +1,9 @@
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-import redisClient from '../redis.js';
-import { responseHandler } from '../utils/index.js';
-import HttpStatus from 'http-status-codes';
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+import redisClient from "../config/_redis.js";
+import { responseHandler } from "../utils/index.js";
+import HttpStatus from "http-status-codes";
+import { logger } from "../config/_logger.js";
 
 dotenv.config();
 
@@ -20,8 +21,8 @@ const ERR_FORBIDDEN_ACTION = "You are not allowed to perform this task.";
  * @returns {Promise<boolean>} True if token is blacklisted, false otherwise
  */
 export const isTokenBlacklisted = async (token) => {
-    const blacklisted = await redisClient.get(token);
-    return blacklisted === "true";
+  const blacklisted = await redisClient.get(token);
+  return blacklisted === "true";
 };
 
 /**
@@ -31,7 +32,7 @@ export const isTokenBlacklisted = async (token) => {
  * @returns {Promise<void>}
  */
 export const updateBlacklist = async (token, expiration = 3600) => {
-    await redisClient.set(token, "true", "EX", expiration);
+  await redisClient.set(token, "true", "EX", expiration);
 };
 
 /**
@@ -42,28 +43,28 @@ export const updateBlacklist = async (token, expiration = 3600) => {
  * @returns {Promise<void>}
  */
 export const authenticationVerifier = async (req, res, next) => {
-    const token = req.headers.authorization;
-    if (!token) {
-        return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", ERR_AUTH_HEADER_MISSING);
+  const token = req.headers.authorization;
+  if (!token) {
+    return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", ERR_AUTH_HEADER_MISSING);
+  }
+
+  try {
+    if (!redisClient) {
+      throw new Error("Redis client is not initialized.");
     }
 
-    try {
-        if (!redisClient) {
-            throw new Error("Redis client is not initialized.");
-        }
-
-        const blacklisted = await isTokenBlacklisted(token);
-        if (blacklisted) {
-            return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", ERR_INVALID_TOKEN);
-        }
-
-        const user = jwt.verify(token, JWT_SECRET);
-        req.user = user;
-        next();
-    } catch (err) {
-        console.error("Token verification failed:", err);
-        return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", ERR_INVALID_TOKEN);
+    const blacklisted = await isTokenBlacklisted(token);
+    if (blacklisted) {
+      return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", ERR_INVALID_TOKEN);
     }
+
+    const user = jwt.verify(token, JWT_SECRET);
+    req.user = user;
+    next();
+  } catch (err) {
+    logger.error(`Token verification failed: ${err.message}`);
+    return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", ERR_INVALID_TOKEN);
+  }
 };
 
 /**
@@ -75,30 +76,30 @@ export const authenticationVerifier = async (req, res, next) => {
  * @returns {Promise<void>}
  */
 export const optionalVerifier = async (req, res, next) => {
-    const token = req.headers.authorization;
+  const token = req.headers.authorization;
 
-    if (!token) {
-        req.user = null;
-        return next();
+  if (!token) {
+    req.user = null;
+    return next();
+  }
+
+  try {
+    if (!redisClient) {
+      throw new Error("Redis client is not initialized.");
     }
 
-    try {
-        if (!redisClient) {
-            throw new Error("Redis client is not initialized.");
-        }
-
-        const blacklisted = await isTokenBlacklisted(token);
-        if (blacklisted) {
-            return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", ERR_INVALID_TOKEN);
-        }
-
-        const user = jwt.verify(token, JWT_SECRET);
-        req.user = user;
-        next();
-    } catch (err) {
-        console.error("Optional token verification failed:", err);
-        return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", ERR_INVALID_TOKEN);
+    const blacklisted = await isTokenBlacklisted(token);
+    if (blacklisted) {
+      return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", ERR_INVALID_TOKEN);
     }
+
+    const user = jwt.verify(token, JWT_SECRET);
+    req.user = user;
+    next();
+  } catch (err) {
+    logger.error(`Optional token verification failed: ${err.message}`);
+    return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", ERR_INVALID_TOKEN);
+  }
 };
 
 /**
@@ -107,15 +108,15 @@ export const optionalVerifier = async (req, res, next) => {
  * @returns {Function} Express middleware function
  */
 export const permissionVerifier = (...conditions) => {
-    return (req, res, next) => {
-        authenticationVerifier(req, res, () => {
-            if (conditions.some((condition) => condition(req.user, req.params.userId))) {
-                next();
-            } else {
-                responseHandler(res, HttpStatus.FORBIDDEN, "error", ERR_FORBIDDEN_ACTION);
-            }
-        });
-    };
+  return (req, res, next) => {
+    authenticationVerifier(req, res, () => {
+      if (conditions.some((condition) => condition(req.user, req.params.userId))) {
+        next();
+      } else {
+        responseHandler(res, HttpStatus.FORBIDDEN, "error", ERR_FORBIDDEN_ACTION);
+      }
+    });
+  };
 };
 
 /**
@@ -123,8 +124,8 @@ export const permissionVerifier = (...conditions) => {
  * @type {Function}
  */
 export const accessLevelVerifier = permissionVerifier(
-    (user, userId) => user.id === userId, // User is accessing their own data
-    (user) => user.isAdmin // User is an admin
+  (user, userId) => user.id === userId, // User is accessing their own data
+  (user) => user.isAdmin // User is an admin
 );
 
 /**

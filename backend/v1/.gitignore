@@ -1,4 +1,7 @@
-log/
+./v1/log/
 package-lock.json
 node_modules/
 .env
+.env.development
+.env.production
+.env.test
