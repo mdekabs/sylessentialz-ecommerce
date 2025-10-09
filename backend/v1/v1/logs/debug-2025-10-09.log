@@ -3423,3 +3423,212 @@
   },
   "responseTime": 2
 }
+2025-10-09 17:08:40 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:08:40 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:08:40 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:08:42 PM INFO: MongoDB connected 
+2025-10-09 17:08:42 PM INFO: Redis connected 
+2025-10-09 17:08:42 PM INFO: Server is running on port 3000 
+2025-10-09 17:25:40 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:25:41 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:25:41 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:25:46 PM INFO: MongoDB connected 
+2025-10-09 17:25:46 PM INFO: Redis connected 
+2025-10-09 17:25:46 PM INFO: Server is running on port 3000 
+2025-10-09 17:25:49 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:25:49 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:25:51 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:25:52 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:25:51 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:25:53 PM INFO: MongoDB connected 
+2025-10-09 17:25:53 PM INFO: Redis connected 
+2025-10-09 17:25:53 PM INFO: Server is running on port 3000 
+2025-10-09 17:25:56 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:25:57 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:25:56 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:25:58 PM INFO: MongoDB connected 
+2025-10-09 17:25:58 PM INFO: Redis connected 
+2025-10-09 17:25:58 PM INFO: Server is running on port 3000 
+2025-10-09 17:26:31 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:26:31 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:26:31 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:26:32 PM INFO: MongoDB connected 
+2025-10-09 17:26:32 PM INFO: Redis connected 
+2025-10-09 17:26:32 PM INFO: Server is running on port 3000 
+2025-10-09 17:26:40 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:26:41 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:26:41 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:26:42 PM INFO: MongoDB connected 
+2025-10-09 17:26:42 PM INFO: Redis connected 
+2025-10-09 17:26:43 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:26:43 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:26:43 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:26:44 PM INFO: MongoDB connected 
+2025-10-09 17:26:44 PM INFO: Redis connected 
+2025-10-09 17:26:44 PM INFO: Server is running on port 3000 
+2025-10-09 17:26:59 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:26:59 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:27:01 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:27:01 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:27:02 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:27:02 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:27:02 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:27:04 PM INFO: MongoDB connected 
+2025-10-09 17:27:04 PM INFO: Redis connected 
+2025-10-09 17:27:04 PM INFO: Server is running on port 3000 
+2025-10-09 17:28:02 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:28:02 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:28:02 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:28:06 PM INFO: MongoDB connected 
+2025-10-09 17:28:06 PM INFO: Redis connected 
+2025-10-09 17:28:06 PM INFO: Server is running on port 3000 
+2025-10-09 17:28:25 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:28:25 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:28:25 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:28:26 PM INFO: MongoDB connected 
+2025-10-09 17:28:26 PM INFO: Redis connected 
+2025-10-09 17:28:26 PM INFO: Server is running on port 3000 
+2025-10-09 17:29:21 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:29:21 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:29:21 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:29:22 PM INFO: MongoDB connected 
+2025-10-09 17:29:22 PM INFO: Redis connected 
+2025-10-09 17:29:22 PM INFO: Server is running on port 3000 
+2025-10-09 17:29:24 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:29:24 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:29:24 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:29:25 PM INFO: MongoDB connected 
+2025-10-09 17:29:25 PM INFO: Redis connected 
+2025-10-09 17:29:25 PM INFO: Server is running on port 3000 
+2025-10-09 17:29:34 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:29:34 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:29:37 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:29:37 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:29:42 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:29:42 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:29:42 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:29:44 PM INFO: MongoDB connected 
+2025-10-09 17:29:44 PM INFO: Redis connected 
+2025-10-09 17:29:44 PM INFO: Server is running on port 3000 
+2025-10-09 17:29:56 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:29:57 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:29:57 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:29:58 PM INFO: MongoDB connected 
+2025-10-09 17:29:58 PM INFO: Redis connected 
+2025-10-09 17:29:58 PM INFO: Server is running on port 3000 
+2025-10-09 17:30:52 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:30:53 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:30:52 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:30:54 PM INFO: MongoDB connected 
+2025-10-09 17:30:54 PM INFO: Redis connected 
+2025-10-09 17:30:54 PM INFO: Server is running on port 3000 
+2025-10-09 17:31:15 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:31:16 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:31:15 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:31:17 PM INFO: MongoDB connected 
+2025-10-09 17:31:17 PM INFO: Redis connected 
+2025-10-09 17:31:17 PM INFO: Server is running on port 3000 
+2025-10-09 17:31:44 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:31:45 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:31:45 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:31:46 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:31:45 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:31:47 PM INFO: MongoDB connected 
+2025-10-09 17:31:47 PM INFO: Redis connected 
+2025-10-09 17:31:47 PM INFO: Server is running on port 3000 
+2025-10-09 17:32:01 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:32:01 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:32:02 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:32:02 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:32:02 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:32:04 PM INFO: MongoDB connected 
+2025-10-09 17:32:04 PM INFO: Redis connected 
+2025-10-09 17:32:04 PM INFO: Server is running on port 3000 
+2025-10-09 17:32:17 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:32:17 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:32:17 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:32:18 PM INFO: MongoDB connected 
+2025-10-09 17:32:18 PM INFO: Redis connected 
+2025-10-09 17:32:18 PM INFO: Server is running on port 3000 
+2025-10-09 17:32:22 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:32:22 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:32:24 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:32:24 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:32:25 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:32:25 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:32:27 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:32:27 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:32:27 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:32:28 PM INFO: MongoDB connected 
+2025-10-09 17:32:28 PM INFO: Redis connected 
+2025-10-09 17:32:28 PM INFO: Server is running on port 3000 
+2025-10-09 17:32:32 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:32:33 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:32:32 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:32:34 PM INFO: MongoDB connected 
+2025-10-09 17:32:34 PM INFO: Redis connected 
+2025-10-09 17:32:34 PM INFO: Server is running on port 3000 
+2025-10-09 17:33:47 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:33:48 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:33:47 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:33:49 PM INFO: MongoDB connected 
+2025-10-09 17:33:49 PM INFO: Redis connected 
+2025-10-09 17:33:49 PM INFO: Server is running on port 3000 
+2025-10-09 17:36:20 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:36:20 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:36:20 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:36:22 PM INFO: MongoDB connected 
+2025-10-09 17:36:22 PM INFO: Redis connected 
+2025-10-09 17:36:22 PM INFO: Server is running on port 3000 
+2025-10-09 17:36:23 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:36:23 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:36:23 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:36:25 PM INFO: MongoDB connected 
+2025-10-09 17:36:25 PM INFO: Redis connected 
+2025-10-09 17:36:25 PM INFO: Server is running on port 3000 
+2025-10-09 17:36:27 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:36:27 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:36:29 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:36:29 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:36:29 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:36:30 PM INFO: MongoDB connected 
+2025-10-09 17:36:30 PM INFO: Redis connected 
+2025-10-09 17:36:30 PM INFO: Server is running on port 3000 
+2025-10-09 17:36:32 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:36:32 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:36:33 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:36:33 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:36:33 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:36:35 PM INFO: MongoDB connected 
+2025-10-09 17:36:35 PM INFO: Redis connected 
+2025-10-09 17:36:35 PM INFO: Server is running on port 3000 
+2025-10-09 17:39:31 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:39:32 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:39:31 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:39:33 PM INFO: MongoDB connected 
+2025-10-09 17:39:33 PM INFO: Redis connected 
+2025-10-09 17:39:33 PM INFO: Server is running on port 3000 
+2025-10-09 17:40:09 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:40:09 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:40:09 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:40:10 PM INFO: MongoDB connected 
+2025-10-09 17:40:10 PM INFO: Redis connected 
+2025-10-09 17:40:10 PM INFO: Server is running on port 3000 
+2025-10-09 17:40:22 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:40:22 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:40:22 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:40:26 PM INFO: MongoDB connected 
+2025-10-09 17:40:26 PM INFO: Redis connected 
+2025-10-09 17:40:26 PM INFO: Server is running on port 3000 
+2025-10-09 17:42:06 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:42:06 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 17:42:05 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:42:11 PM INFO: MongoDB connected 
+2025-10-09 17:42:11 PM INFO: Redis connected 
+2025-10-09 17:42:11 PM INFO: Server is running on port 3000 
+2025-10-09 17:46:54 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 17:46:56 PM INFO: MongoDB connected 
+2025-10-09 18:20:59 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 18:20:59 PM INFO: MongoDB connected 
+2025-10-09 18:20:59 PM INFO: ✅ Connected to MongoDB - Cron Job Worker Started 
+2025-10-09 18:21:06 PM INFO: 🛑 Shutting down cron worker... 

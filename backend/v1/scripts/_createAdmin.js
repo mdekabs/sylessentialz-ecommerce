@@ -1,4 +1,3 @@
-import { env } from "../config/_env.js";
 import { User } from "../models/index.js";
 import { connectDB, disconnectDB } from "../config/_database.js";
 

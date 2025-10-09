@@ -1,6 +1,6 @@
 import cron from "node-cron";
 import { Cart } from "../../models/index.js";
-import CartController from "../../services/_cartService.js";
+import { CartService } from "../../services/_cartService.js";
 import { logger } from "../../config/_logger.js";
 
 /**
@@ -22,7 +22,7 @@ const cleanupExpiredCarts = () => {
 
       // Clear each expired cart using the controller
       for (const cart of expiredCarts) {
-        await CartController.clearExpiredCart(cart._id); // Delegate cleanup to controller
+        await CartService.clearExpiredCart(cart._id); // Delegate cleanup to controller
       }
       logger.info(`Cleared ${expiredCarts.length} expired carts`);
     } catch (err) {
