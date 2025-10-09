@@ -4,6 +4,11 @@ import { connectDB, disconnectDB } from "./config/_database.js";
 import { connectRedis, disconnectRedis } from "./config/_redis.js";
 import { logger } from "./config/_logger.js";
 import gracefulShutdown from "express-graceful-shutdown";
+import { setupSwaggerDocs } from "./config/_swagger.js";
+
+// Setup Swagger documentation
+setupSwaggerDocs(app);
+
 
 const PORT = process.env.PORT || 3000;
 

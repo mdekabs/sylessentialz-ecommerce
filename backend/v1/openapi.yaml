@@ -1,0 +1,1146 @@
+openapi: 3.0.0
+info:
+  title: Ecommerce API
+  version: 1.0.0
+  description: For sylessentials online store
+servers:
+  - url: http://localhost:3000
+paths:
+  /auth/guest:
+    post:
+      summary: Generate a guest user ID and token
+      tags:
+        - Authentication
+      responses:
+        "200":
+          description: Guest ID and token generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Guest ID and token generated successfully
+                  data:
+                    type: object
+                    properties:
+                      guestId:
+                        type: string
+                        description: Unique guest identifier
+                        example: 550e8400-e29b-41d4-a716-446655440000
+                      token:
+                        type: string
+                        description: JWT token for guest access
+                        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        "500":
+          description: Internal server error
+  /auth/register:
+    post:
+      summary: Register a new user
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: The user's email
+                username:
+                  type: string
+                  description: The user's username
+                password:
+                  type: string
+                  description: The user's password
+                  format: password
+      responses:
+        "201":
+          description: User registered successfully
+        "400":
+          description: Bad request - Invalid input data
+        "409":
+          description: Conflict - Email already in use
+        "500":
+          description: Internal server error
+  /auth/login:
+    post:
+      summary: Login as an existing user
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: The user's username
+                password:
+                  type: string
+                  description: The user's password
+                  format: password
+      responses:
+        "200":
+          description: User logged in successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Successfully logged in
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      username:
+                        type: string
+                      email:
+                        type: string
+                      isAdmin:
+                        type: boolean
+                      accessToken:
+                        type: string
+        "401":
+          description: Unauthorized - Invalid username or password
+        "403":
+          description: Forbidden - Account locked
+        "500":
+          description: Internal server error
+  /auth/logout:
+    post:
+      summary: Logout a user and blacklist their token
+      tags:
+        - Authentication
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Successfully logged out
+        "401":
+          description: Unauthorized - Invalid or missing token
+        "500":
+          description: Internal server error
+  /auth/forgot-password:
+    post:
+      summary: Send reset password email
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: The user's email
+      responses:
+        "200":
+          description: Password reset email sent successfully
+        "404":
+          description: User not found
+        "500":
+          description: Internal server error
+  /auth/reset-password:
+    post:
+      summary: Reset user password
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: The password reset token
+                newPassword:
+                  type: string
+                  description: The new password
+                  format: password
+      responses:
+        "200":
+          description: Password has been reset successfully
+        "400":
+          description: Bad request - Invalid or expired token
+        "500":
+          description: Internal server error
+  /carts:
+    get:
+      summary: Get all carts
+      description: Retrieve all carts (admin only)
+      tags:
+        - Carts
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+          description: Page number
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 10
+          description: Items per page
+        - in: query
+          name: sort
+          schema:
+            type: string
+            default: createdAt
+          description: Field to sort by
+        - in: query
+          name: order
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: asc
+          description: Sort order
+      responses:
+        "200":
+          description: Carts retrieved successfully
+        "403":
+          description: Forbidden - Admin access required
+        "500":
+          description: Internal server error
+      security:
+        - bearerAuth: []
+    post:
+      summary: Create new cart
+      description: Create a new cart for the authenticated user
+      tags:
+        - Carts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                products:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      productId:
+                        type: string
+                      quantity:
+                        type: number
+                        default: 1
+      responses:
+        "201":
+          description: Cart created successfully
+        "400":
+          description: Bad request - Invalid products array
+        "401":
+          description: Unauthorized - Authentication required
+        "409":
+          description: Conflict - Cart already exists
+        "500":
+          description: Internal server error
+      security:
+        - bearerAuth: []
+  /carts/my-cart:
+    get:
+      summary: Get current user's or guest's cart
+      description: Retrieve the cart of the authenticated user or guest (via token or
+        guestId)
+      tags:
+        - Carts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                guestId:
+                  type: string
+                  description: Guest ID (optional if token provided)
+      responses:
+        "200":
+          description: Cart retrieved successfully
+        "400":
+          description: Bad request - No identifier provided
+        "401":
+          description: Unauthorized - Invalid token (if provided)
+        "404":
+          description: Cart not found or expired
+        "500":
+          description: Internal server error
+      security:
+        - bearerAuth: []
+  /carts/{id}:
+    get:
+      summary: Get cart by ID
+      description: Retrieve a specific cart by its ID (authenticated users only)
+      tags:
+        - Carts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: The cart ID
+      responses:
+        "200":
+          description: Cart retrieved successfully
+        "400":
+          description: Bad request - Invalid cart ID
+        "401":
+          description: Unauthorized - Authentication required
+        "404":
+          description: Cart not found
+        "500":
+          description: Internal server error
+      security:
+        - bearerAuth: []
+    put:
+      summary: Update cart
+      description: Update the authenticated user's cart
+      tags:
+        - Carts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: The cart ID
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                products:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      productId:
+                        type: string
+                      quantity:
+                        type: number
+      responses:
+        "200":
+          description: Cart updated successfully
+        "400":
+          description: Bad request - Invalid product format
+        "401":
+          description: Unauthorized - Authentication required
+        "403":
+          description: Forbidden - Not authorized to update this cart
+        "404":
+          description: Cart not found
+        "409":
+          description: Conflict - Concurrency issue
+        "500":
+          description: Internal server error
+      security:
+        - bearerAuth: []
+  /carts/add:
+    post:
+      summary: Add item to cart
+      description: Add a product to the authenticated user's or guest's cart
+      tags:
+        - Carts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                productId:
+                  type: string
+                quantity:
+                  type: number
+                  default: 1
+                guestId:
+                  type: string
+                  description: Guest ID (optional if token provided)
+      responses:
+        "200":
+          description: Item added to cart successfully
+        "400":
+          description: Bad request - Invalid productId, quantity, or no identifier
+        "401":
+          description: Unauthorized - Invalid token (if provided)
+        "409":
+          description: Conflict - Concurrency issue
+        "500":
+          description: Internal server error
+      security:
+        - bearerAuth: []
+  /carts/remove:
+    post:
+      summary: Remove item from cart
+      description: Remove a product from the authenticated user's or guest's cart
+      tags:
+        - Carts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                productId:
+                  type: string
+                guestId:
+                  type: string
+                  description: Guest ID (optional if token provided)
+      responses:
+        "200":
+          description: Item removed from cart successfully
+        "400":
+          description: Bad request - Invalid productId or no identifier
+        "401":
+          description: Unauthorized - Invalid token (if provided)
+        "404":
+          description: Product or cart not found
+        "409":
+          description: Conflict - Concurrency issue
+        "500":
+          description: Internal server error
+      security:
+        - bearerAuth: []
+  /carts/clear:
+    post:
+      summary: Clear cart
+      description: Remove all items from the authenticated user's or guest's cart
+      tags:
+        - Carts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                guestId:
+                  type: string
+                  description: Guest ID (optional if token provided)
+      responses:
+        "200":
+          description: Cart cleared successfully
+        "400":
+          description: Bad request - No identifier provided
+        "401":
+          description: Unauthorized - Invalid token (if provided)
+        "404":
+          description: Cart not found
+        "409":
+          description: Conflict - Concurrency issue
+        "500":
+          description: Internal server error
+      security:
+        - bearerAuth: []
+  /api/v1/orders:
+    post:
+      summary: Create a new order
+      tags:
+        - Orders
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                address:
+                  type: string
+                  description: Shipping address for the order
+                  example: 123 Main St, City, Country
+      responses:
+        "201":
+          description: Order created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Order placed successfully
+                  data:
+                    type: object
+        "400":
+          description: Bad request (e.g., missing address or empty cart)
+        "401":
+          description: Unauthorized
+    get:
+      summary: Retrieve all orders (Admin only)
+      tags:
+        - Orders
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+          description: Page number
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 10
+          description: Number of orders per page
+      responses:
+        "200":
+          description: Orders retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Orders retrieved successfully
+                  data:
+                    type: object
+                    properties:
+                      orders:
+                        type: array
+                      pagination:
+                        type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden (non-admin)
+  /api/v1/orders/user:
+    get:
+      summary: Retrieve orders for the authenticated user
+      tags:
+        - Orders
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+          description: Page number
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 10
+          description: Number of orders per page
+      responses:
+        "200":
+          description: User orders retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Orders retrieved successfully
+                  data:
+                    type: object
+                    properties:
+                      orders:
+                        type: array
+                      pagination:
+                        type: object
+        "401":
+          description: Unauthorized
+  /api/v1/orders/{orderId}/status:
+    put:
+      summary: Update an order's status (Admin only)
+      tags:
+        - Orders
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+          description: The ID of the order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - pending
+                    - processing
+                    - shipped
+                    - delivered
+                    - cancelled
+                  description: New status for the order
+      responses:
+        "200":
+          description: Order status updated successfully
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden (non-admin)
+        "404":
+          description: Order not found
+  /api/v1/orders/{orderId}/cancel:
+    put:
+      summary: Cancel an order and issue store credit (Admin only)
+      tags:
+        - Orders
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+          description: The ID of the order
+      responses:
+        "200":
+          description: Order cancelled and store credit issued
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden (non-admin)
+        "404":
+          description: Order not found
+  /api/v1/orders/income:
+    get:
+      summary: Calculate total income from orders (Admin only)
+      tags:
+        - Orders
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Total income calculated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Total income calculated successfully
+                  data:
+                    type: object
+                    properties:
+                      totalIncome:
+                        type: number
+                      breakdown:
+                        type: object
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden (non-admin)
+  /api/v1/orders/store-credit:
+    get:
+      summary: Retrieve user's store credit
+      tags:
+        - Orders
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Store credit retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Store credit retrieved successfully
+                  data:
+                    type: object
+                    properties:
+                      storeCredit:
+                        type: object
+        "401":
+          description: Unauthorized
+  /payment:
+    post:
+      summary: Process a payment
+      description: Process a payment using Stripe
+      tags:
+        - Payments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tokenId:
+                  type: string
+                  description: The Stripe token ID
+                amount:
+                  type: number
+                  description: The amount to charge in cents
+              required:
+                - tokenId
+                - amount
+      responses:
+        "200":
+          description: Payment processed successfully
+        "401":
+          description: Unauthorized - User access required
+        "500":
+          description: Internal server error
+      security:
+        - bearerAuth: []
+  /products:
+    get:
+      summary: Get all products
+      description: Retrieve a paginated list of products with optional sorting and
+        filtering by new or category.
+      tags:
+        - Products
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+          description: Page number for pagination
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 10
+          description: Number of products per page
+        - in: query
+          name: new
+          schema:
+            type: boolean
+          description: Filter to get the newest products (limits to 5)
+        - in: query
+          name: category
+          schema:
+            type: string
+          description: Filter by product category
+        - in: query
+          name: sort
+          schema:
+            type: string
+            default: createdAt
+          description: Field to sort by
+        - in: query
+          name: order
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: desc
+          description: Sort order
+      responses:
+        "200":
+          description: Successfully retrieved list of products
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      products:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Product"
+                      pagination:
+                        type: object
+                        properties:
+                          page:
+                            type: integer
+                          limit:
+                            type: integer
+                          totalItems:
+                            type: integer
+                          totalPages:
+                            type: integer
+                          hasMorePages:
+                            type: boolean
+                          links:
+                            type: object
+        "500":
+          description: Internal server error
+    post:
+      summary: Create a new product
+      description: Create a new product. Admin access required.
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                price:
+                  type: number
+                category:
+                  type: string
+                image:
+                  type: string
+                stock:
+                  type: number
+                  default: 0
+              required:
+                - name
+                - description
+                - price
+                - category
+      responses:
+        "201":
+          description: Product created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      savedProduct:
+                        $ref: "#/components/schemas/Product"
+        "401":
+          description: Unauthorized - Admin access required
+        "500":
+          description: Internal server error
+      security:
+        - accessToken: []
+  /products/{id}:
+    get:
+      summary: Get a single product
+      description: Retrieve a single product by its ID
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The product ID (MongoDB ObjectId)
+      responses:
+        "200":
+          description: Successfully retrieved the product
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      product:
+                        $ref: "#/components/schemas/Product"
+        "400":
+          description: Invalid product ID format
+        "404":
+          description: Product not found
+        "500":
+          description: Internal server error
+    put:
+      summary: Update a product
+      description: Update an existing product by its ID. Admin access required.
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The product ID (MongoDB ObjectId)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                price:
+                  type: number
+                category:
+                  type: string
+                image:
+                  type: string
+                stock:
+                  type: number
+      responses:
+        "200":
+          description: Product updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      updatedProduct:
+                        $ref: "#/components/schemas/Product"
+        "400":
+          description: Invalid product ID format
+        "401":
+          description: Unauthorized - Admin access required
+        "404":
+          description: Product not found
+        "409":
+          description: Concurrency conflict - Product modified by another request
+        "500":
+          description: Internal server error
+      security:
+        - accessToken: []
+    delete:
+      summary: Delete a product
+      description: Delete a product by its ID. Admin access required.
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The product ID (MongoDB ObjectId)
+      responses:
+        "200":
+          description: Product deleted successfully
+        "400":
+          description: Invalid product ID format
+        "401":
+          description: Unauthorized - Admin access required
+        "404":
+          description: Product not found
+        "409":
+          description: Concurrency conflict - Product modified by another request
+        "500":
+          description: Internal server error
+      security:
+        - accessToken: []
+  /users:
+    get:
+      summary: Get all users
+      description: Retrieve all users (admin only)
+      tags:
+        - Users
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: Page number for pagination
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Number of users per page
+      responses:
+        "200":
+          description: Users retrieved successfully
+        "401":
+          description: Unauthorized - Admin access required
+        "500":
+          description: Internal server error
+      security:
+        - bearerAuth: []
+  /users/{id}:
+    get:
+      summary: Get user by ID
+      description: Retrieve a user by ID (admin only)
+      tags:
+        - Users
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: The ID of the user
+      responses:
+        "200":
+          description: User retrieved successfully
+        "401":
+          description: Unauthorized - Admin access required
+        "404":
+          description: User not found
+        "500":
+          description: Internal server error
+      security:
+        - bearerAuth: []
+    put:
+      summary: Update user
+      description: Update user details (admin or self)
+      tags:
+        - Users
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: The ID of the user
+      responses:
+        "200":
+          description: User updated successfully
+        "401":
+          description: Unauthorized - Admin or user access required
+        "403":
+          description: Forbidden - You are not allowed to perform this task
+        "404":
+          description: User not found
+        "500":
+          description: Internal server error
+      security:
+        - bearerAuth: []
+    delete:
+      summary: Delete user
+      description: Delete a user by ID (admin only)
+      tags:
+        - Users
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: The ID of the user
+      responses:
+        "200":
+          description: User deleted successfully
+        "401":
+          description: Unauthorized - Admin access required
+        "404":
+          description: User not found
+        "500":
+          description: Internal server error
+      security:
+        - bearerAuth: []
+  /users/stats:
+    get:
+      summary: Get user statistics
+      description: Retrieve statistics about users (admin only)
+      tags:
+        - Users
+      responses:
+        "200":
+          description: User statistics retrieved successfully
+        "401":
+          description: Unauthorized - Admin access required
+        "500":
+          description: Internal server error
+      security:
+        - bearerAuth: []
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        category:
+          type: string
+        image:
+          type: string
+        stock:
+          type: number
+        version:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+tags:
+  - name: Authentication
+    description: User authentication and guest access
+  - name: Carts
+    description: Cart management and retrieval
+  - name: Payments
+    description: Payment processing
+  - name: Products
+    description: Product management
+  - name: Users
+    description: User management and retrieval
+
+securitySchemes:
+      bearerAuth:
+        type: http
+        scheme: bearer
+        bearerFormat: JWT

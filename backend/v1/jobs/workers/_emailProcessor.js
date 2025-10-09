@@ -1,5 +1,5 @@
 import { logger } from "../../config/_logger.js";
-import sendMail from "../../utils/sendMail.js";
+import sendMail from "../../utils/_sendMail.js";
 
 /**
  * Processes an email job and sends it using the sendMail utility.

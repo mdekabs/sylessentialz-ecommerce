@@ -7,9 +7,11 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development nodemon server.js",
     "start:prod": "cross-env NODE_ENV=production node server.js",
-    "worker": "cross-env NODE_ENV=development nodemon ./scripts/email-worker.js",
-    "worker production": "cross-env NODE_ENV=production node ./scripts/email-worker.js",
-    "create-admin": "cross-env NODE_ENV=$NODE_ENV node ./scripts/create-admin.js",
+    "worker": "cross-env NODE_ENV=development nodemon ./scripts/_emailWorker.js",
+    "worker:prod": "cross-env NODE_ENV=production node ./scripts/_emailWorker.js",
+    "create-admin": "cross-env NODE_ENV=development node ./scripts/_createAdmin.js",
+    "create-admin:test": "cross-env NODE_ENV=test node ./scripts/_createAdmin.js",
+    "create-admin:prod": "cross-env NODE_ENV=production node ./scripts/_createAdmin.js",
     "test": "cross-env NODE_ENV=test mocha test/**/*.test.js --exit"
   },
   "author": "mawoda Ekabua",
@@ -20,7 +22,7 @@
     "compression": "^1.8.0",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.6.1",
     "express": "^4.19.2",
     "express-graceful-shutdown": "^1.1.3",
     "express-winston": "^4.2.0",
@@ -31,8 +33,11 @@
     "node-cron": "^3.0.3",
     "nodemailer": "^6.9.13",
     "redis": "^4.6.14",
+    "swagger-ui-express": "^5.0.1",
     "winston": "^3.13.0",
-    "winston-daily-rotate-file": "^5.0.0"
+    "winston-daily-rotate-file": "^5.0.0",
+    "yaml": "^2.8.1",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "chai": "^5.2.0",

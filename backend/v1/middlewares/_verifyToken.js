@@ -4,7 +4,6 @@ import { responseHandler } from "../utils/index.js";
 import HttpStatus from "http-status-codes";
 import { logger } from "../config/_logger.js";
 
-
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // Error message constants
@@ -19,7 +18,7 @@ const ERR_FORBIDDEN_ACTION = "You are not allowed to perform this task.";
  * @returns {Promise<boolean>} True if token is blacklisted, false otherwise
  */
 export const isTokenBlacklisted = async (token) => {
-  const blacklisted = await redisClient.get(token);
+  const blacklisted = await redisClient.get(`blacklist:${token}`);
   return blacklisted === "true";
 };
 
@@ -30,24 +29,21 @@ export const isTokenBlacklisted = async (token) => {
  * @returns {Promise<void>}
  */
 export const updateBlacklist = async (token, expiration = 3600) => {
-  await redisClient.set(token, "true", "EX", expiration);
+  await redisClient.set(`blacklist:${token}`, "true", "EX", expiration);
+  logger.info(`Token blacklisted for ${expiration}s`);
 };
 
 /**
  * Middleware to verify JWT authentication for protected routes.
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
- * @param {Function} next - Express next middleware function
- * @returns {Promise<void>}
  */
 export const authenticationVerifier = async (req, res, next) => {
-  const token = req.headers.authorization;
+  const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
   if (!token) {
     return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", ERR_AUTH_HEADER_MISSING);
   }
 
   try {
-    if (!redisClient) {
+    if (!redisClient.isOpen) {
       throw new Error("Redis client is not initialized.");
     }
 
@@ -67,25 +63,15 @@ export const authenticationVerifier = async (req, res, next) => {
 
 /**
  * Optional authentication middleware that allows unauthenticated access.
- * Sets req.user if token is valid, otherwise continues with req.user = null.
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
- * @param {Function} next - Express next middleware function
- * @returns {Promise<void>}
  */
 export const optionalVerifier = async (req, res, next) => {
-  const token = req.headers.authorization;
-
+  const token = req.headers.authorization?.split(" ")[1];
   if (!token) {
     req.user = null;
     return next();
   }
 
   try {
-    if (!redisClient) {
-      throw new Error("Redis client is not initialized.");
-    }
-
     const blacklisted = await isTokenBlacklisted(token);
     if (blacklisted) {
       return responseHandler(res, HttpStatus.UNAUTHORIZED, "error", ERR_INVALID_TOKEN);
@@ -102,8 +88,6 @@ export const optionalVerifier = async (req, res, next) => {
 
 /**
  * Creates a permission verification middleware with custom conditions.
- * @param {...Function} conditions - Array of condition functions that take user and userId
- * @returns {Function} Express middleware function
  */
 export const permissionVerifier = (...conditions) => {
   return (req, res, next) => {
@@ -117,17 +101,9 @@ export const permissionVerifier = (...conditions) => {
   };
 };
 
-/**
- * Middleware to verify access level (user is either self or admin).
- * @type {Function}
- */
 export const accessLevelVerifier = permissionVerifier(
   (user, userId) => user.id === userId, // User is accessing their own data
   (user) => user.isAdmin // User is an admin
 );
 
-/**
- * Middleware to verify if user has admin privileges.
- * @type {Function}
- */
 export const isAdminVerifier = permissionVerifier((user) => user.isAdmin);

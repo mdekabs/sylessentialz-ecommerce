@@ -168,3 +168,57 @@
   "responseTime": 6
 }
 2025-10-08 17:40:33 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-08 18:44:31 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-08 18:44:32 PM INFO: MongoDB connected 
+2025-10-08 18:44:33 PM INFO: Redis connected 
+2025-10-08 18:44:33 PM INFO: Server is running on port 3000 
+2025-10-08 18:44:37 PM WARN: GET / 404 3ms 
+{
+  "req": {
+    "url": "/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 3
+}
+2025-10-08 19:01:02 PM INFO: Received SIGINT. Initiating graceful shutdown... 
+2025-10-08 19:01:02 PM INFO: MongoDB disconnected 
+2025-10-08 19:01:02 PM INFO: MongoDB disconnected 
+2025-10-08 19:01:02 PM INFO: Redis disconnected 
+2025-10-08 19:08:23 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-08 19:08:26 PM INFO: MongoDB connected 
+2025-10-08 19:08:26 PM INFO: Redis connected 
+2025-10-08 19:08:26 PM INFO: Server is running on port 3000 
+2025-10-08 19:28:32 PM INFO: Received SIGINT. Initiating graceful shutdown... 
+2025-10-08 19:28:32 PM INFO: MongoDB disconnected 
+2025-10-08 19:28:32 PM INFO: MongoDB disconnected 
+2025-10-08 21:02:18 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-08 21:02:20 PM INFO: MongoDB connected 
+2025-10-08 21:02:20 PM INFO: Redis connected 
+2025-10-08 21:02:20 PM INFO: Server is running on port 3000 
+2025-10-08 21:02:24 PM INFO: Received SIGINT. Initiating graceful shutdown... 
+2025-10-08 21:02:24 PM INFO: MongoDB disconnected 
+2025-10-08 21:02:24 PM INFO: MongoDB disconnected 
+2025-10-08 21:02:24 PM INFO: Redis disconnected 

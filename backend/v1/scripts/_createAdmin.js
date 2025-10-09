@@ -1,7 +1,6 @@
-import "..config/env.js";
-import mongoose from "mongoose";
+import { env } from "../config/_env.js";
 import { User } from "../models/index.js";
-import { connectDB } from "../config/_database.js";
+import { connectDB, disconnectDB } from "../config/_database.js";
 
 
 const ADMIN_ROLE = "admin";
@@ -38,7 +37,7 @@ async function createAdmin() {
     console.error(`${ERROR_MESSAGES.SERVER_ERROR}: ${error.message}`);
     process.exit(1);
   } finally {
-    await mongoose.connection.close();
+    await disconnectDB();
     console.log("Database connection closed");
     process.exit(0);
   }

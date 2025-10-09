@@ -459,3 +459,43 @@ Error: Route.post() requires a callback function but got a [object Undefined]
     at async ModuleLoader.import (node:internal/modules/esm/loader:336:24)
     at async loadESM (node:internal/process/esm_loader:34:7)
     at async handleMainPromise (node:internal/modules/run_main:106:12) 
+2025-10-09 08:43:19 AM ERROR: uncaughtException: EIO: i/o error, write
+Error: EIO: i/o error, write
+    at writeSync (node:fs:929:3)
+    at SyncWriteStream._write (node:internal/fs/sync_write_stream:27:5)
+    at writeOrBuffer (node:internal/streams/writable:392:12)
+    at _write (node:internal/streams/writable:333:10)
+    at Writable.write (node:internal/streams/writable:337:10)
+    at Console.log (/home/mdstorms/sylessentialz-ecommerce/backend/v1/node_modules/winston/lib/winston/transports/console.js:87:23)
+    at Console._write (/home/mdstorms/sylessentialz-ecommerce/backend/v1/node_modules/winston-transport/modern.js:103:17)
+    at doWrite (/home/mdstorms/sylessentialz-ecommerce/backend/v1/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+    at writeOrBuffer (/home/mdstorms/sylessentialz-ecommerce/backend/v1/node_modules/readable-stream/lib/_stream_writable.js:381:5)
+    at Writable.write (/home/mdstorms/sylessentialz-ecommerce/backend/v1/node_modules/readable-stream/lib/_stream_writable.js:302:11) 
+2025-10-09 14:22:32 PM ERROR: uncaughtException: EIO: i/o error, write
+Error: EIO: i/o error, write
+    at writeSync (node:fs:929:3)
+    at SyncWriteStream._write (node:internal/fs/sync_write_stream:27:5)
+    at writeOrBuffer (node:internal/streams/writable:392:12)
+    at _write (node:internal/streams/writable:333:10)
+    at Writable.write (node:internal/streams/writable:337:10)
+    at Console.log (/home/mdstorms/sylessentialz-ecommerce/backend/v1/node_modules/winston/lib/winston/transports/console.js:87:23)
+    at Console._write (/home/mdstorms/sylessentialz-ecommerce/backend/v1/node_modules/winston-transport/modern.js:103:17)
+    at doWrite (/home/mdstorms/sylessentialz-ecommerce/backend/v1/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+    at writeOrBuffer (/home/mdstorms/sylessentialz-ecommerce/backend/v1/node_modules/readable-stream/lib/_stream_writable.js:381:5)
+    at Writable.write (/home/mdstorms/sylessentialz-ecommerce/backend/v1/node_modules/readable-stream/lib/_stream_writable.js:302:11) 
+2025-10-09 15:56:31 PM ERROR: uncaughtException: listen EADDRINUSE: address already in use :::3000
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1811:16)
+    at listenInCluster (node:net:1859:12)
+    at Server.listen (node:net:1947:7)
+    at Function.listen (/home/mdstorms/sylessentialz-ecommerce/backend/v1/node_modules/express/lib/application.js:635:24)
+    at start (file:///home/mdstorms/sylessentialz-ecommerce/backend/v1/server.js:21:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) 
+2025-10-09 15:58:31 PM ERROR: uncaughtException: listen EADDRINUSE: address already in use :::3000
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1811:16)
+    at listenInCluster (node:net:1859:12)
+    at Server.listen (node:net:1947:7)
+    at Function.listen (/home/mdstorms/sylessentialz-ecommerce/backend/v1/node_modules/express/lib/application.js:635:24)
+    at start (file:///home/mdstorms/sylessentialz-ecommerce/backend/v1/server.js:21:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) 

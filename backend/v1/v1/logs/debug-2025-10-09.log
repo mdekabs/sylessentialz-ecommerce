@@ -1,0 +1,3425 @@
+2025-10-09 08:27:24 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 08:27:26 AM INFO: MongoDB connected 
+2025-10-09 08:27:26 AM INFO: Redis connected 
+2025-10-09 08:27:26 AM INFO: Server is running on port 3000 
+2025-10-09 08:27:32 AM WARN: GET / 404 4ms 
+{
+  "req": {
+    "url": "/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 4
+}
+2025-10-09 08:27:44 AM INFO: GET /api-docs 301 3ms 
+{
+  "req": {
+    "url": "/api-docs",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 301
+  },
+  "responseTime": 3
+}
+2025-10-09 08:27:44 AM INFO: GET /api-docs/ 200 6ms 
+{
+  "req": {
+    "url": "/api-docs/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 6
+}
+2025-10-09 08:27:44 AM INFO: GET /api-docs/swagger-ui.css 200 11ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui.css",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "text/css,*/*;q=0.1",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "style",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui.css",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 11
+}
+2025-10-09 08:27:45 AM INFO: GET /api-docs/swagger-ui-init.js 200 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-init.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-init.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 1
+}
+2025-10-09 08:27:45 AM INFO: GET /api-docs/swagger-ui-standalone-preset.js 200 25ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-standalone-preset.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-standalone-preset.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 25
+}
+2025-10-09 08:27:45 AM INFO: GET /api-docs/swagger-ui-bundle.js 200 57ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-bundle.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-bundle.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 57
+}
+2025-10-09 08:27:45 AM INFO: GET /api-docs/favicon-32x32.png 200 2ms 
+{
+  "req": {
+    "url": "/api-docs/favicon-32x32.png",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "image",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/favicon-32x32.png",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 2
+}
+2025-10-09 08:30:14 AM WARN: POST /auth/guest 404 2ms 
+{
+  "req": {
+    "url": "/auth/guest",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "content-length": "0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "application/json",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "origin": "http://localhost:3000",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-dest": "empty",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/auth/guest",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 2
+}
+2025-10-09 08:32:04 AM WARN: POST /auth/register 404 1ms 
+{
+  "req": {
+    "url": "/auth/register",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "content-length": "90",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "*/*",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "content-type": "application/json",
+      "sec-ch-ua-mobile": "?0",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "origin": "http://localhost:3000",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-dest": "empty",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/auth/register",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 1
+}
+2025-10-09 08:41:29 AM INFO: Received SIGINT. Initiating graceful shutdown... 
+2025-10-09 08:41:29 AM INFO: MongoDB disconnected 
+2025-10-09 08:41:29 AM INFO: MongoDB disconnected 
+2025-10-09 08:41:29 AM INFO: Redis disconnected 
+2025-10-09 08:41:37 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 08:41:38 AM INFO: MongoDB connected 
+2025-10-09 08:41:38 AM INFO: Redis connected 
+2025-10-09 08:41:38 AM INFO: Server is running on port 3000 
+2025-10-09 08:41:42 AM WARN: GET / 404 8ms 
+{
+  "req": {
+    "url": "/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 8
+}
+2025-10-09 08:41:52 AM INFO: GET /api-docs/ 304 7ms 
+{
+  "req": {
+    "url": "/api-docs/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"c3f-zHFRcEZNxVhFjonzIT4NePE8qZs\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 7
+}
+2025-10-09 08:41:52 AM INFO: GET /api-docs/swagger-ui.css 304 3ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui.css",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "text/css,*/*;q=0.1",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "style",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"25e4c-199c7d86ba4\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:13 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui.css",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 3
+}
+2025-10-09 08:41:52 AM INFO: GET /api-docs/swagger-ui-bundle.js 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-bundle.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"170b2b-199c7d87311\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:15 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-bundle.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-10-09 08:41:52 AM INFO: GET /api-docs/swagger-ui-standalone-preset.js 304 2ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-standalone-preset.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"3d1df-199c7d87a9c\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:17 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-standalone-preset.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 2
+}
+2025-10-09 08:41:52 AM INFO: GET /api-docs/swagger-ui-init.js 200 0ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-init.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"cfaf-hx1dXkY0E4teAHrzvxZr0sJ06wE\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-init.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 0
+}
+2025-10-09 08:42:00 AM INFO: POST /api/auth/guest 200 6ms 
+{
+  "req": {
+    "url": "/api/auth/guest",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "content-length": "0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "application/json",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "origin": "http://localhost:3000",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-dest": "empty",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/auth/guest",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 6
+}
+2025-10-09 08:43:18 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 08:43:19 AM INFO: MongoDB connected 
+2025-10-09 08:56:17 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 08:56:19 AM INFO: MongoDB connected 
+2025-10-09 08:56:19 AM INFO: Redis connected 
+2025-10-09 08:56:19 AM INFO: Server is running on port 3000 
+2025-10-09 08:56:26 AM WARN: GET / 404 10ms 
+{
+  "req": {
+    "url": "/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 10
+}
+2025-10-09 08:56:33 AM INFO: GET /api-docs/ 304 4ms 
+{
+  "req": {
+    "url": "/api-docs/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"c3f-zHFRcEZNxVhFjonzIT4NePE8qZs\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 4
+}
+2025-10-09 08:56:33 AM INFO: GET /api-docs/swagger-ui.css 304 3ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui.css",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "text/css,*/*;q=0.1",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "style",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"25e4c-199c7d86ba4\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:13 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui.css",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 3
+}
+2025-10-09 08:56:33 AM INFO: GET /api-docs/swagger-ui-bundle.js 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-bundle.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"170b2b-199c7d87311\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:15 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-bundle.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-10-09 08:56:33 AM INFO: GET /api-docs/swagger-ui-standalone-preset.js 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-standalone-preset.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"3d1df-199c7d87a9c\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:17 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-standalone-preset.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-10-09 08:56:33 AM INFO: GET /api-docs/swagger-ui-init.js 304 6ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-init.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"cfb3-phc8HY87NqTpzTmE5hclZDezeqQ\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-init.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 6
+}
+2025-10-09 08:57:10 AM WARN: POST /api/auth/register 409 30ms 
+{
+  "req": {
+    "url": "/api/auth/register",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "content-length": "81",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "*/*",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "content-type": "application/json",
+      "sec-ch-ua-mobile": "?0",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "origin": "http://localhost:3000",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-dest": "empty",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/auth/register",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 409
+  },
+  "responseTime": 30
+}
+2025-10-09 08:57:31 AM INFO: POST /api/auth/register 201 153ms 
+{
+  "req": {
+    "url": "/api/auth/register",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "content-length": "84",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "*/*",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "content-type": "application/json",
+      "sec-ch-ua-mobile": "?0",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "origin": "http://localhost:3000",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-dest": "empty",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/auth/register",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 201
+  },
+  "responseTime": 153
+}
+2025-10-09 08:58:11 AM INFO: POST /api/auth/login 200 136ms 
+{
+  "req": {
+    "url": "/api/auth/login",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "content-length": "53",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "application/json",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "content-type": "application/json",
+      "sec-ch-ua-mobile": "?0",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "origin": "http://localhost:3000",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-dest": "empty",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/auth/login",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 136
+}
+2025-10-09 08:58:55 AM WARN: POST /api/auth/logout 401 1ms 
+{
+  "req": {
+    "url": "/api/auth/logout",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "content-length": "0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "*/*",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "origin": "http://localhost:3000",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-dest": "empty",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/api/auth/logout",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 401
+  },
+  "responseTime": 1
+}
+2025-10-09 09:11:27 AM INFO: GET /api-docs/ 304 2ms 
+{
+  "req": {
+    "url": "/api-docs/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "cache-control": "max-age=0",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"c3f-zHFRcEZNxVhFjonzIT4NePE8qZs\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 2
+}
+2025-10-09 09:11:27 AM INFO: GET /api-docs/swagger-ui.css 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui.css",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "text/css,*/*;q=0.1",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "style",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"25e4c-199c7d86ba4\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:13 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui.css",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-10-09 09:11:27 AM INFO: GET /api-docs/swagger-ui-bundle.js 304 3ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-bundle.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"170b2b-199c7d87311\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:15 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-bundle.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 3
+}
+2025-10-09 09:11:27 AM INFO: GET /api-docs/swagger-ui-standalone-preset.js 304 3ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-standalone-preset.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"3d1df-199c7d87a9c\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:17 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-standalone-preset.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 3
+}
+2025-10-09 09:11:27 AM INFO: GET /api-docs/swagger-ui-init.js 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-init.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"cfb3-phc8HY87NqTpzTmE5hclZDezeqQ\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-init.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-10-09 09:11:28 AM INFO: GET /api-docs/favicon-32x32.png 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/favicon-32x32.png",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "image",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"274-199c7d88d05\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:21 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/favicon-32x32.png",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-10-09 09:13:30 AM INFO: Received SIGINT. Initiating graceful shutdown... 
+2025-10-09 09:13:31 AM INFO: MongoDB disconnected 
+2025-10-09 09:13:31 AM INFO: MongoDB disconnected 
+2025-10-09 09:13:31 AM INFO: Redis disconnected 
+2025-10-09 09:13:52 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 09:13:53 AM INFO: MongoDB connected 
+2025-10-09 09:13:53 AM INFO: Redis connected 
+2025-10-09 09:13:53 AM INFO: Server is running on port 3000 
+2025-10-09 09:13:57 AM WARN: GET / 404 9ms 
+{
+  "req": {
+    "url": "/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 404
+  },
+  "responseTime": 9
+}
+2025-10-09 09:14:05 AM INFO: GET /api-docs/ 304 7ms 
+{
+  "req": {
+    "url": "/api-docs/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"c3f-zHFRcEZNxVhFjonzIT4NePE8qZs\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 7
+}
+2025-10-09 09:14:05 AM INFO: GET /api-docs/swagger-ui.css 304 3ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui.css",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "text/css,*/*;q=0.1",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "style",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"25e4c-199c7d86ba4\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:13 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui.css",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 3
+}
+2025-10-09 09:14:05 AM INFO: GET /api-docs/swagger-ui-bundle.js 304 4ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-bundle.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"170b2b-199c7d87311\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:15 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-bundle.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 4
+}
+2025-10-09 09:14:05 AM INFO: GET /api-docs/swagger-ui-standalone-preset.js 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-standalone-preset.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"3d1df-199c7d87a9c\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:17 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-standalone-preset.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-10-09 09:14:05 AM INFO: GET /api-docs/swagger-ui-init.js 200 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-init.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"cfb3-phc8HY87NqTpzTmE5hclZDezeqQ\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-init.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 1
+}
+2025-10-09 09:19:42 AM INFO: GET /api-docs/ 304 3ms 
+{
+  "req": {
+    "url": "/api-docs/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "cache-control": "max-age=0",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"c3f-zHFRcEZNxVhFjonzIT4NePE8qZs\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 3
+}
+2025-10-09 09:19:42 AM INFO: GET /api-docs/swagger-ui.css 304 2ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui.css",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "text/css,*/*;q=0.1",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "style",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"25e4c-199c7d86ba4\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:13 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui.css",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 2
+}
+2025-10-09 09:19:42 AM INFO: GET /api-docs/swagger-ui-init.js 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-init.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"d0b3-iAxzKRbc9KHp+J1iv8YhrDlQb3k\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-init.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-10-09 09:19:42 AM INFO: GET /api-docs/swagger-ui-bundle.js 304 3ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-bundle.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"170b2b-199c7d87311\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:15 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-bundle.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 3
+}
+2025-10-09 09:19:42 AM INFO: GET /api-docs/swagger-ui-standalone-preset.js 304 13ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-standalone-preset.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"3d1df-199c7d87a9c\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:17 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-standalone-preset.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 13
+}
+2025-10-09 09:19:42 AM INFO: GET /api-docs/favicon-32x32.png 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/favicon-32x32.png",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "image",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"274-199c7d88d05\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:21 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/favicon-32x32.png",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-10-09 09:19:44 AM INFO: GET /api-docs/ 304 2ms 
+{
+  "req": {
+    "url": "/api-docs/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "cache-control": "max-age=0",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"c3f-zHFRcEZNxVhFjonzIT4NePE8qZs\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 2
+}
+2025-10-09 09:19:44 AM INFO: GET /api-docs/swagger-ui.css 304 3ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui.css",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"25e4c-199c7d86ba4\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:13 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "text/css,*/*;q=0.1",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "style",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui.css",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 3
+}
+2025-10-09 09:19:44 AM INFO: GET /api-docs/swagger-ui-bundle.js 304 5ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-bundle.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"170b2b-199c7d87311\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:15 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-bundle.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 5
+}
+2025-10-09 09:19:44 AM INFO: GET /api-docs/swagger-ui-standalone-preset.js 304 9ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-standalone-preset.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"3d1df-199c7d87a9c\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:17 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-standalone-preset.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 9
+}
+2025-10-09 09:19:44 AM INFO: GET /api-docs/swagger-ui-init.js 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-init.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"d0b3-iAxzKRbc9KHp+J1iv8YhrDlQb3k\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-init.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-10-09 09:19:44 AM INFO: GET /api-docs/favicon-32x32.png 304 0ms 
+{
+  "req": {
+    "url": "/api-docs/favicon-32x32.png",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "image",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"274-199c7d88d05\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:21 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/favicon-32x32.png",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 0
+}
+2025-10-09 09:19:58 AM INFO: GET /api-docs/ 304 3ms 
+{
+  "req": {
+    "url": "/api-docs/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"c3f-zHFRcEZNxVhFjonzIT4NePE8qZs\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 3
+}
+2025-10-09 09:19:58 AM INFO: GET /api-docs/swagger-ui.css 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui.css",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "text/css,*/*;q=0.1",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "style",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"25e4c-199c7d86ba4\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:13 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui.css",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-10-09 09:19:58 AM INFO: GET /api-docs/swagger-ui-bundle.js 304 5ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-bundle.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"170b2b-199c7d87311\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:15 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-bundle.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 5
+}
+2025-10-09 09:19:58 AM INFO: GET /api-docs/swagger-ui-standalone-preset.js 304 2ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-standalone-preset.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"3d1df-199c7d87a9c\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:17 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-standalone-preset.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 2
+}
+2025-10-09 09:19:58 AM INFO: GET /api-docs/swagger-ui-init.js 304 2ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-init.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"d0b3-iAxzKRbc9KHp+J1iv8YhrDlQb3k\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-init.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 2
+}
+2025-10-09 10:24:35 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:24:37 AM INFO: MongoDB connected 
+2025-10-09 10:24:37 AM INFO: Redis connected 
+2025-10-09 10:24:37 AM INFO: Server is running on port 3000 
+2025-10-09 10:24:39 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:24:41 AM INFO: MongoDB connected 
+2025-10-09 10:24:41 AM INFO: Redis connected 
+2025-10-09 10:24:41 AM INFO: Server is running on port 3000 
+2025-10-09 10:40:19 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:40:21 AM INFO: MongoDB connected 
+2025-10-09 10:40:21 AM INFO: Redis connected 
+2025-10-09 10:40:21 AM INFO: Server is running on port 3000 
+2025-10-09 10:40:22 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:40:23 AM INFO: MongoDB connected 
+2025-10-09 10:40:23 AM INFO: Redis connected 
+2025-10-09 10:40:23 AM INFO: Server is running on port 3000 
+2025-10-09 10:40:32 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:40:33 AM INFO: MongoDB connected 
+2025-10-09 10:40:33 AM INFO: Redis connected 
+2025-10-09 10:40:33 AM INFO: Server is running on port 3000 
+2025-10-09 10:40:38 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:40:39 AM INFO: MongoDB connected 
+2025-10-09 10:40:39 AM INFO: Redis connected 
+2025-10-09 10:40:39 AM INFO: Server is running on port 3000 
+2025-10-09 10:40:41 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:40:42 AM INFO: MongoDB connected 
+2025-10-09 10:40:42 AM INFO: Redis connected 
+2025-10-09 10:40:42 AM INFO: Server is running on port 3000 
+2025-10-09 10:40:43 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:40:44 AM INFO: MongoDB connected 
+2025-10-09 10:40:44 AM INFO: Redis connected 
+2025-10-09 10:40:44 AM INFO: Server is running on port 3000 
+2025-10-09 10:43:01 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:43:02 AM INFO: MongoDB connected 
+2025-10-09 10:43:02 AM INFO: Redis connected 
+2025-10-09 10:43:02 AM INFO: Server is running on port 3000 
+2025-10-09 10:43:38 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:43:39 AM INFO: MongoDB connected 
+2025-10-09 10:43:39 AM INFO: Redis connected 
+2025-10-09 10:43:39 AM INFO: Server is running on port 3000 
+2025-10-09 10:43:40 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:43:41 AM INFO: MongoDB connected 
+2025-10-09 10:43:41 AM INFO: Redis connected 
+2025-10-09 10:43:41 AM INFO: Server is running on port 3000 
+2025-10-09 10:43:43 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:43:44 AM INFO: MongoDB connected 
+2025-10-09 10:43:44 AM INFO: Redis connected 
+2025-10-09 10:43:44 AM INFO: Server is running on port 3000 
+2025-10-09 10:43:45 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:43:46 AM INFO: MongoDB connected 
+2025-10-09 10:43:46 AM INFO: Redis connected 
+2025-10-09 10:43:46 AM INFO: Server is running on port 3000 
+2025-10-09 10:43:49 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:43:50 AM INFO: MongoDB connected 
+2025-10-09 10:43:50 AM INFO: Redis connected 
+2025-10-09 10:43:50 AM INFO: Server is running on port 3000 
+2025-10-09 10:43:50 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:43:51 AM INFO: MongoDB connected 
+2025-10-09 10:43:51 AM INFO: Redis connected 
+2025-10-09 10:43:51 AM INFO: Server is running on port 3000 
+2025-10-09 10:43:59 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:44:00 AM INFO: MongoDB connected 
+2025-10-09 10:44:00 AM INFO: Redis connected 
+2025-10-09 10:44:00 AM INFO: Server is running on port 3000 
+2025-10-09 10:44:10 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:44:11 AM INFO: MongoDB connected 
+2025-10-09 10:44:11 AM INFO: Redis connected 
+2025-10-09 10:44:11 AM INFO: Server is running on port 3000 
+2025-10-09 10:45:31 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:45:32 AM INFO: MongoDB connected 
+2025-10-09 10:45:32 AM INFO: Redis connected 
+2025-10-09 10:45:32 AM INFO: Server is running on port 3000 
+2025-10-09 10:48:22 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:48:23 AM INFO: MongoDB connected 
+2025-10-09 10:48:23 AM INFO: Redis connected 
+2025-10-09 10:48:23 AM INFO: Server is running on port 3000 
+2025-10-09 10:48:25 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:48:26 AM INFO: MongoDB connected 
+2025-10-09 10:48:26 AM INFO: Redis connected 
+2025-10-09 10:48:26 AM INFO: Server is running on port 3000 
+2025-10-09 10:48:33 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:48:35 AM INFO: MongoDB connected 
+2025-10-09 10:48:35 AM INFO: Redis connected 
+2025-10-09 10:48:35 AM INFO: Server is running on port 3000 
+2025-10-09 10:48:35 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:48:36 AM INFO: MongoDB connected 
+2025-10-09 10:48:36 AM INFO: Redis connected 
+2025-10-09 10:48:36 AM INFO: Server is running on port 3000 
+2025-10-09 10:49:32 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:49:33 AM INFO: MongoDB connected 
+2025-10-09 10:49:33 AM INFO: Redis connected 
+2025-10-09 10:49:33 AM INFO: Server is running on port 3000 
+2025-10-09 10:49:44 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:49:45 AM INFO: MongoDB connected 
+2025-10-09 10:49:45 AM INFO: Redis connected 
+2025-10-09 10:49:45 AM INFO: Server is running on port 3000 
+2025-10-09 10:50:57 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:50:58 AM INFO: MongoDB connected 
+2025-10-09 10:50:58 AM INFO: Redis connected 
+2025-10-09 10:50:58 AM INFO: Server is running on port 3000 
+2025-10-09 10:50:59 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:51:00 AM INFO: MongoDB connected 
+2025-10-09 10:51:00 AM INFO: Redis connected 
+2025-10-09 10:51:00 AM INFO: Server is running on port 3000 
+2025-10-09 10:54:56 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:54:57 AM INFO: MongoDB connected 
+2025-10-09 10:54:57 AM INFO: Redis connected 
+2025-10-09 10:54:57 AM INFO: Server is running on port 3000 
+2025-10-09 10:54:57 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:54:58 AM INFO: MongoDB connected 
+2025-10-09 10:54:58 AM INFO: Redis connected 
+2025-10-09 10:54:58 AM INFO: Server is running on port 3000 
+2025-10-09 10:55:10 AM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 10:55:11 AM INFO: MongoDB connected 
+2025-10-09 10:55:11 AM INFO: Redis connected 
+2025-10-09 10:55:11 AM INFO: Server is running on port 3000 
+2025-10-09 13:41:22 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 13:41:23 PM INFO: MongoDB connected 
+2025-10-09 13:41:23 PM INFO: Redis connected 
+2025-10-09 13:41:23 PM INFO: Server is running on port 3000 
+2025-10-09 13:42:09 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 13:42:10 PM INFO: MongoDB connected 
+2025-10-09 13:42:10 PM INFO: Redis connected 
+2025-10-09 13:42:10 PM INFO: Server is running on port 3000 
+2025-10-09 13:42:13 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 13:42:14 PM INFO: MongoDB connected 
+2025-10-09 13:42:14 PM INFO: Redis connected 
+2025-10-09 13:42:14 PM INFO: Server is running on port 3000 
+2025-10-09 13:42:17 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 13:42:18 PM INFO: MongoDB connected 
+2025-10-09 13:42:18 PM INFO: Redis connected 
+2025-10-09 13:42:18 PM INFO: Server is running on port 3000 
+2025-10-09 13:51:37 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 13:51:38 PM INFO: MongoDB connected 
+2025-10-09 13:51:38 PM INFO: Redis connected 
+2025-10-09 13:51:38 PM INFO: Server is running on port 3000 
+2025-10-09 13:53:06 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 13:53:07 PM INFO: MongoDB connected 
+2025-10-09 13:53:07 PM INFO: Redis connected 
+2025-10-09 13:53:07 PM INFO: Server is running on port 3000 
+2025-10-09 13:55:38 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 13:55:38 PM INFO: MongoDB connected 
+2025-10-09 13:55:38 PM INFO: Redis connected 
+2025-10-09 13:55:38 PM INFO: Server is running on port 3000 
+2025-10-09 13:59:52 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 13:59:52 PM INFO: MongoDB connected 
+2025-10-09 13:59:53 PM INFO: Redis connected 
+2025-10-09 13:59:53 PM INFO: Server is running on port 3000 
+2025-10-09 14:13:42 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 14:13:43 PM INFO: MongoDB connected 
+2025-10-09 14:13:44 PM INFO: Redis connected 
+2025-10-09 14:13:44 PM INFO: Server is running on port 3000 
+2025-10-09 14:15:57 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 14:15:59 PM INFO: MongoDB connected 
+2025-10-09 14:15:59 PM INFO: Redis connected 
+2025-10-09 14:15:59 PM INFO: Server is running on port 3000 
+2025-10-09 14:16:01 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 14:16:02 PM INFO: MongoDB connected 
+2025-10-09 14:16:02 PM INFO: Redis connected 
+2025-10-09 14:16:02 PM INFO: Server is running on port 3000 
+2025-10-09 14:16:05 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 14:16:06 PM INFO: MongoDB connected 
+2025-10-09 14:16:06 PM INFO: Redis connected 
+2025-10-09 14:16:06 PM INFO: Server is running on port 3000 
+2025-10-09 14:16:19 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 14:16:20 PM INFO: MongoDB connected 
+2025-10-09 14:16:20 PM INFO: Redis connected 
+2025-10-09 14:16:20 PM INFO: Server is running on port 3000 
+2025-10-09 14:17:07 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 14:17:08 PM INFO: MongoDB connected 
+2025-10-09 14:17:09 PM INFO: Redis connected 
+2025-10-09 14:17:09 PM INFO: Server is running on port 3000 
+2025-10-09 14:17:10 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 14:17:11 PM INFO: MongoDB connected 
+2025-10-09 14:17:11 PM INFO: Redis connected 
+2025-10-09 14:17:11 PM INFO: Server is running on port 3000 
+2025-10-09 14:18:43 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 14:18:44 PM INFO: MongoDB connected 
+2025-10-09 14:18:44 PM INFO: Redis connected 
+2025-10-09 14:18:44 PM INFO: Server is running on port 3000 
+2025-10-09 14:19:03 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 14:19:04 PM INFO: MongoDB connected 
+2025-10-09 14:19:04 PM INFO: Redis connected 
+2025-10-09 14:19:04 PM INFO: Server is running on port 3000 
+2025-10-09 14:19:30 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 14:19:31 PM INFO: MongoDB connected 
+2025-10-09 14:19:31 PM INFO: Redis connected 
+2025-10-09 14:19:31 PM INFO: Server is running on port 3000 
+2025-10-09 14:20:02 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 14:20:03 PM INFO: MongoDB connected 
+2025-10-09 14:20:03 PM INFO: Redis connected 
+2025-10-09 14:20:03 PM INFO: Server is running on port 3000 
+2025-10-09 14:20:33 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 14:20:34 PM INFO: MongoDB connected 
+2025-10-09 14:20:34 PM INFO: Redis connected 
+2025-10-09 14:20:34 PM INFO: Server is running on port 3000 
+2025-10-09 14:20:57 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 14:20:58 PM INFO: MongoDB connected 
+2025-10-09 14:20:58 PM INFO: Redis connected 
+2025-10-09 14:20:58 PM INFO: Server is running on port 3000 
+2025-10-09 14:21:26 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 14:21:26 PM INFO: MongoDB connected 
+2025-10-09 14:21:26 PM INFO: Redis connected 
+2025-10-09 14:21:26 PM INFO: Server is running on port 3000 
+2025-10-09 14:21:34 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 14:21:35 PM INFO: MongoDB connected 
+2025-10-09 14:21:35 PM INFO: Redis connected 
+2025-10-09 14:21:35 PM INFO: Server is running on port 3000 
+2025-10-09 14:21:36 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 14:21:37 PM INFO: MongoDB connected 
+2025-10-09 14:21:37 PM INFO: Redis connected 
+2025-10-09 14:21:37 PM INFO: Server is running on port 3000 
+2025-10-09 14:21:39 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 14:21:40 PM INFO: MongoDB connected 
+2025-10-09 14:21:40 PM INFO: Redis connected 
+2025-10-09 14:21:40 PM INFO: Server is running on port 3000 
+2025-10-09 14:22:31 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 14:22:32 PM INFO: MongoDB connected 
+2025-10-09 15:43:26 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 15:43:29 PM INFO: MongoDB connected 
+2025-10-09 15:43:29 PM INFO: Redis connected 
+2025-10-09 15:43:29 PM INFO: Server is running on port 3000 
+2025-10-09 15:44:33 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 15:44:34 PM INFO: MongoDB connected 
+2025-10-09 15:44:34 PM INFO: Redis connected 
+2025-10-09 15:44:34 PM INFO: Server is running on port 3000 
+2025-10-09 15:44:36 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 15:44:37 PM INFO: MongoDB connected 
+2025-10-09 15:44:38 PM INFO: Redis connected 
+2025-10-09 15:44:38 PM INFO: Server is running on port 3000 
+2025-10-09 15:44:41 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 15:44:42 PM INFO: MongoDB connected 
+2025-10-09 15:44:42 PM INFO: Redis connected 
+2025-10-09 15:44:42 PM INFO: Server is running on port 3000 
+2025-10-09 15:45:08 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 15:45:08 PM INFO: MongoDB connected 
+2025-10-09 15:45:09 PM INFO: MongoDB disconnected 
+2025-10-09 15:56:30 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 15:56:31 PM INFO: MongoDB connected 
+2025-10-09 15:56:31 PM INFO: Redis connected 
+2025-10-09 15:58:13 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 15:58:15 PM INFO: MongoDB connected 
+2025-10-09 15:58:15 PM INFO: Redis connected 
+2025-10-09 15:58:15 PM INFO: Server is running on port 3000 
+2025-10-09 15:58:29 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 15:58:31 PM INFO: MongoDB connected 
+2025-10-09 15:58:31 PM INFO: Redis connected 
+2025-10-09 16:03:28 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:03:29 PM INFO: MongoDB connected 
+2025-10-09 16:03:29 PM INFO: Redis connected 
+2025-10-09 16:03:29 PM INFO: Server is running on port 3000 
+2025-10-09 16:03:35 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:03:36 PM INFO: MongoDB connected 
+2025-10-09 16:03:36 PM INFO: Redis connected 
+2025-10-09 16:03:36 PM INFO: Server is running on port 3000 
+2025-10-09 16:03:37 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:03:39 PM INFO: MongoDB connected 
+2025-10-09 16:03:39 PM INFO: Redis connected 
+2025-10-09 16:03:39 PM INFO: Server is running on port 3000 
+2025-10-09 16:04:05 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:04:05 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 16:08:43 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:08:43 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 16:08:44 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:08:44 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 16:08:46 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:08:46 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 16:08:46 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:08:48 PM INFO: MongoDB connected 
+2025-10-09 16:08:48 PM INFO: Redis connected 
+2025-10-09 16:08:48 PM INFO: Server is running on port 3000 
+2025-10-09 16:08:49 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:08:50 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 16:08:50 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:08:51 PM INFO: MongoDB connected 
+2025-10-09 16:08:51 PM INFO: Redis connected 
+2025-10-09 16:08:51 PM INFO: Server is running on port 3000 
+2025-10-09 16:08:58 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:08:58 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 16:08:59 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:08:59 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 16:08:59 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:09:00 PM INFO: MongoDB connected 
+2025-10-09 16:09:01 PM INFO: Redis connected 
+2025-10-09 16:09:01 PM INFO: Server is running on port 3000 
+2025-10-09 16:09:02 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:09:02 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 16:09:02 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:09:04 PM INFO: MongoDB connected 
+2025-10-09 16:09:04 PM INFO: Redis connected 
+2025-10-09 16:09:04 PM INFO: Server is running on port 3000 
+2025-10-09 16:09:09 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:09:09 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 16:09:10 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:09:11 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 16:09:10 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:09:12 PM INFO: MongoDB connected 
+2025-10-09 16:09:12 PM INFO: Redis connected 
+2025-10-09 16:09:12 PM INFO: Server is running on port 3000 
+2025-10-09 16:09:13 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:09:13 PM INFO: Email worker is running and processing jobs... 
+2025-10-09 16:09:13 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:09:15 PM INFO: MongoDB connected 
+2025-10-09 16:09:15 PM INFO: Redis connected 
+2025-10-09 16:09:15 PM INFO: Server is running on port 3000 
+2025-10-09 16:10:05 PM INFO: GET /api-docs/ 304 20ms 
+{
+  "req": {
+    "url": "/api-docs/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"c3f-zHFRcEZNxVhFjonzIT4NePE8qZs\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 20
+}
+2025-10-09 16:10:06 PM INFO: GET /api-docs/swagger-ui-init.js 200 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-init.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"d0b3-iAxzKRbc9KHp+J1iv8YhrDlQb3k\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-init.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 1
+}
+2025-10-09 16:10:06 PM INFO: GET /api-docs/swagger-ui.css 200 46ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui.css",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "text/css,*/*;q=0.1",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "style",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"25e4c-199c7d86ba4\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:13 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui.css",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 46
+}
+2025-10-09 16:10:06 PM INFO: GET /api-docs/swagger-ui-standalone-preset.js 200 37ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-standalone-preset.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"3d1df-199c7d87a9c\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:17 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-standalone-preset.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 37
+}
+2025-10-09 16:10:06 PM INFO: GET /api-docs/swagger-ui-bundle.js 200 99ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-bundle.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"170b2b-199c7d87311\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:15 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-bundle.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 99
+}
+2025-10-09 16:11:12 PM INFO: GET /api-docs/ 304 4ms 
+{
+  "req": {
+    "url": "/api-docs/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "cache-control": "max-age=0",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"c3f-zHFRcEZNxVhFjonzIT4NePE8qZs\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 4
+}
+2025-10-09 16:11:12 PM INFO: GET /api-docs/swagger-ui.css 304 4ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui.css",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"25e4c-199c8fa6397\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "text/css,*/*;q=0.1",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "style",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui.css",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 4
+}
+2025-10-09 16:11:12 PM INFO: GET /api-docs/swagger-ui-bundle.js 304 3ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-bundle.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"170b2b-199c8fa63b1\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-bundle.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 3
+}
+2025-10-09 16:11:12 PM INFO: GET /api-docs/swagger-ui-standalone-preset.js 304 4ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-standalone-preset.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"3d1df-199c8fa63ca\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-standalone-preset.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 4
+}
+2025-10-09 16:11:12 PM INFO: GET /api-docs/swagger-ui-init.js 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-init.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"d03f-7puavnlfkayYF6RMTSJVrQM/kuU\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-init.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-10-09 16:11:13 PM INFO: GET /api-docs/favicon-32x32.png 200 4ms 
+{
+  "req": {
+    "url": "/api-docs/favicon-32x32.png",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "image",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"274-199c7d88d05\"",
+      "if-modified-since": "Thu, 09 Oct 2025 07:21:21 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/favicon-32x32.png",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 4
+}
+2025-10-09 16:11:13 PM INFO: GET /api-docs/ 304 4ms 
+{
+  "req": {
+    "url": "/api-docs/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "cache-control": "max-age=0",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"c3f-zHFRcEZNxVhFjonzIT4NePE8qZs\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 4
+}
+2025-10-09 16:11:13 PM INFO: GET /api-docs/swagger-ui-init.js 304 0ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-init.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"d03f-7puavnlfkayYF6RMTSJVrQM/kuU\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-init.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 0
+}
+2025-10-09 16:11:13 PM INFO: GET /api-docs/swagger-ui.css 304 7ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui.css",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"25e4c-199c8fa6397\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "text/css,*/*;q=0.1",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "style",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui.css",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 7
+}
+2025-10-09 16:11:13 PM INFO: GET /api-docs/swagger-ui-bundle.js 304 13ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-bundle.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"170b2b-199c8fa63b1\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-bundle.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 13
+}
+2025-10-09 16:11:13 PM INFO: GET /api-docs/swagger-ui-standalone-preset.js 304 17ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-standalone-preset.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"3d1df-199c8fa63ca\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-standalone-preset.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 17
+}
+2025-10-09 16:11:14 PM INFO: GET /api-docs/favicon-32x32.png 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/favicon-32x32.png",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "image",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"274-199c8fa6413\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/favicon-32x32.png",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-10-09 16:11:14 PM INFO: GET /api-docs/ 304 3ms 
+{
+  "req": {
+    "url": "/api-docs/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "cache-control": "max-age=0",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"c3f-zHFRcEZNxVhFjonzIT4NePE8qZs\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 3
+}
+2025-10-09 16:11:14 PM INFO: GET /api-docs/swagger-ui.css 304 4ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui.css",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"25e4c-199c8fa6397\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "text/css,*/*;q=0.1",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "style",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui.css",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 4
+}
+2025-10-09 16:11:14 PM INFO: GET /api-docs/swagger-ui-bundle.js 304 16ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-bundle.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"170b2b-199c8fa63b1\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-bundle.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 16
+}
+2025-10-09 16:11:14 PM INFO: GET /api-docs/swagger-ui-init.js 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-init.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"d03f-7puavnlfkayYF6RMTSJVrQM/kuU\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-init.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-10-09 16:11:14 PM INFO: GET /api-docs/swagger-ui-standalone-preset.js 304 8ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-standalone-preset.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"3d1df-199c8fa63ca\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-standalone-preset.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 8
+}
+2025-10-09 16:11:14 PM INFO: GET /api-docs/ 304 2ms 
+{
+  "req": {
+    "url": "/api-docs/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "cache-control": "max-age=0",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"c3f-zHFRcEZNxVhFjonzIT4NePE8qZs\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 2
+}
+2025-10-09 16:11:14 PM INFO: GET /api-docs/swagger-ui.css 304 3ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui.css",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"25e4c-199c8fa6397\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "text/css,*/*;q=0.1",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "style",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui.css",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 3
+}
+2025-10-09 16:11:14 PM INFO: GET /api-docs/swagger-ui-bundle.js 304 5ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-bundle.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"170b2b-199c8fa63b1\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-bundle.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 5
+}
+2025-10-09 16:11:14 PM INFO: GET /api-docs/swagger-ui-init.js 304 7ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-init.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"d03f-7puavnlfkayYF6RMTSJVrQM/kuU\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-init.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 7
+}
+2025-10-09 16:11:14 PM INFO: GET /api-docs/swagger-ui-standalone-preset.js 304 18ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-standalone-preset.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"3d1df-199c8fa63ca\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-standalone-preset.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 18
+}
+2025-10-09 16:11:14 PM INFO: GET /api-docs/favicon-32x32.png 304 3ms 
+{
+  "req": {
+    "url": "/api-docs/favicon-32x32.png",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "image",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"274-199c8fa6413\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/favicon-32x32.png",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 3
+}
+2025-10-09 16:11:15 PM INFO: GET /api-docs/favicon-32x32.png 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/favicon-32x32.png",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "image",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"274-199c8fa6413\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/favicon-32x32.png",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-10-09 16:11:35 PM INFO: GET /api-docs/ 304 3ms 
+{
+  "req": {
+    "url": "/api-docs/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "cache-control": "max-age=0",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"c3f-zHFRcEZNxVhFjonzIT4NePE8qZs\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 3
+}
+2025-10-09 16:11:35 PM INFO: GET /api-docs/swagger-ui.css 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui.css",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"25e4c-199c8fa6397\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "text/css,*/*;q=0.1",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "style",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui.css",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-10-09 16:11:35 PM INFO: GET /api-docs/swagger-ui-bundle.js 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-bundle.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"170b2b-199c8fa63b1\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-bundle.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-10-09 16:11:35 PM INFO: GET /api-docs/swagger-ui-standalone-preset.js 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-standalone-preset.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"3d1df-199c8fa63ca\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-standalone-preset.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-10-09 16:11:35 PM INFO: GET /api-docs/swagger-ui-init.js 304 1ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-init.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"d03f-7puavnlfkayYF6RMTSJVrQM/kuU\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-init.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 1
+}
+2025-10-09 16:11:35 PM INFO: GET /api-docs/favicon-32x32.png 304 2ms 
+{
+  "req": {
+    "url": "/api-docs/favicon-32x32.png",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "image",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"274-199c8fa6413\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/favicon-32x32.png",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 2
+}
+2025-10-09 16:15:34 PM INFO: Received SIGINT. Initiating graceful shutdown... 
+2025-10-09 16:15:34 PM INFO: MongoDB disconnected 
+2025-10-09 16:15:34 PM INFO: MongoDB disconnected 
+2025-10-09 16:15:51 PM INFO: Loaded environment variables from .env.development for NODE_ENV=development 
+2025-10-09 16:15:53 PM INFO: MongoDB connected 
+2025-10-09 16:15:53 PM INFO: Redis connected 
+2025-10-09 16:15:53 PM INFO: Server is running on port 3000 
+2025-10-09 16:16:06 PM INFO: GET /api-docs/ 304 14ms 
+{
+  "req": {
+    "url": "/api-docs/",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "cache-control": "max-age=0",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "none",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-user": "?1",
+      "sec-fetch-dest": "document",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"c3f-zHFRcEZNxVhFjonzIT4NePE8qZs\""
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 14
+}
+2025-10-09 16:16:06 PM INFO: GET /api-docs/swagger-ui.css 304 6ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui.css",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"25e4c-199c8fa6397\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "text/css,*/*;q=0.1",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "style",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui.css",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 6
+}
+2025-10-09 16:16:06 PM INFO: GET /api-docs/swagger-ui-bundle.js 304 8ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-bundle.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"170b2b-199c8fa63b1\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-bundle.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 8
+}
+2025-10-09 16:16:06 PM INFO: GET /api-docs/swagger-ui-standalone-preset.js 304 5ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-standalone-preset.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"3d1df-199c8fa63ca\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-standalone-preset.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 5
+}
+2025-10-09 16:16:06 PM INFO: GET /api-docs/swagger-ui-init.js 200 4ms 
+{
+  "req": {
+    "url": "/api-docs/swagger-ui-init.js",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "W/\"d03f-7puavnlfkayYF6RMTSJVrQM/kuU\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "*/*",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "script",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/swagger-ui-init.js",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 200
+  },
+  "responseTime": 4
+}
+2025-10-09 16:16:07 PM INFO: GET /api-docs/favicon-32x32.png 304 2ms 
+{
+  "req": {
+    "url": "/api-docs/favicon-32x32.png",
+    "headers": {
+      "host": "localhost:3000",
+      "connection": "keep-alive",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Brave\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+      "sec-ch-ua-mobile": "?0",
+      "accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+      "sec-gpc": "1",
+      "accept-language": "en-GB,en;q=0.8",
+      "sec-fetch-site": "same-origin",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-dest": "image",
+      "referer": "http://localhost:3000/api-docs/",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "if-none-match": "W/\"274-199c8fa6413\"",
+      "if-modified-since": "Thu, 09 Oct 2025 12:37:56 GMT"
+    },
+    "method": "GET",
+    "httpVersion": "1.1",
+    "originalUrl": "/api-docs/favicon-32x32.png",
+    "query": {}
+  },
+  "res": {
+    "statusCode": 304
+  },
+  "responseTime": 2
+}
